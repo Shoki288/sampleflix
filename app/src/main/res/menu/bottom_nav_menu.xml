@@ -5,24 +5,24 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
         android:menuCategory="secondary"
-        android:title="ホーム" />
+        android:title="@string/nav_home_title" />
 
     <item
         android:id="@+id/nav_game"
         android:icon="@drawable/ic_game"
         android:menuCategory="secondary"
-        android:title="ゲーム" />
+        android:title="@string/nav_game_title" />
 
     <item
         android:id="@+id/nav_notice"
         android:icon="@drawable/ic_notice"
         android:menuCategory="secondary"
-        android:title="新着＆ホット" />
+        android:title="@string/nav_notice_title" />
 
     <item
         android:id="@+id/nav_download"
         android:icon="@drawable/ic_download"
         android:menuCategory="secondary"
-        android:title="ダウンロード" />
+        android:title="@string/nav_download_title" />
 
 </menu>

@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.sampleflix.HomeFragment"
+        android:name="com.example.sampleflix.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_game"
-        android:name="com.example.sampleflix.GameFragment"
+        android:name="com.example.sampleflix.game.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
     <fragment
         android:id="@+id/nav_notice"
-        android:name="com.example.sampleflix.NoticeFragment"
+        android:name="com.example.sampleflix.notice.NoticeFragment"
         android:label="fragment_notice"
         tools:layout="@layout/fragment_notice" />
     <fragment
         android:id="@+id/nav_download"
-        android:name="com.example.sampleflix.DownloadFragment"
+        android:name="com.example.sampleflix.download.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download" />
 </navigation>
