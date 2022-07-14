@@ -4,8 +4,16 @@ buildscript {
         google()
     }
 
+    dependencies {
+        /** dagger-hilt **/
+        def app_hilt_version = "2.40.5"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$app_hilt_version"
+    }
+
     ext {
         nav_version = '2.5.0'
+        dagger_version = '2.42'
+        moshi_version = '1.13.0'
     }
 }
 
