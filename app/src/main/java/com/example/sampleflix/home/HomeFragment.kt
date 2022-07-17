@@ -1,12 +1,27 @@
 package com.example.sampleflix.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sampleflix.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.sampleflix.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
+    private val viewModel by viewModels<HomeViewModel>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        return FragmentHomeBinding.inflate(inflater, container, false).also {
+            it.viewModel = viewModel
+        }.root
+    }
 
 }

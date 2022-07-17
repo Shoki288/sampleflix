@@ -16,3 +16,4 @@ rootProject.name = "sampleflix"
 include ':app'
 include ':core_retrofit'
 include ':entity'
+include ':repository_search'

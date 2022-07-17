@@ -13,6 +13,7 @@ buildscript {
     ext {
         nav_version = '2.5.0'
         dagger_version = '2.42'
+        retrofit_version = '2.9.0'
         moshi_version = '1.13.0'
     }
 }
