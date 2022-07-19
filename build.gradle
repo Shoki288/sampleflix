@@ -15,6 +15,9 @@ buildscript {
         dagger_version = '2.42'
         retrofit_version = '2.9.0'
         moshi_version = '1.13.0'
+        room_version = '2.4.2'
+        coroutine_version = '2.4.2'
+        room_version = '2.4.2'
     }
 }
 

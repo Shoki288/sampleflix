@@ -13,6 +13,6 @@ interface SearchBooksService {
      * @link https://developers.google.com/books/docs/v1/using
      */
     @GET("v1/volumes")
-    fun searchBooks(@Query("q") keyword: String, @Query("maxResults") maxResults: Int? = null): Response<BookInfoList>
+    suspend fun searchBooks(@Query("q") keyword: String, @Query("maxResults") maxResults: Int? = null): Response<BookInfoList>
 
 }

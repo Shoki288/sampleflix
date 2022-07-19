@@ -18,8 +18,18 @@ data class BookInfo(
 // Success
 data class BookDetail(
     val title: String,
+    val authors: List<String>,
+    val publisher: String,
+    val publishedDate: String,  // YYYY-MM-ddで返る
+    val description: String,
+    val pageCount: Int,
+    val categories: List<String>,
+    val averageRating: Double,
+    val ratingCount: Int,
     @Json(name = "imageLinks")
-    val images: ImageLinks?
+    val images: ImageLinks?,
+    val language: String,
+    val previewLink: String
 )
 
 data class ImageLinks(
@@ -30,8 +40,7 @@ data class ImageLinks(
 )
 
 data class SaleInfo(
-    val listPrice: Price?,
-    val retailPrice: Price?
+    val listPrice: Price?
 )
 
 data class Price(
