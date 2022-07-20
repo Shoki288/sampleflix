@@ -7,16 +7,17 @@ import androidx.room.PrimaryKey
 @Entity
 data class CacheBookInfo(
     @PrimaryKey val id: String,
-    @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "authors") val authors: List<String>,
-    @ColumnInfo(name = "publisher") val publisher: String,
-    @ColumnInfo(name = "publishedDate") val publishedDate: String,  // YYYY-MM-dd
-    @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "pageCount") val pageCount: Int,
-    @ColumnInfo(name = "categories") val categories: List<String>,
-    @ColumnInfo(name = "averageRating") val averageRating: Double,
-    @ColumnInfo(name = "ratingCount") val ratingCount: Int,
-    @ColumnInfo(name = "image") val image: String,
-    @ColumnInfo(name = "language") val language: String,
-    @ColumnInfo(name = "previewLink") val previewLink: String
+    @ColumnInfo val title: String,
+    @ColumnInfo val authors: String,        // カンマ区切り
+    @ColumnInfo val publisher: String,
+    @ColumnInfo val publishedDate: String,  // YYYY-MM-dd
+    @ColumnInfo val description: String,
+    @ColumnInfo val pageCount: Int,
+    @ColumnInfo val categories: String,     // カンマ区切り
+    @ColumnInfo val averageRating: Double,
+    @ColumnInfo val ratingCount: Int,
+    @ColumnInfo val image: String,
+    @ColumnInfo val language: String,
+    @ColumnInfo val previewLink: String,
+    @ColumnInfo val price: Int
 )

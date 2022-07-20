@@ -12,7 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/core_cache" />
+            <option value="$PROJECT_DIR$/core_database" />
             <option value="$PROJECT_DIR$/core_retrofit" />
             <option value="$PROJECT_DIR$/entity" />
             <option value="$PROJECT_DIR$/extension" />
