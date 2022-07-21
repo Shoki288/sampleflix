@@ -18,14 +18,14 @@ data class BookInfo(
 // Success
 data class BookDetail(
     val title: String,
-    val authors: List<String>,
-    val publisher: String,
-    val publishedDate: String,  // YYYY-MM-ddで返る
-    val description: String,
-    val pageCount: Int,
-    val categories: List<String>,
-    val averageRating: Double,
-    val ratingCount: Int,
+    val authors: List<String> = emptyList(),
+    val publisher: String?,
+    val publishedDate: String?,  // YYYY-MM-ddで返る
+    val description: String = "",
+    val pageCount: Int = 0,
+    val categories: List<String> = emptyList(),
+    val averageRating: Double?,
+    val ratingCount: Int = 0,
     @Json(name = "imageLinks")
     val images: ImageLinks?,
     val language: String,

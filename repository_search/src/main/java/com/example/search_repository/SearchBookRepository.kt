@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SearchBookRepository @Inject constructor(
     private val service: SearchBooksService,
     private val dao: BookInfoDao,
-    @DefaultDispatcher val defaultDispatcher: CoroutineDispatcher
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
     suspend fun searchBooksInit(): ApiResult<BookInfoList> =

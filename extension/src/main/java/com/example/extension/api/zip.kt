@@ -19,8 +19,10 @@ suspend fun <T : Any> zip(
     secondExecute: suspend () -> Deferred<Response<T>>,
 ): ApiResult<T> {
     return try {
-        val (res1, res2) = Pair(firstExecute().await(), secondExecute().await())
-        val (body1, body2) = Pair(res1.body(), res2.body())
+        val res1 = firstExecute().await()
+        val res2 = secondExecute().await()
+        val body1 = res1.body()
+        val body2 = res2.body()
 
         if (res1.isSuccessful && body1 != null && res2.isSuccessful && body2 != null) {
             ApiZipSuccess(data = Pair(body1, body2))
