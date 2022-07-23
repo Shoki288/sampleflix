@@ -19,9 +19,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        return FragmentHomeBinding.inflate(inflater, container, false).also {
-            it.viewModel = viewModel
-        }.root
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        return binding.root
     }
 
 }

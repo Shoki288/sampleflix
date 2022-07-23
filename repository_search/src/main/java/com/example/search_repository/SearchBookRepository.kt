@@ -19,7 +19,7 @@ class SearchBookRepository @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun searchBooksInit(): ApiResult<BookInfoList> =
+    suspend fun searchBooksInit(): Result<BookInfoList> =
         withContext(defaultDispatcher) {
             val cache = dao.getAll()
             if (cache.isEmpty()) {
@@ -27,15 +27,15 @@ class SearchBookRepository @Inject constructor(
                     firstExecute = { async { searchBookAndroid() } }, secondExecute = { async { searchBookFF() } },
                 ).onZipSuccess { first, second ->
                     val result = BookInfoList(first.items + second.items)
-                    ApiSuccess(data = result)
+                    Success(data = result)
                     saveCache(result)
                 }.onHttpError { code, message ->
-                    ApiHttpError<BookInfoList>(code, message)
+                    HttpError<BookInfoList>(code, message)
                 }.onException { e ->
-                    ApiException<BookInfoList>(e)
+                    Exception<BookInfoList>(e)
                 }
             } else {
-                ApiSuccess(data = cacheBookInfoAdapter(cache))
+                Success(data = cacheBookInfoAdapter(cache))
             }
         }
     private suspend fun searchBookAndroid(): Response<BookInfoList> =

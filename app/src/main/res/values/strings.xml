@@ -4,4 +4,5 @@
     <string name="nav_game_title">ゲーム</string>
     <string name="nav_notice_title">新着＆ホット</string>
     <string name="nav_download_title">ダウンロード</string>
+    <string name="show_all">すべて表示</string>
 </resources>

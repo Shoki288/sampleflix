@@ -1,21 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.sampleflix.home.HomeViewModel" />
     </data>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context="home.HomeFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <include
+            layout="@layout/recommend_item_carousel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="fragment_home.xml" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="読み始めたシリーズを続ける" />
 
-    </FrameLayout>
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="すぐ読める本" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="プライム会員特定で読めるベストセラー" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="最近読んだ本に基づくおすすめ" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="もうすぐ読み放題が終了するタイトル" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="近日配信開始のタイトルのおすすめ" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="類似タイトルに基づくおすすめ" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="読書履歴に基づくおすすめ" />
+
+        <include
+            layout="@layout/recommend_item_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:title="本をさらに見る" />
+
+    </LinearLayout>
 </layout>
