@@ -34,9 +34,7 @@ data class BookDetail(
 
 data class ImageLinks(
     @Json(name = "smallThumbnail")
-    val smallImg: String?,
-    @Json(name = "thumbnail")
-    val mediumImg: String?
+    val smallImg: String?
 )
 
 data class SaleInfo(

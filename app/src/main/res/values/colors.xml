@@ -8,5 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="link">#0066c0</color>
-    <color name="divider">#B0000000</color>
+    <color name="divider">#1FFFFFFF</color>
 </resources>

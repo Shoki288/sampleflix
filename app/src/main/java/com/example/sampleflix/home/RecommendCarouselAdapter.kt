@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sampleflix.databinding.ItemRecommendBinding
 
-class RecommendCarousel: ListAdapter<RecommendItem, RecommendCarousel.RecommendCarouselViewHolder>(diffCalBack) {
+class RecommendCarouselAdapter : ListAdapter<RecommendItem, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
     companion object {
         private val diffCalBack = object : DiffUtil.ItemCallback<RecommendItem>() {
             override fun areItemsTheSame(oldItem: RecommendItem, newItem: RecommendItem): Boolean = oldItem.id == newItem.id
