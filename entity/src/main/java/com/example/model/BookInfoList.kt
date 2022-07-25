@@ -33,9 +33,11 @@ data class BookDetail(
 )
 
 data class ImageLinks(
-    @Json(name = "smallThumbnail")
-    val smallImg: String?
-)
+    @Json(name = "thumbnail")
+    private val thumbnail: String?
+) {
+    val imageUrl = thumbnail?.replace("http:", "https:") ?: ""
+}
 
 data class SaleInfo(
     val listPrice: Price?

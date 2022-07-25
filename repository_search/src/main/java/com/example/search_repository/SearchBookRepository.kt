@@ -26,9 +26,9 @@ class SearchBookRepository @Inject constructor(
                 zip(
                     firstExecute = { async { searchBookAndroid() } }, secondExecute = { async { searchBookFF() } },
                 ).onZipSuccess { first, second ->
-                    val result = BookInfoList(first.items + second.items)
-                    Success(data = result)
-                    saveCache(result)
+                    val response = BookInfoList(first.items + second.items)
+                    Success(data = response)
+                    saveCache(response)
                 }.onHttpError { code, message ->
                     HttpError<BookInfoList>(code, message)
                 }.onException { e ->

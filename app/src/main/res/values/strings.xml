@@ -5,4 +5,14 @@
     <string name="nav_notice_title">新着＆ホット</string>
     <string name="nav_download_title">ダウンロード</string>
     <string name="show_all">すべて表示</string>
+
+    <string name="recently_reading_carousel_title">読み始めたシリーズを続ける</string>
+    <string name="recommend_carousel_title">すぐ読める本</string>
+    <string name="best_seller_carousel_title">プライム会員特定で読めるベストセラー</string>
+    <string name="recently_read_history_carousel_title">最近読んだ本に基づくおすすめ</string>
+    <string name="end_unlimited_reading_carousel_title">もうすぐ読み放題が終了するタイトル</string>
+    <string name="recently_release_carousel_title">近日配信開始のタイトルのおすすめ</string>
+    <string name="similar_title_carousel_title">類似タイトルに基づくおすすめ</string>
+    <string name="reading_history_carousel_title">読書履歴に基づくおすすめ</string>
+    <string name="recommend_category_carousel_title">本をさらに見る</string>
 </resources>

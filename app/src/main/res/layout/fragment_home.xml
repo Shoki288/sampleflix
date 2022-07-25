@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="読み始めたシリーズを続ける" />
+                app:carouselTitle="@{@string/recently_reading_carousel_title}" />
 
             <include
                 android:id="@+id/recommendList"
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="すぐ読める本" />
+                app:carouselTitle="@{@string/recommend_carousel_title}" />
 
             <include
                 android:id="@+id/bestSellerList"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="プライム会員特定で読めるベストセラー" />
+                app:carouselTitle="@{@string/best_seller_carousel_title}" />
 
             <include
                 android:id="@+id/recentlyReadHistoryList"
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="最近読んだ本に基づくおすすめ" />
+                app:carouselTitle="@{@string/recently_read_history_carousel_title}" />
 
             <include
                 android:id="@+id/endUnlimitedReadingList"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="もうすぐ読み放題が終了するタイトル" />
+                app:carouselTitle="@{@string/end_unlimited_reading_carousel_title}" />
 
             <include
                 android:id="@+id/recentlyReleaseList"
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="近日配信開始のタイトルのおすすめ" />
+                app:carouselTitle="@{@string/recently_release_carousel_title}" />
 
             <include
                 android:id="@+id/similarTitleList"
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="類似タイトルに基づくおすすめ" />
+                app:carouselTitle="@{@string/similar_title_carousel_title}" />
 
             <include
                 android:id="@+id/readingHistoryList"
@@ -82,14 +82,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="読書履歴に基づくおすすめ" />
+                app:carouselTitle="@{@string/reading_history_carousel_title}" />
 
             <include
+                android:id="@+id/recommendCategoryList"
                 layout="@layout/recommend_item_carousel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:title="本をさらに見る" />
+                app:carouselTitle="@{@string/recommend_category_carousel_title}" />
 
         </LinearLayout>
     </ScrollView>

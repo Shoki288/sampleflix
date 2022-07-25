@@ -18,7 +18,7 @@ fun cacheBookInfoAdapter(cache: List<CacheBookInfo>) =
                         averageRating = it.averageRating,
                         ratingCount = it.ratingCount,
                         images = ImageLinks(
-                            smallImg = it.image
+                            thumbnail = it.image
                         ),
                         language = it.language,
                         previewLink = it.previewLink,

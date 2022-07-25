@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -139,7 +140,7 @@ class HomeFragment : Fragment() {
         list.map {
             RecommendItem(
                 id = it.id,
-                imgUrl = it.bookInfo.images?.smallImg ?: ""
+                imgUrl = it.bookInfo.images?.imageUrl ?: ""
             )
         }
 }
