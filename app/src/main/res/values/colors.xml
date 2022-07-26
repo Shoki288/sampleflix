@@ -9,4 +9,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="link">#0066c0</color>
     <color name="divider">#1FFFFFFF</color>
+    
+    <color name="pink">#EC407A</color>
+    <color name="purple">#AB47BC</color>
+    <color name="deep_purple">#7E57C2</color>
+    <color name="blue">#42A5F5</color>
+    <color name="light_blue">#29B6F6</color>
+    <color name="green">#66BB6A</color>
+    <color name="light_green">#9CCC65</color>
+    <color name="lime">#D4E157</color>
+    <color name="gray">#BDBDBD</color>
+    <color name="orange">#FFA726</color>
 </resources>

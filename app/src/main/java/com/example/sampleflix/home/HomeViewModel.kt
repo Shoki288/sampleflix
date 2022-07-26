@@ -86,6 +86,7 @@ class HomeViewModel @Inject constructor(
 
     // 本をさらに見る
     val categories = _books.filterIsInstance<HomeUiState.Success>().map {
-        it.books.map { books -> books.bookInfo.categories }.flatten().filterNot { list -> list.isEmpty() }.run { distinct() }
+        val categories = it.books.map { books -> books.bookInfo.categories }.flatten().filterNot { list -> list.isEmpty() }.distinct()
+        categories.subList(0, 9)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 }

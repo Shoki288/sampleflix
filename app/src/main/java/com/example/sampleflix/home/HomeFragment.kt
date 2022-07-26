@@ -124,16 +124,16 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // TODO このカテゴリ用のAdapterつくる
         //本をさらに見る
-//        val categoriesAdapter = RecommendCarouselAdapter()
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                viewModel.categories.collect {
-//                    categoriesAdapter.submitList(it)
-//                }
-//            }
-//        }
+        val categoriesAdapter = RecommendCategoryAdapter()
+        binding.recommendCategoryList.carousel.adapter = categoriesAdapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.categories.collect {
+                    categoriesAdapter.submitList(it)
+                }
+            }
+        }
     }
 
     private fun convertRecommendItem(list: List<BookInfo>) =
