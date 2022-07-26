@@ -31,7 +31,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:padding="12dp"
                 android:text="@{carouselTitle}"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{ onClickShowAll }"
-                android:padding="4dp"
+                android:padding="12dp"
                 android:text="@string/show_all"
                 android:textColor="@color/link" />
 

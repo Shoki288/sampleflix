@@ -7,6 +7,7 @@ import com.example.extension.dispatcher.DefaultDispatcher
 import com.example.model.BookInfoList
 import com.example.model.adeapter.bookInfoListAdapter
 import com.example.model.adeapter.cacheBookInfoAdapter
+import com.example.model.adeapter.updateBookInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -26,7 +27,7 @@ class SearchBookRepository @Inject constructor(
                 zip(
                     firstExecute = { async { searchBookAndroid() } }, secondExecute = { async { searchBookFF() } },
                 ).onZipSuccess { first, second ->
-                    val response = BookInfoList(first.items + second.items)
+                    val response = updateBookInfo(first.items + second.items)
                     Success(data = response)
                     saveCache(response)
                 }.onHttpError { code, message ->

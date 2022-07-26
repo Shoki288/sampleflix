@@ -1,7 +1,6 @@
 package com.example.model.adeapter
 
-import com.example.model.BookInfoList
-import com.example.model.CacheBookInfo
+import com.example.model.*
 
 fun bookInfoListAdapter(response: BookInfoList) =
     response.items.map {
@@ -22,3 +21,31 @@ fun bookInfoListAdapter(response: BookInfoList) =
             price = it.salesInfo.listPrice?.price ?: 0,
         )
     }
+
+// APIから返ったレスポンスの中身のimageUrlがhttpなのでhttpsに置換する
+fun updateBookInfo(books: List<BookInfo>): BookInfoList =
+    BookInfoList(
+        books.map {
+            BookInfo(
+                id = it.id,
+                bookInfo = BookDetail(
+                    title = it.bookInfo.title,
+                    authors = it.bookInfo.authors,
+                    publisher = it.bookInfo.publisher,
+                    publishedDate = it.bookInfo.publishedDate,
+                    description = it.bookInfo.description,
+                    pageCount = it.bookInfo.pageCount,
+                    categories = it.bookInfo.categories,
+                    averageRating = it.bookInfo.averageRating,
+                    ratingCount = it.bookInfo.ratingCount,
+                    images = ImageLinks(
+                        thumbnail = it.bookInfo.images?.imageUrl?.replace("http:", "https:")
+                    ),
+                    language = it.bookInfo.language,
+                    previewLink = it.bookInfo.previewLink,
+                ),
+                salesInfo = it.salesInfo,
+                accessInfo = it.accessInfo
+            )
+        }
+    )
