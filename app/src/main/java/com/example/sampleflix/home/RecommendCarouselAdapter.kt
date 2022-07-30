@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.sampleflix.R
 import com.example.sampleflix.databinding.ItemRecommendBinding
+import com.example.sampleflix.home.BookDetailBottomSheet.BookInfoItem
 
-class RecommendCarouselAdapter : ListAdapter<RecommendItem, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
+class RecommendCarouselAdapter(private val listener: RecommendCarouselListener) : ListAdapter<RecommendItem, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
     companion object {
         private val diffCalBack = object : DiffUtil.ItemCallback<RecommendItem>() {
             override fun areItemsTheSame(oldItem: RecommendItem, newItem: RecommendItem): Boolean =
@@ -28,20 +27,31 @@ class RecommendCarouselAdapter : ListAdapter<RecommendItem, RecommendCarouselAda
     }
 
     override fun onBindViewHolder(holder: RecommendCarouselViewHolder, position: Int) {
-        println(getItem(position).imgUrl)
+        val item = getItem(position)
+        holder.binding.imageUrl = item.imgUrl
 
-        Glide.with(holder.binding.root.context)
-            .load(getItem(position).imgUrl)
-            .error(R.drawable.ic_not_found_image)
-            .fallback(R.drawable.ic_not_found_image)
-            .fallback(R.drawable.ic_not_found_image)
-            .into(holder.binding.bookImage)
+        holder.itemView.setOnClickListener {
+            listener.onClickItem(
+                BookInfoItem(
+                    title = item.title,
+                    publishDate = item.publishDate,
+                    description = item.description
+                )
+            )
+        }
     }
 
     class RecommendCarouselViewHolder(val binding: ItemRecommendBinding) : RecyclerView.ViewHolder(binding.root)
+
+    interface RecommendCarouselListener {
+        fun onClickItem(item: BookInfoItem)
+    }
 }
 
 data class RecommendItem(
     val id: String,
+    val title: String,
+    val publishDate: String,
+    val description: String,
     val imgUrl: String,
 )

@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.example.sampleflix.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_bookDetailBottomSheet"
+            app:destination="@id/bookDetailBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/nav_game"
         android:name="com.example.sampleflix.game.GameFragment"
@@ -25,4 +29,12 @@
         android:name="com.example.sampleflix.download.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download" />
+    <dialog
+        android:id="@+id/bookDetailBottomSheet"
+        android:name="com.example.sampleflix.home.BookDetailBottomSheet"
+        android:label="BookDetailBottomSheet" >
+        <argument
+            android:name="BookDetailItem"
+            app:argType="com.example.sampleflix.home.BookDetailBottomSheet$BookInfoItem" />
+    </dialog>
 </navigation>

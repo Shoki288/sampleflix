@@ -17,7 +17,7 @@ class RecommendCategoryAdapter: ListAdapter<String, RecommendCategoryAdapter.Rec
         }
 
         private val colorList = listOf(R.color.pink, R.color.purple, R.color.deep_purple, R.color.blue,
-            R.color.light_blue, R.color.green, R.color.light_green, R.color.lime, R.color.gray, R.color.orange,)
+            R.color.light_blue, R.color.green, R.color.light_green, R.color.lime, R.color.gray, R.color.orange)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendCategoryViewHolder {

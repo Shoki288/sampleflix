@@ -13,13 +13,17 @@ import com.example.model.BookInfo
 import com.example.sampleflix.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
+import java.util.Calendar.YEAR
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), RecommendCarouselAdapter.RecommendCarouselListener {
     private val viewModel by viewModels<HomeViewModel>()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val calendar by lazy { Calendar.getInstance() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +41,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //読み始めたシリーズを続ける
-        val recentlyReadingBooksAdapter = RecommendCarouselAdapter()
+        val recentlyReadingBooksAdapter = RecommendCarouselAdapter(this)
         binding.recentlyReadingBooksList.carousel.adapter = recentlyReadingBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -48,7 +52,7 @@ class HomeFragment : Fragment() {
         }
 
         //すぐ読める本
-        val recommendBooksAdapter = RecommendCarouselAdapter()
+        val recommendBooksAdapter = RecommendCarouselAdapter(this)
         binding.recommendList.carousel.adapter = recommendBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -59,7 +63,7 @@ class HomeFragment : Fragment() {
         }
 
         //プライム会員特定で読めるベストセラー
-        val bestSellerBooksAdapter = RecommendCarouselAdapter()
+        val bestSellerBooksAdapter = RecommendCarouselAdapter(this)
         binding.bestSellerList.carousel.adapter = bestSellerBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -70,7 +74,7 @@ class HomeFragment : Fragment() {
         }
 
         //最近読んだ本に基づくおすすめ
-        val recentlyReadHistoryRecommendBooksAdapter = RecommendCarouselAdapter()
+        val recentlyReadHistoryRecommendBooksAdapter = RecommendCarouselAdapter(this)
         binding.recentlyReadHistoryList.carousel.adapter = recentlyReadHistoryRecommendBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -81,7 +85,7 @@ class HomeFragment : Fragment() {
         }
 
         //もうすぐ読み放題が終了するタイトル
-        val endUnlimitedReadingBooksAdapter = RecommendCarouselAdapter()
+        val endUnlimitedReadingBooksAdapter = RecommendCarouselAdapter(this)
         binding.endUnlimitedReadingList.carousel.adapter = endUnlimitedReadingBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -92,7 +96,7 @@ class HomeFragment : Fragment() {
         }
 
         //近日配信開始のタイトルのおすすめ
-        val recentlyReleaseBooksAdapter = RecommendCarouselAdapter()
+        val recentlyReleaseBooksAdapter = RecommendCarouselAdapter(this)
         binding.recentlyReleaseList.carousel.adapter = recentlyReleaseBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -103,7 +107,7 @@ class HomeFragment : Fragment() {
         }
 
         //類似タイトルに基づくおすすめ
-        val similarTitleBooksAdapter = RecommendCarouselAdapter()
+        val similarTitleBooksAdapter = RecommendCarouselAdapter(this)
         binding.similarTitleList.carousel.adapter = similarTitleBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -114,7 +118,7 @@ class HomeFragment : Fragment() {
         }
 
         //読書履歴に基づくおすすめ
-        val readingHistoryRecommendBooksAdapter = RecommendCarouselAdapter()
+        val readingHistoryRecommendBooksAdapter = RecommendCarouselAdapter(this)
         binding.readingHistoryList.carousel.adapter = readingHistoryRecommendBooksAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -140,7 +144,13 @@ class HomeFragment : Fragment() {
         list.map {
             RecommendItem(
                 id = it.id,
+                title = it.bookInfo.title,
+                publishDate = it.bookInfo.publishedDate ?: calendar.get(YEAR).toString(),
+                description = it.bookInfo.description,
                 imgUrl = it.bookInfo.images?.imageUrl ?: ""
             )
         }
+
+    override fun onClickItem(item: BookDetailBottomSheet.BookInfoItem) =
+        BookDetailBottomSheet.newInstance(childFragmentManager, item)
 }

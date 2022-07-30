@@ -15,4 +15,6 @@
     <string name="similar_title_carousel_title">類似タイトルに基づくおすすめ</string>
     <string name="reading_history_carousel_title">読書履歴に基づくおすすめ</string>
     <string name="recommend_category_carousel_title">本をさらに見る</string>
+    <string name="detail_info">詳細情報</string>
+    <string name="publish_date">%s  %dエピソード</string>
 </resources>
