@@ -16,23 +16,24 @@
     </fragment>
     <fragment
         android:id="@+id/nav_game"
-        android:name="com.example.sampleflix.game.GameFragment"
+        android:name="com.example.feature_game.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
     <fragment
         android:id="@+id/nav_notice"
-        android:name="com.example.sampleflix.notice.NoticeFragment"
+        android:name="com.example.feature_notice.NoticeFragment"
         android:label="fragment_notice"
         tools:layout="@layout/fragment_notice" />
     <fragment
         android:id="@+id/nav_download"
-        android:name="com.example.sampleflix.download.DownloadFragment"
+        android:name="com.example.feature_download.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download" />
     <dialog
         android:id="@+id/bookDetailBottomSheet"
         android:name="com.example.feature_home.BookDetailBottomSheet"
-        android:label="BookDetailBottomSheet" >
+        android:label="BookDetailBottomSheet"
+        tools:layout="@layout/book_detail_bottom_sheet">
         <argument
             android:name="BookDetailItem"
             app:argType="com.example.feature_home.BookDetailBottomSheet$BookInfoItem" />
