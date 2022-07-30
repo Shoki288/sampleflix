@@ -35,6 +35,7 @@ class RecommendCarouselAdapter(private val listener: RecommendCarouselListener) 
                 BookInfoItem(
                     title = item.title,
                     publishDate = item.publishDate,
+                    imageUrl = item.imgUrl,
                     description = item.description
                 )
             )

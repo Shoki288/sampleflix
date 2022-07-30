@@ -17,4 +17,5 @@
     <string name="recommend_category_carousel_title">本をさらに見る</string>
     <string name="detail_info">詳細情報</string>
     <string name="publish_date">%s  %dエピソード</string>
+    <string name="search_box_hint">google booksを検索</string>
 </resources>

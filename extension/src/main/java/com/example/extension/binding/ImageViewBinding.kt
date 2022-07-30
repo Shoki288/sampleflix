@@ -11,6 +11,6 @@ fun ImageView.setImageUrl(imageUrl: String) {
         .load(imageUrl)
         .error(R.drawable.ic_not_found_image)
         .fallback(R.drawable.ic_not_found_image)
-        .fallback(R.drawable.ic_not_found_image)
+        .placeholder(R.drawable.ic_not_found_image)
         .into(this)
 }

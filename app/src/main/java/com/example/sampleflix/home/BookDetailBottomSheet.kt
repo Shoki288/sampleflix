@@ -36,11 +36,19 @@ class BookDetailBottomSheet: BottomSheetDialogFragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return BookDetailBottomSheetBinding.inflate(inflater, container, false).apply {
+            // TODO xmlと記述の順番を合わせる
             bookTitle = argument.title
             publishDate = argument.publishDate
+            imageUrl = argument.imageUrl
             episodeNum = (1..100).random()
             bookDescription = argument.description
+            owner = this@BookDetailBottomSheet
         }.root
+    }
+
+    fun onClickClose() = dismiss()
+    fun onClickDetail() {
+        // TODO 詳細画面に飛ばす
     }
 
     // TODO リネーム
@@ -48,6 +56,7 @@ class BookDetailBottomSheet: BottomSheetDialogFragment() {
     data class BookInfoItem(
         val title: String,
         val publishDate: String,
+        val imageUrl: String,
         val description: String
     ): Parcelable
 }

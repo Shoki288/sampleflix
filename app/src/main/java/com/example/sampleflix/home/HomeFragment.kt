@@ -138,6 +138,8 @@ class HomeFragment : Fragment(), RecommendCarouselAdapter.RecommendCarouselListe
                 }
             }
         }
+
+        binding.similarTitleList.title.setOnClickListener {  }
     }
 
     private fun convertRecommendItem(list: List<BookInfo>) =

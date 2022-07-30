@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--TODO 詳細情報タブrippleが親Layoutの影響でおかしいためレイアウト組みなおし -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="imgUrl"
+            name="imageUrl"
             type="String" />
 
         <variable
@@ -25,12 +26,16 @@
             name="bookDescription"
             type="String" />
 
+        <variable
+            name="owner"
+            type="com.example.sampleflix.home.BookDetailBottomSheet" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/thumbnail"
@@ -39,6 +44,7 @@
             android:contentDescription="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{imageUrl}"
             tools:background="@android:color/holo_red_light"
             tools:src="@tools:sample/avatars" />
 
@@ -46,27 +52,30 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="@{bookTitle}"
             android:textAppearance="@style/TextAppearance.AppCompat.Bold"
             app:layout_constraintEnd_toStartOf="@id/close"
             app:layout_constraintStart_toStartOf="@id/barrier"
             app:layout_constraintTop_toTopOf="@id/thumbnail"
-            android:lineBreakWordStyle="phrase"
-            android:text="@{bookTitle}"
             tools:text="たいとるたいとるたいとるたいとる" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/close"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/gray"
+            android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="18dp"
-            app:contentPadding="2dp"
+            android:onClick="@{() -> owner.onClickClose()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/thumbnail">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_close" />
@@ -77,11 +86,11 @@
             android:id="@+id/publish_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{@string/publish_date(publishDate,episodeNum)}"
             android:textAppearance="@style/TextAppearance.AppCompat.Tiny"
             app:layout_constraintEnd_toStartOf="@id/close"
             app:layout_constraintStart_toStartOf="@id/barrier"
             app:layout_constraintTop_toBottomOf="@id/title"
-            android:text="@{@string/publish_date(publishDate,episodeNum)}"
             tools:text="2020 5エピソード" />
 
         <TextView
@@ -89,10 +98,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:lines="3"
+            android:text="@{bookDescription}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/barrier"
             app:layout_constraintTop_toBottomOf="@id/publish_info"
-            android:text="@{bookDescription}"
             tools:text="さんぷるさんぷるさんぷるさんぷるさんぷるさんぷるさんぷる" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -101,7 +112,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:barrierDirection="end"
-            app:barrierMargin="8dp"
+            app:barrierMargin="12dp"
             app:constraint_referenced_ids="thumbnail" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -131,6 +142,7 @@
             app:drawableEndCompat="@drawable/ic_detail"
             app:drawableStartCompat="@drawable/ic_info"
             app:drawableTint="@color/gray"
+            android:onClick="@{() -> owner.onClickDetail()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottom_barrier" />
