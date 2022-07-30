@@ -28,7 +28,7 @@
 
         <variable
             name="owner"
-            type="com.example.sampleflix.home.BookDetailBottomSheet" />
+            type="com.example.feature_home.BookDetailBottomSheet" />
 
     </data>
 

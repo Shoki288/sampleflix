@@ -1,4 +1,4 @@
-package com.example.sampleflix.home
+package com.example.feature_home
 
 import android.os.Bundle
 import android.os.Parcelable
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import com.example.sampleflix.databinding.BookDetailBottomSheetBinding
+import com.example.feature_home.databinding.BookDetailBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.parcelize.Parcelize
 

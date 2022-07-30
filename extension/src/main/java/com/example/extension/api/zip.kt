@@ -33,6 +33,6 @@ suspend fun <T : Any> zip(
     } catch (e: HttpException) {
         HttpError(code = e.code(), message = e.message())
     } catch (e: Throwable) {
-        Exception(e)
+        AppException(e)
     }
 }

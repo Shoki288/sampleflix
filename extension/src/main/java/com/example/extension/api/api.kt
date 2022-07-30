@@ -6,7 +6,7 @@ import retrofit2.Response
 sealed interface Result<T : Any>
 class Success<T : Any>(val data: T) : Result<T>
 class HttpError<T : Any>(val code: Int, val message: String) : Result<T>
-class Exception<T : Any>(val e: Throwable) : Result<T>
+class AppException<T : Any>(val e: Throwable) : Result<T>
 
 suspend fun <T: Any> Result<T>.onSuccess(
     executable: suspend (T) -> Unit
@@ -27,7 +27,7 @@ suspend fun <T: Any> Result<T>.onHttpError(
 suspend fun <T: Any> Result<T>.onException(
     executable: suspend (Throwable) -> Unit
 ): Result<T> = also {
-    if (it is Exception<T>) {
+    if (it is AppException<T>) {
         executable(it.e)
     }
 }
@@ -46,6 +46,6 @@ suspend fun <T : Any> api(
     } catch (e: HttpException) {
         HttpError(code = e.code(), message = e.message())
     } catch (e: Throwable) {
-        Exception(e)
+        AppException(e)
     }
 }

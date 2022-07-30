@@ -1,4 +1,4 @@
-package com.example.sampleflix.home
+package com.example.feature_home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.feature_home.databinding.FragmentHomeBinding
 import com.example.model.BookInfo
-import com.example.sampleflix.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
@@ -35,6 +35,11 @@ class HomeFragment : Fragment(), RecommendCarouselAdapter.RecommendCarouselListe
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

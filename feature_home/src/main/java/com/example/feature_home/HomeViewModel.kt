@@ -1,8 +1,8 @@
-package com.example.sampleflix.home
+package com.example.feature_home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.extension.api.Exception
+import com.example.extension.api.AppException
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
 import com.example.model.BookInfo
@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
                 is HttpError -> {
                     _books.value = HomeUiState.ApiError(res.message)
                 }
-                is Exception -> {
+                is AppException -> {
                     _books.value =
                         HomeUiState.ApiError(res.e.message ?: "接続できませんでした。もう一度時間をおいて確認してください。")
                 }

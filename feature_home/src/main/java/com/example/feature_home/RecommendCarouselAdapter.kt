@@ -1,14 +1,16 @@
-package com.example.sampleflix.home
+package com.example.feature_home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sampleflix.databinding.ItemRecommendBinding
-import com.example.sampleflix.home.BookDetailBottomSheet.BookInfoItem
+import com.example.feature_home.BookDetailBottomSheet.BookInfoItem
+import com.example.feature_home.databinding.ItemRecommendBinding
 
-class RecommendCarouselAdapter(private val listener: RecommendCarouselListener) : ListAdapter<RecommendItem, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
+class RecommendCarouselAdapter(
+    private val listener: RecommendCarouselListener
+) : ListAdapter<RecommendItem, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
     companion object {
         private val diffCalBack = object : DiffUtil.ItemCallback<RecommendItem>() {
             override fun areItemsTheSame(oldItem: RecommendItem, newItem: RecommendItem): Boolean =

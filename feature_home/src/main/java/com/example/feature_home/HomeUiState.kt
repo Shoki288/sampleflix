@@ -1,4 +1,4 @@
-package com.example.sampleflix.home
+package com.example.feature_home
 
 import com.example.model.BookInfo
 

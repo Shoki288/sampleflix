@@ -33,7 +33,7 @@ class SearchBookRepository @Inject constructor(
                 }.onHttpError { code, message ->
                     HttpError<BookInfoList>(code, message)
                 }.onException { e ->
-                    Exception<BookInfoList>(e)
+                    AppException<BookInfoList>(e)
                 }
             } else {
                 Success(data = cacheBookInfoAdapter(cache))

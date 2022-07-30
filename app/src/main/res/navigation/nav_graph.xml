@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.sampleflix.home.HomeFragment"
+        android:name="com.example.feature_home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -31,10 +31,10 @@
         tools:layout="@layout/fragment_download" />
     <dialog
         android:id="@+id/bookDetailBottomSheet"
-        android:name="com.example.sampleflix.home.BookDetailBottomSheet"
+        android:name="com.example.feature_home.BookDetailBottomSheet"
         android:label="BookDetailBottomSheet" >
         <argument
             android:name="BookDetailItem"
-            app:argType="com.example.sampleflix.home.BookDetailBottomSheet$BookInfoItem" />
+            app:argType="com.example.feature_home.BookDetailBottomSheet$BookInfoItem" />
     </dialog>
 </navigation>
