@@ -18,10 +18,9 @@
             <option value="$PROJECT_DIR$/core_retrofit" />
             <option value="$PROJECT_DIR$/entity" />
             <option value="$PROJECT_DIR$/extension" />
-            <option value="$PROJECT_DIR$/feature_download" />
-            <option value="$PROJECT_DIR$/feature_game" />
+            <option value="$PROJECT_DIR$/feature_favorite" />
             <option value="$PROJECT_DIR$/feature_home" />
-            <option value="$PROJECT_DIR$/feature_notice" />
+            <option value="$PROJECT_DIR$/feature_search" />
             <option value="$PROJECT_DIR$/repository_search" />
           </set>
         </option>

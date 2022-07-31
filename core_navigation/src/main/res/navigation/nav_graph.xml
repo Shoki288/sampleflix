@@ -14,19 +14,16 @@
             android:id="@+id/action_nav_home_to_bookDetailBottomSheet"
             app:destination="@id/bookDetailBottomSheet" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_game"
-        android:name="com.example.feature_game.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+    <!-- TODO 検索に変えたい -->
     <fragment
         android:id="@+id/nav_notice"
-        android:name="com.example.feature_notice.NoticeFragment"
+        android:name="com.example.feature_search.NoticeFragment"
         android:label="fragment_notice"
         tools:layout="@layout/fragment_notice" />
+    <!-- TODO お気に入りに変えたい -->
     <fragment
         android:id="@+id/nav_download"
-        android:name="com.example.feature_download.DownloadFragment"
+        android:name="com.example.feature_favorite.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download" />
     <dialog

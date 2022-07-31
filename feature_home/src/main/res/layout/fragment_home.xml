@@ -20,22 +20,6 @@
             android:orientation="vertical"
             tools:context="com.example.feature_home.HomeFragment">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_margin="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/search_box_hint"
-                app:boxBackgroundColor="@color/white"
-                app:startIconDrawable="@drawable/ic_search">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
             <include
                 android:id="@+id/recentlyReadingBooksList"
                 layout="@layout/recommend_item_carousel"

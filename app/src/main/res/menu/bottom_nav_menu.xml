@@ -8,20 +8,14 @@
         android:title="@string/nav_home_title" />
 
     <item
-        android:id="@+id/nav_game"
-        android:icon="@drawable/ic_game"
-        android:menuCategory="secondary"
-        android:title="@string/nav_game_title" />
-
-    <item
         android:id="@+id/nav_notice"
-        android:icon="@drawable/ic_notice"
+        android:icon="@drawable/ic_search"
         android:menuCategory="secondary"
         android:title="@string/nav_notice_title" />
 
     <item
         android:id="@+id/nav_download"
-        android:icon="@drawable/ic_download"
+        android:icon="@drawable/ic_no_favorite"
         android:menuCategory="secondary"
         android:title="@string/nav_download_title" />
 
