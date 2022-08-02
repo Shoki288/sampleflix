@@ -17,4 +17,6 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         findViewById<BottomNavigationView>(R.id.bottom_nav).setupWithNavController(navHost.navController)
     }
+
+    override fun onBackPressed() { super.onBackPressed() }
 }

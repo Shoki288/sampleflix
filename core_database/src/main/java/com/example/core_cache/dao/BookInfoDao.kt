@@ -13,4 +13,7 @@ interface BookInfoDao {
 
     @Query("SELECT * FROM cachebookinfo")
     suspend fun getAll(): List<CacheBookInfo>
+
+    @Query("SELECT categories FROM cachebookinfo")
+    suspend fun getAllBooksCategory(): List<String>
 }

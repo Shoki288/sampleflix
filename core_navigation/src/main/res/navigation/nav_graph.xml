@@ -17,9 +17,9 @@
     <!-- TODO 検索に変えたい -->
     <fragment
         android:id="@+id/nav_notice"
-        android:name="com.example.feature_search.NoticeFragment"
+        android:name="com.example.feature_search.SearchFragment"
         android:label="fragment_notice"
-        tools:layout="@layout/fragment_notice" />
+        tools:layout="@layout/fragment_search" />
     <!-- TODO お気に入りに変えたい -->
     <fragment
         android:id="@+id/nav_download"
