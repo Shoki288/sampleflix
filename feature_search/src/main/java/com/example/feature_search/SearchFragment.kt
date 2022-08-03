@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feature_search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,7 +63,7 @@ class SearchFragment : Fragment() {
         binding.textField.setOnKeyListener { _, code, event ->
             if (event.action == KeyEvent.ACTION_DOWN && code == KeyEvent.KEYCODE_ENTER) {
                 val keyword = binding.textField.editText?.text?.toString()
-                // TODO 検索結果に遷移
+//                findNavController().navigate()
                 return@setOnKeyListener false
             }
             return@setOnKeyListener true

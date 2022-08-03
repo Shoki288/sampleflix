@@ -8,13 +8,13 @@
         android:title="@string/nav_home_title" />
 
     <item
-        android:id="@+id/nav_notice"
+        android:id="@+id/nav_search"
         android:icon="@drawable/ic_search"
         android:menuCategory="secondary"
         android:title="@string/nav_notice_title" />
 
     <item
-        android:id="@+id/nav_download"
+        android:id="@+id/nav_favorite"
         android:icon="@drawable/ic_no_favorite"
         android:menuCategory="secondary"
         android:title="@string/nav_download_title" />

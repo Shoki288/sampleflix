@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--TODO appモジュールに置く-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/nav_home">
-
+    <!--TODO id名をキャメルケースを変える-->
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.feature_home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_bookDetailBottomSheet"
             app:destination="@id/bookDetailBottomSheet" />
     </fragment>
-    <!-- TODO 検索に変えたい -->
     <fragment
-        android:id="@+id/nav_notice"
+        android:id="@+id/nav_search"
         android:name="com.example.feature_search.SearchFragment"
-        android:label="fragment_notice"
-        tools:layout="@layout/fragment_search" />
-    <!-- TODO お気に入りに変えたい -->
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search"/>
     <fragment
-        android:id="@+id/nav_download"
+        android:id="@+id/nav_favorite"
         android:name="com.example.feature_favorite.DownloadFragment"
-        android:label="fragment_download"
+        android:label="fragment_favorite"
         tools:layout="@layout/fragment_download" />
     <dialog
         android:id="@+id/bookDetailBottomSheet"
@@ -35,4 +34,5 @@
             android:name="BookDetailItem"
             app:argType="com.example.feature_home.BookDetailBottomSheet$BookInfoItem" />
     </dialog>
+
 </navigation>
