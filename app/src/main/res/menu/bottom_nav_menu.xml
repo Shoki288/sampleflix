@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_home"
+        android:id="@id/nav_home"
         android:icon="@drawable/ic_home"
         android:menuCategory="secondary"
         android:title="@string/nav_home_title" />
 
     <item
-        android:id="@+id/nav_search"
+        android:id="@id/nav_search"
         android:icon="@drawable/ic_search"
         android:menuCategory="secondary"
         android:title="@string/nav_notice_title" />
 
     <item
-        android:id="@+id/nav_favorite"
+        android:id="@id/nav_favorite"
         android:icon="@drawable/ic_no_favorite"
         android:menuCategory="secondary"
         android:title="@string/nav_download_title" />

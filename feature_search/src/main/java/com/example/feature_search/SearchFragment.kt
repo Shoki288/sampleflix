@@ -46,7 +46,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = CategoryAdapter{
-            // TODO 検索結果に遷移
+            val action = SearchFragmentDirections.actionNavSearchToSearchResultFragment(it)
+            findNavController().navigate(action)
         }
         binding.categoryList.let {
             it.adapter = adapter
@@ -62,8 +63,9 @@ class SearchFragment : Fragment() {
 
         binding.textField.setOnKeyListener { _, code, event ->
             if (event.action == KeyEvent.ACTION_DOWN && code == KeyEvent.KEYCODE_ENTER) {
-                val keyword = binding.textField.editText?.text?.toString()
-//                findNavController().navigate()
+                val keyword = binding.textField.editText?.text?.toString() ?: return@setOnKeyListener true
+                val action = SearchFragmentDirections.actionNavSearchToSearchResultFragment(keyword)
+                findNavController().navigate(action)
                 return@setOnKeyListener false
             }
             return@setOnKeyListener true

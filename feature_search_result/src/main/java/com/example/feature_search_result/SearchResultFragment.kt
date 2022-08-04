@@ -13,7 +13,7 @@ class SearchResultFragment : Fragment() {
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
 
-//    private val args by navArgs<SearchResult>()
+    private val args by navArgs<SearchResultFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
