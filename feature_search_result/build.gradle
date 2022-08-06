@@ -35,6 +35,8 @@ android {
 
 dependencies {
     api project(":entity")
+    api project(":extension")
+    api project(":core_navigation")
     api project(":core_design")
 
     implementation 'androidx.core:core-ktx:1.7.0'

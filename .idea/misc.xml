@@ -25,6 +25,10 @@
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/layout/recommend_category_carousel.xml" value="0.315625" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/layout/recommend_item_carousel.xml" value="0.33" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_not_review.xml" value="0.1725" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_review_star.xml" value="0.1725" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/layout/review_starts_view.xml" value="0.35959221501390176" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/layout/sample_review_starts_view.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/extension/src/main/res/drawable/ic_not_found_image.xml" value="0.2745" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_favorite/src/main/res/layout/fragment_download.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_home/src/main/res/layout/fragment_home.xml" value="0.23969072164948454" />
@@ -34,7 +38,7 @@
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_search/src/main/res/layout/fragment_search.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_search/src/main/res/layout/item_search_category.xml" value="0.67" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_search_result/src/main/res/layout/fragment_search_result.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_search_result/src/main/res/layout/item_search_result.xml" value="0.15260416666666668" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/feature_search_result/src/main/res/layout/item_search_result.xml" value="0.25" />
       </map>
     </option>
   </component>

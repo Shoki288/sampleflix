@@ -39,6 +39,7 @@ dependencies {
     api project(":core_design")
     api project(":extension")
     api project(":repository_category")
+    api project(":core_navigation")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

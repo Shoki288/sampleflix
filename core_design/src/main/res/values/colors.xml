@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="link">#0066c0</color>
     <color name="divider">#1FFFFFFF</color>
-    
+
     <color name="pink">#EC407A</color>
     <color name="purple">#AB47BC</color>
     <color name="deep_purple">#7E57C2</color>
@@ -20,4 +20,8 @@
     <color name="lime">#D4E157</color>
     <color name="gray">#BDBDBD</color>
     <color name="orange">#FFA726</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
 </resources>
