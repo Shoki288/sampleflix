@@ -28,15 +28,15 @@ class SearchBookRepository @Inject constructor(
                     firstExecute = { async { searchBookAndroid() } }, secondExecute = { async { searchBookFF() } },
                 ).onZipSuccess { first, second ->
                     val response = updateBookInfo(first.items + second.items)
-                    Success(data = response)
+                    ApiSuccess(data = response)
                     saveCache(response)
                 }.onHttpError { code, message ->
                     HttpError<BookInfoList>(code, message)
                 }.onException { e ->
-                    AppException<BookInfoList>(e)
+                    ApiException<BookInfoList>(e)
                 }
             } else {
-                Success(data = cacheBookInfoAdapter(cache))
+                ApiSuccess(data = cacheBookInfoAdapter(cache))
             }
         }
     private suspend fun searchBookAndroid(): Response<BookInfoList> =
@@ -46,7 +46,6 @@ class SearchBookRepository @Inject constructor(
 
     suspend fun searchBooks(keyword: String, maxResultSize: Int? = null): Response<BookInfoList> =
         service.searchBooks(keyword, maxResultSize)
-
 
     private suspend fun saveCache(items: BookInfoList) {
         dao.insertAll(bookInfoListAdapter(items))

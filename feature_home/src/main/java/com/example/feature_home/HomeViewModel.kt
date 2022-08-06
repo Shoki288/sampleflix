@@ -2,9 +2,9 @@ package com.example.feature_home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.extension.api.AppException
+import com.example.extension.api.ApiException
 import com.example.extension.api.HttpError
-import com.example.extension.api.Success
+import com.example.extension.api.ApiSuccess
 import com.example.feature_home.HomeUiState.ApiError
 import com.example.model.BookInfo
 import com.example.search_repository.usecase.SearchBookUseCase
@@ -23,9 +23,9 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             books.value = when (val res = useCase.searchBookInit()) {
-                is Success -> HomeUiState.Success(res.data.items)
+                is ApiSuccess -> HomeUiState.Success(res.data.items)
                 is HttpError -> ApiError(res.message)
-                is AppException -> ApiError(res.e.message ?: "接続できませんでした。もう一度時間をおいて確認してください。")
+                is ApiException -> ApiError(res.e.message ?: "接続できませんでした。もう一度時間をおいて確認してください。")
                 else -> ApiError("接続できませんでした。もう一度時間をおいて確認してください。")
             }
         }

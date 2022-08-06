@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetAllCategoryUseCase @Inject constructor(
     private val repository: CategoryRepository
 ) {
-    suspend fun getCategory() = repository.getCategory().filterNot { it.isEmpty() }.distinct()
+    suspend fun getCategory(): List<String> = repository.getCategory().filterNot { it.isEmpty() }.distinct()
 }

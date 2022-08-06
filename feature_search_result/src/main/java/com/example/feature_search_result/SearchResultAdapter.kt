@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feature_search_result.SearchResultAdapter.SearchResult
 import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHolder
 import com.example.feature_search_result.databinding.ItemSearchResultBinding
 
@@ -45,15 +46,15 @@ class SearchResultAdapter : ListAdapter<SearchResult, SearchResultViewHolder>(di
 
     inner class SearchResultViewHolder(val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root)
-}
 
-data class SearchResult(
-    val imgUrl: String,
-    val title: String,
-    val price: Int,
-    val description: String,
-    val author: String,
-    val publisher: String,
-    val reviewTotalResult: Int,
-    val reviewAverageResult: Int,
-)
+    data class SearchResult(
+        val imgUrl: String,
+        val title: String,
+        val price: Int,
+        val description: String,
+        val author: String,
+        val publisher: String?,
+        val reviewTotalResult: Int,
+        val reviewAverageResult: Int,
+    )
+}

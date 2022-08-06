@@ -24,13 +24,16 @@ data class BookDetail(
     val description: String = "",
     val pageCount: Int = 0,
     val categories: List<String> = emptyList(),
-    val averageRating: Double?,
-    val ratingCount: Int = 0,
+    private val averageRating: Int?,
+    private val ratingCount: Int = 0,
     @Json(name = "imageLinks")
     val images: ImageLinks?,
     val language: String,
     val previewLink: String
-)
+) {
+    val averageReviewRate: Int = pageCount % 6
+    val totalReviewCount: Int = pageCount
+}
 
 data class ImageLinks(
     @Json(name = "thumbnail")

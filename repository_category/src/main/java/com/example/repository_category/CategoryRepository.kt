@@ -6,5 +6,5 @@ import javax.inject.Inject
 class CategoryRepository @Inject constructor(
     private val dao: BookInfoDao,
 ) {
-    suspend fun getCategory() = dao.getAllBooksCategory()
+    suspend fun getCategory(): List<String> = dao.getAllBooksCategory()
 }

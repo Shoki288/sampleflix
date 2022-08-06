@@ -47,6 +47,7 @@
             android:id="@+id/thumbnail"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            app:imageUrl="@{thumbnailUrl}"
             android:contentDescription="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -101,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@{price}"
+                android:text="@{@string/price(price)}"
                 tools:text="￥2,000" />
 
         </LinearLayout>

@@ -6,7 +6,7 @@ buildscript {
 
     dependencies {
         /** dagger-hilt **/
-        def app_hilt_version = "2.40.5"
+        def app_hilt_version = "2.42"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$app_hilt_version"
 
         /** nav-args **/
