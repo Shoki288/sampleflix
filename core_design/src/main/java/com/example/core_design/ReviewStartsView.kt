@@ -3,6 +3,7 @@ package com.example.core_design
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -19,6 +20,7 @@ class ReviewStartsView : FrameLayout {
     private fun init(context: Context) {
         val inflater = LayoutInflater.from(context)
         binding = DataBindingUtil.inflate(inflater, R.layout.review_starts_view, this, false)
+        addView(binding.root)
     }
 
     internal fun setupViews(totalResult: Int, average: Int) {

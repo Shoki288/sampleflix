@@ -41,7 +41,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:paddingVertical="2dp"
+        android:paddingHorizontal="8dp" >
 
         <ImageView
             android:id="@+id/thumbnail"
@@ -81,7 +82,6 @@
                 app:layout_constraintStart_toEndOf="@id/barrier"
                 tools:text="著者著者著（出版社）" />
 
-            <!-- TODO 表示できてない -->
             <com.example.core_design.ReviewStartsView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
