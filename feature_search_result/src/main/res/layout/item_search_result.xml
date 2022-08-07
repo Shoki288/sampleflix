@@ -68,8 +68,7 @@
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{title}"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="@color/black"
                 tools:text="たいとるたいとるたいとるたいとるたいとるたいとる" />
 
             <TextView
@@ -82,6 +81,7 @@
                 app:layout_constraintStart_toEndOf="@id/barrier"
                 tools:text="著者著者著（出版社）" />
 
+            <!-- TODO 表示できてない -->
             <com.example.core_design.ReviewStartsView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:textSize="12sp"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{description}"
@@ -102,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:textSize="12sp"
                 android:text="@{@string/price(price)}"
                 tools:text="￥2,000" />
 

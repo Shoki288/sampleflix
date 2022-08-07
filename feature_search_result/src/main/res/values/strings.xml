@@ -2,4 +2,6 @@
 <resources>
     <string name="author_and_publisher">%1$s（%2$s）</string>
     <string name="price">\%d</string>
+    <string name="zero_match_search_result">検索結果が見つかりませんでした。</string>
+    <string name="search_box_hint">キーワードから検索する</string>
 </resources>

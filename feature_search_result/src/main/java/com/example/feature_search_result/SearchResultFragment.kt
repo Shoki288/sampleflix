@@ -1,6 +1,7 @@
 package com.example.feature_search_result
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.feature_search_result.adapter.convertSearchResultToBookInfo
 import com.example.feature_search_result.databinding.FragmentSearchResultBinding
@@ -21,6 +23,8 @@ class SearchResultFragment : Fragment() {
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
 
+    private val args by navArgs<SearchResultFragmentArgs>()
+
     private val viewModel by viewModels<SearchResultViewModel>()
 
     override fun onCreateView(
@@ -29,7 +33,10 @@ class SearchResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        _binding = FragmentSearchResultBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchResultBinding.inflate(inflater, container, false).also {
+            it.viewModel = viewModel
+            it.lifecycleOwner = viewLifecycleOwner
+        }
         return binding.root
     }
 
@@ -46,6 +53,16 @@ class SearchResultFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        binding.textField.editText?.setText(args.keyword)
+        binding.textField.setOnKeyListener { _, code, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && code == KeyEvent.KEYCODE_ENTER) {
+                val keyword = binding.textField.editText?.text?.toString() ?: return@setOnKeyListener true
+                viewModel.search(keyword)
+                return@setOnKeyListener false
+            }
+            return@setOnKeyListener true
         }
     }
 

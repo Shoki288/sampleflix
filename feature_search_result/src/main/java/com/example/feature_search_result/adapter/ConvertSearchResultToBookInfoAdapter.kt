@@ -8,10 +8,10 @@ fun convertSearchResultToBookInfo(bookInfoList: List<BookInfo>) =
         SearchResult(
             imgUrl =it.bookInfo.images?.imageUrl ?: "",
             title =it.bookInfo.title,
-            price =it.salesInfo.listPrice?.price ?: 0,
+            price =it.salesInfo.listPrice?.price ?: (1..10000).random(),
             description =it.bookInfo.description,
-            author =it.bookInfo.authors.joinToString(),
-            publisher =it.bookInfo.publisher,
+            author =it.bookInfo.authors.joinToString().ifEmpty { "不明" },
+            publisher =it.bookInfo.publisher ?: "不明",
             reviewTotalResult =it.bookInfo.totalReviewCount,
             reviewAverageResult =it.bookInfo.averageReviewRate
         )

@@ -53,7 +53,7 @@ class SearchResultAdapter : ListAdapter<SearchResult, SearchResultViewHolder>(di
         val price: Int,
         val description: String,
         val author: String,
-        val publisher: String?,
+        val publisher: String,
         val reviewTotalResult: Int,
         val reviewAverageResult: Int,
     )
