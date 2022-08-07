@@ -1,11 +1,14 @@
 package com.example.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.parcelize.Parcelize
 
 data class BookInfoList(
     val items: List<BookInfo>
 )
 
+@Parcelize
 data class BookInfo(
     val id: String,
     @Json(name = "volumeInfo")
@@ -13,9 +16,9 @@ data class BookInfo(
     @Json(name ="saleInfo")
     val salesInfo: SaleInfo,
     val accessInfo: AccessInfo?
-)
+): Parcelable
 
-// Success
+@Parcelize
 data class BookDetail(
     val title: String,
     val authors: List<String> = emptyList(),
@@ -30,32 +33,36 @@ data class BookDetail(
     val images: ImageLinks?,
     val language: String,
     val previewLink: String
-) {
+): Parcelable {
     val averageReviewRate: Int = pageCount % 6
     val totalReviewCount: Int = pageCount
 }
 
+@Parcelize
 data class ImageLinks(
     @Json(name = "thumbnail")
     private val thumbnail: String?
-) {
+): Parcelable {
     val imageUrl = thumbnail?.replace("http:", "https:") ?: ""
 }
 
+@Parcelize
 data class SaleInfo(
     val listPrice: Price?
-)
+): Parcelable
 
+@Parcelize
 data class Price(
     @Json(name = "amount")
     val price: Int
-)
+): Parcelable
 
-// Error
+@Parcelize
 data class AccessInfo(
     val downloadAccess: DownloadAccess?
-)
+): Parcelable
 
+@Parcelize
 data class DownloadAccess(
     val message: String?
-)
+): Parcelable
