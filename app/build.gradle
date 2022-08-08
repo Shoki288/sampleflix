@@ -43,6 +43,7 @@ dependencies {
     api project(":feature_home")
     api project(":feature_search")
     api project(":feature_search_result")
+    api project(":feature_book_detail")
     api project(":feature_favorite")
     api project(':core_design')
     api project(":core_navigation")

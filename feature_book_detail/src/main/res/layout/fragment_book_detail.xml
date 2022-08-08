@@ -22,6 +22,7 @@
             android:id="@+id/thumbnail"
             android:layout_width="150dp"
             android:layout_height="200dp"
+            app:imageUrl="@{viewModel.bookInfoDetail.bookDetailInfo.image}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:text="@{viewModel.bookInfoDetail.bookDetailInfo.title}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 tools:text="たいとるたいとるたいとるたいとるたいとる" />
 
@@ -50,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:text="@{viewModel.bookInfoDetail.bookDetailInfo.authors}"
                 tools:text="著者著者著者著者" />
 
             <!-- レビュー -->
@@ -57,14 +60,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
-                app:appsetReviewTotalResult="@{}"
-                app:setReviewAverage="@{}" />
+                app:setReviewTotalResult="@{viewModel.bookInfoDetail.bookDetailInfo.totalReviewCount}"
+                app:setReviewAverage="@{viewModel.bookInfoDetail.bookDetailInfo.averageReviewRate}" />
 
             <!-- カテゴリ -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:text="@{viewModel.bookInfoDetail.bookDetailInfo.categories}"
                 tools:text="カテゴリ：コミック" />
 
             <!-- 値段 -->
@@ -72,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:text="@{@string/yen(viewModel.bookInfoDetail.bookDetailInfo.price)}"
                 tools:text="￥2,000" />
 
         </LinearLayout>
@@ -91,7 +96,7 @@
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
             android:paddingVertical="4dp"
-            android:text="購入する"
+            android:text="@string/purchase"
             app:layout_constraintTop_toBottomOf="@id/barrier" />
 
         <!-- 説明 -->
@@ -124,6 +129,7 @@
                     android:layout_marginTop="4dp"
                     android:ellipsize="end"
                     android:maxLines="3"
+                    android:text="@{viewModel.bookInfoDetail.bookDetailInfo.description}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/descriptionTitle"
                     tools:text="説明説明説明説明説明説明説明説明説明説明説明説明" />
@@ -200,6 +206,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@{viewModel.bookInfoDetail.bookDetailInfo.publisher}"
                     app:layout_constraintBaseline_toBaselineOf="@id/publisherTitle"
                     app:layout_constraintStart_toStartOf="@id/detailsBarrier"
                     tools:text="出版社出版社出版社出版社出版社出版社" />
@@ -211,6 +218,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@{viewModel.bookInfoDetail.bookDetailInfo.publishedDate}"
                     app:layout_constraintBaseline_toBaselineOf="@id/publishDateTitle"
                     app:layout_constraintStart_toStartOf="@id/detailsBarrier"
                     tools:text="発売日発売日発売日発売日発売日発売日" />
@@ -222,6 +230,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@{viewModel.bookInfoDetail.bookDetailInfo.language}"
                     app:layout_constraintBaseline_toBaselineOf="@id/languageTitle"
                     app:layout_constraintStart_toStartOf="@id/detailsBarrier"
                     tools:text="日本語日本語日本語日本語日本語日本語" />
@@ -244,24 +253,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="カスタマーレビュー"
+            android:text="@string/customer_review_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detailFrame" />
 
         <com.example.core_design.ReviewStartsView
             android:id="@+id/reviewFrame"
-            setReviewTotalResult="@{}"
+            setReviewTotalResult="@{viewModel.bookInfoDetail.bookDetailInfo.totalReviewCount}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/reviewTitle"
-            app:setReviewAverage="@{}" />
+            app:setReviewAverage="@{viewModel.bookInfoDetail.bookDetailInfo.averageReviewRate}" />
 
         <!-- レビューリスト -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reviewList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

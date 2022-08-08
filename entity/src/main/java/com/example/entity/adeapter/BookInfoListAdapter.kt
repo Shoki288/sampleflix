@@ -18,7 +18,7 @@ fun bookInfoListAdapter(response: BookInfoList) =
             image = it.bookInfo.images?.imageUrl ?: "",
             language = it.bookInfo.language,
             previewLink = it.bookInfo.previewLink,
-            price = it.salesInfo.listPrice?.price ?: 0,
+            price = it.salesInfo.listPrice.price,
         )
     }
 

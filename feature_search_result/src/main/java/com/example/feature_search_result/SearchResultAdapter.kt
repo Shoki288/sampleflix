@@ -9,7 +9,9 @@ import com.example.feature_search_result.SearchResultAdapter.SearchResult
 import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHolder
 import com.example.feature_search_result.databinding.ItemSearchResultBinding
 
-class SearchResultAdapter : ListAdapter<SearchResult, SearchResultViewHolder>(diffCallback) {
+class SearchResultAdapter(
+    private val onClickItem: (String) -> Unit
+) : ListAdapter<SearchResult, SearchResultViewHolder>(diffCallback) {
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<SearchResult>() {
             override fun areItemsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean =
@@ -27,7 +29,6 @@ class SearchResultAdapter : ListAdapter<SearchResult, SearchResultViewHolder>(di
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
@@ -42,12 +43,15 @@ class SearchResultAdapter : ListAdapter<SearchResult, SearchResultViewHolder>(di
             description = item.description
             price = item.price
         }
+
+        holder.itemView.setOnClickListener { onClickItem(item.id) }
     }
 
     inner class SearchResultViewHolder(val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     data class SearchResult(
+        val id: String,
         val imgUrl: String,
         val title: String,
         val price: Int,

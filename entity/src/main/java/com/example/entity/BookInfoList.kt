@@ -51,13 +51,13 @@ data class ImageLinks(
 
 @Parcelize
 data class SaleInfo(
-    val listPrice: Price?
+    val listPrice: Price = Price()
 ): Parcelable
 
 @Parcelize
 data class Price(
     @Json(name = "amount")
-    val price: Int
+    val price: Int = 0
 ): Parcelable
 
 @Parcelize

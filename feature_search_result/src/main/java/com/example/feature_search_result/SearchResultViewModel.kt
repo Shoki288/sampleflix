@@ -3,6 +3,7 @@ package com.example.feature_search_result
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.entity.BookInfo
 import com.example.extension.api.api
 import com.example.extension.api.onException
 import com.example.extension.api.onHttpError
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchResultViewModel @Inject constructor(
-    val useCase: SearchBookUseCase,
+    private val useCase: SearchBookUseCase,
     state: SavedStateHandle
 ): ViewModel() {
 
@@ -38,6 +39,14 @@ class SearchResultViewModel @Inject constructor(
             }.onException { e ->
                 _searchResult.value = SearchResultUiState.Error(e.message ?: "エラー")
             }
+        }
+    }
+
+    fun findBookInfoById(id: String): BookInfo? {
+        searchResult.value.let {
+            return if (it is SearchResultUiState.Success) {
+                it.results.first { result -> result.id == id }
+            } else null
         }
     }
 }
