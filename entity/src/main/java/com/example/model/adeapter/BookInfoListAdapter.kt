@@ -28,7 +28,7 @@ fun updateBookInfo(books: List<BookInfo>): BookInfoList =
         books.map {
             BookInfo(
                 id = it.id,
-                bookInfo = BookDetail(
+                bookInfo = VolumeInfo(
                     title = it.bookInfo.title,
                     authors = it.bookInfo.authors,
                     publisher = it.bookInfo.publisher,

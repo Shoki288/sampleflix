@@ -12,14 +12,14 @@ data class BookInfoList(
 data class BookInfo(
     val id: String,
     @Json(name = "volumeInfo")
-    val bookInfo: BookDetail,
+    val bookInfo: VolumeInfo,
     @Json(name ="saleInfo")
     val salesInfo: SaleInfo,
     val accessInfo: AccessInfo?
 ): Parcelable
 
 @Parcelize
-data class BookDetail(
+data class VolumeInfo(
     val title: String,
     val authors: List<String> = emptyList(),
     val publisher: String?,
