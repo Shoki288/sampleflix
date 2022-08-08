@@ -1,6 +1,6 @@
-package com.example.model.adeapter
+package com.example.entity.adeapter
 
-import com.example.model.*
+import com.example.entity.*
 
 fun bookInfoListAdapter(response: BookInfoList) =
     response.items.map {

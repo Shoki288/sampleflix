@@ -1,7 +1,7 @@
 package com.example.feature_search_result.adapter
 
 import com.example.feature_search_result.SearchResultAdapter.SearchResult
-import com.example.model.BookInfo
+import com.example.entity.BookInfo
 
 fun convertSearchResultToBookInfo(bookInfoList: List<BookInfo>) =
     bookInfoList.map {

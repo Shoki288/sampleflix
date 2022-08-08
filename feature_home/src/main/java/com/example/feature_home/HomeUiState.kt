@@ -1,6 +1,6 @@
 package com.example.feature_home
 
-import com.example.model.BookInfo
+import com.example.entity.BookInfo
 
 sealed class HomeUiState {
     object Loading : HomeUiState()

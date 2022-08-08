@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.feature_book_detail.databinding.FragmentBookDetailBinding
-import com.example.model.BookInfo
+import com.example.entity.BookInfo
 
 
 class BookDetailFragment : Fragment() {

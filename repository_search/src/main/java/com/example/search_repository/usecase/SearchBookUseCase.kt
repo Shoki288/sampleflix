@@ -1,7 +1,7 @@
 package com.example.search_repository.usecase
 
 import com.example.extension.api.Result
-import com.example.model.BookInfoList
+import com.example.entity.BookInfoList
 import com.example.search_repository.SearchBookRepository
 import retrofit2.Response
 import javax.inject.Inject

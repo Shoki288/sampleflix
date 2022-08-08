@@ -1,4 +1,4 @@
-package com.example.model
+package com.example.entity
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
@@ -34,8 +34,10 @@ data class VolumeInfo(
     val language: String,
     val previewLink: String
 ): Parcelable {
-    val averageReviewRate: Int = pageCount % 6
-    val totalReviewCount: Int = pageCount
+    val averageReviewRate: Int
+        get() = pageCount % 6
+    val totalReviewCount: Int
+        get() = pageCount
 }
 
 @Parcelize
@@ -43,7 +45,8 @@ data class ImageLinks(
     @Json(name = "thumbnail")
     private val thumbnail: String?
 ): Parcelable {
-    val imageUrl = thumbnail?.replace("http:", "https:") ?: ""
+    val imageUrl: String
+        get() = thumbnail?.replace("http:", "https:") ?: ""
 }
 
 @Parcelize

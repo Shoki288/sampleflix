@@ -6,7 +6,7 @@ import com.example.extension.api.ApiException
 import com.example.extension.api.HttpError
 import com.example.extension.api.ApiSuccess
 import com.example.feature_home.HomeUiState.ApiError
-import com.example.model.BookInfo
+import com.example.entity.BookInfo
 import com.example.search_repository.usecase.SearchBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

@@ -4,10 +4,10 @@ import com.example.core_cache.dao.BookInfoDao
 import com.example.core_retrofit.SearchBooksService
 import com.example.extension.api.*
 import com.example.extension.dispatcher.DefaultDispatcher
-import com.example.model.BookInfoList
-import com.example.model.adeapter.bookInfoListAdapter
-import com.example.model.adeapter.cacheBookInfoAdapter
-import com.example.model.adeapter.updateBookInfo
+import com.example.entity.BookInfoList
+import com.example.entity.adeapter.bookInfoListAdapter
+import com.example.entity.adeapter.cacheBookInfoAdapter
+import com.example.entity.adeapter.updateBookInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext

@@ -1,7 +1,6 @@
 package com.example.core_retrofit
 
-import com.example.model.BookInfoList
-import retrofit2.Call
+import com.example.entity.BookInfoList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
