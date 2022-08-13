@@ -26,8 +26,8 @@ class SearchBooksPagingSource @AssistedInject constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BookInfo> {
         try {
-            val offset = params.key ?: 1
-            val response = service.searchBooks(keyword, offset)
+            val offset = params.key ?: 0
+            val response = service.searchBooks(keyword = keyword, maxResults = LOAD_SIZE, offset = offset)
             val body = response.body() ?: return LoadResult.Error(Exception())
             val itemSize = body.items.size
             return LoadResult.Page(
