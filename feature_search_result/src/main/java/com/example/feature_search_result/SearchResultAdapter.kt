@@ -2,22 +2,22 @@ package com.example.feature_search_result
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feature_search_result.SearchResultAdapter.SearchResult
+import com.example.entity.BookInfo
 import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHolder
 import com.example.feature_search_result.databinding.ItemSearchResultBinding
 
 class SearchResultAdapter(
-    private val onClickItem: (String) -> Unit
-) : ListAdapter<SearchResult, SearchResultViewHolder>(diffCallback) {
+    private val onClickItem: (BookInfo) -> Unit
+) : PagingDataAdapter<BookInfo, SearchResultViewHolder>(diffCallback) {
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<SearchResult>() {
-            override fun areItemsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean =
+        private val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
+            override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =
                 newItem == oldItem
-            override fun areContentsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean =
-                newItem.title == oldItem.title
+            override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =
+                newItem.id == oldItem.id
         }
     }
 
@@ -32,33 +32,21 @@ class SearchResultAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = getItem(position) ?: return
         holder.binding.apply {
-            thumbnailUrl = item.imgUrl
-            title = item.title
-            author = item.author
-            publisher = item.publisher
-            reviewTotalResult = item.reviewTotalResult
-            reviewAverageResult = item.reviewAverageResult
-            description = item.description
-            price = item.price
+            thumbnailUrl = item.bookInfo.images?.imageUrl ?: ""
+            title = item.bookInfo.title
+            author = item.bookInfo.author
+            publisher = item.bookInfo.publisher ?: "不明"
+            reviewTotalResult = item.bookInfo.totalReviewCount
+            reviewAverageResult = item.bookInfo.averageReviewRate
+            description = item.bookInfo.description
+            price = item.salesInfo.listPrice.price
         }
 
-        holder.itemView.setOnClickListener { onClickItem(item.id) }
+        holder.itemView.setOnClickListener { onClickItem(item) }
     }
 
     inner class SearchResultViewHolder(val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root)
-
-    data class SearchResult(
-        val id: String,
-        val imgUrl: String,
-        val title: String,
-        val price: Int,
-        val description: String,
-        val author: String,
-        val publisher: String,
-        val reviewTotalResult: Int,
-        val reviewAverageResult: Int,
-    )
 }

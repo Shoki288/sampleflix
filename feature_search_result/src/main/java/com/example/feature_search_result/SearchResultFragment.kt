@@ -13,7 +13,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.feature_search_result.adapter.convertSearchResultToBookInfo
 import com.example.feature_search_result.databinding.FragmentSearchResultBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,19 +43,15 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = SearchResultAdapter {
-            viewModel.findBookInfoById(it)?.let { info ->
-                val action = SearchResultFragmentDirections.actionSearchResultFragmentToBookDetailFragment(info)
-                findNavController().navigate(action)
-            }
-        }
+            val action = SearchResultFragmentDirections.actionSearchResultFragmentToBookDetailFragment(it)
+            findNavController().navigate(action)
+        }.apply { addLoadStateListener { viewModel.updateState(it) } }
         binding.searchResultList.adapter = adapter
         binding.searchResultList.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.searchResult.collect {
-                    if (it is SearchResultUiState.Success) {
-                        adapter.submitList(convertSearchResultToBookInfo(it.results))
-                    }
+                    adapter.submitData(it)
                 }
             }
         }
@@ -65,7 +60,7 @@ class SearchResultFragment : Fragment() {
         binding.textField.setOnKeyListener { _, code, event ->
             if (event.action == KeyEvent.ACTION_DOWN && code == KeyEvent.KEYCODE_ENTER) {
                 val keyword = binding.textField.editText?.text?.toString() ?: return@setOnKeyListener true
-                viewModel.search(keyword)
+//                viewModel.search(keyword)
                 return@setOnKeyListener false
             }
             return@setOnKeyListener true

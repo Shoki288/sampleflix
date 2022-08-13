@@ -21,7 +21,7 @@ data class BookInfo(
 @Parcelize
 data class VolumeInfo(
     val title: String,
-    val authors: List<String> = emptyList(),
+    private val authors: List<String> = emptyList(),
     val publisher: String?,
     val publishedDate: String?,  // YYYY-MM-ddで返る
     val description: String = "",
@@ -34,10 +34,14 @@ data class VolumeInfo(
     val language: String,
     val previewLink: String
 ): Parcelable {
+    // TODO non-nullにして他画面でも表記統一させたい
     val averageReviewRate: Int
         get() = pageCount % 6
     val totalReviewCount: Int
         get() = pageCount
+    val author
+        get() = authors.joinToString().ifEmpty { "不明" }
+
 }
 
 @Parcelize

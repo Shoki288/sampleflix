@@ -6,7 +6,7 @@ import com.example.feature_book_detail.BookDetailInfo
 fun convertBookInfoToBookDetailInfo(volumeInfo: BookInfo): BookDetailInfo =
     BookDetailInfo(
         title = volumeInfo.bookInfo.title,
-        authors = volumeInfo.bookInfo.authors.joinToString().ifEmpty { "不明" },
+        authors = volumeInfo.bookInfo.author.ifEmpty { "不明" },
         publisher = volumeInfo.bookInfo.publisher ?: "不明",
         publishedDate = volumeInfo.bookInfo.publishedDate ?: "未定",
         description = volumeInfo.bookInfo.description,

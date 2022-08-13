@@ -7,7 +7,7 @@ fun bookInfoListAdapter(response: BookInfoList) =
         CacheBookInfo(
             id = it.id,
             title = it.bookInfo.title,
-            authors = it.bookInfo.authors.joinToString(),
+            authors = it.bookInfo.author,
             publisher = it.bookInfo.publisher,
             publishedDate = it.bookInfo.publishedDate,
             description = it.bookInfo.description,
@@ -30,7 +30,7 @@ fun updateBookInfo(books: List<BookInfo>): BookInfoList =
                 id = it.id,
                 bookInfo = VolumeInfo(
                     title = it.bookInfo.title,
-                    authors = it.bookInfo.authors,
+                    authors = it.bookInfo.author.split(","),
                     publisher = it.bookInfo.publisher,
                     publishedDate = it.bookInfo.publishedDate,
                     description = it.bookInfo.description,

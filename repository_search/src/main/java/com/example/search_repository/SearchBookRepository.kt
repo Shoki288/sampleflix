@@ -1,15 +1,21 @@
 package com.example.search_repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.core_cache.dao.BookInfoDao
 import com.example.core_retrofit.SearchBooksService
+import com.example.entity.BookInfo
 import com.example.extension.api.*
 import com.example.extension.dispatcher.DefaultDispatcher
 import com.example.entity.BookInfoList
 import com.example.entity.adeapter.bookInfoListAdapter
 import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.entity.adeapter.updateBookInfo
+import com.example.search_repository.SearchBooksPagingSource.SearchBooksPagingSourceFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
@@ -50,4 +56,11 @@ class SearchBookRepository @Inject constructor(
     private suspend fun saveCache(items: BookInfoList) {
         dao.insertAll(bookInfoListAdapter(items))
     }
+
+    @Inject
+    lateinit var factory: SearchBooksPagingSourceFactory
+    fun searchPagingBooks(keyword: String): Flow<PagingData<BookInfo>> = Pager(
+        config = PagingConfig(pageSize = 20),
+        pagingSourceFactory = { factory.create(keyword) }
+    ).flow
 }
