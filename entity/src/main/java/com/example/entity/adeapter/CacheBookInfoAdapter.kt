@@ -22,6 +22,7 @@ fun cacheBookInfoAdapter(cache: List<CacheBookInfo>) =
                         ),
                         language = it.language,
                         previewLink = it.previewLink,
+                        isFavorite = it.isFavorite
                     ),
                     salesInfo = SaleInfo(
                         listPrice = Price(

@@ -3,7 +3,7 @@ package com.example.search_repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.core_cache.dao.BookInfoDao
+import com.example.core_cache.cache_home.dao.HomeRecommendDao
 import com.example.core_retrofit.SearchBooksService
 import com.example.entity.BookInfo
 import com.example.extension.api.*
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 class SearchBookRepository @Inject constructor(
     private val service: SearchBooksService,
-    private val dao: BookInfoDao,
+    private val dao: HomeRecommendDao,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 

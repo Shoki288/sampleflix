@@ -19,7 +19,7 @@ fun bookInfoListAdapter(response: BookInfoList) =
             language = it.bookInfo.language,
             previewLink = it.bookInfo.previewLink,
             price = it.salesInfo.listPrice.price,
-            isFavorite = false
+            isFavorite = it.bookInfo.isFavorite
         )
     }
 
@@ -44,6 +44,7 @@ fun updateBookInfo(books: List<BookInfo>): BookInfoList =
                     ),
                     language = it.bookInfo.language,
                     previewLink = it.bookInfo.previewLink,
+                    isFavorite = false
                 ),
                 salesInfo = it.salesInfo,
                 accessInfo = it.accessInfo

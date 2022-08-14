@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core_retrofit.SearchBooksService
 import com.example.entity.BookInfo
+import com.example.repository_favorite.use_case.FavoriteListUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -11,6 +12,7 @@ import retrofit2.HttpException
 
 class SearchBooksPagingSource @AssistedInject constructor(
     private val service: SearchBooksService,
+    private val useCase: FavoriteListUseCase,
     @Assisted private val keyword: String
 ): PagingSource<Int, BookInfo>() {
     companion object {
@@ -28,7 +30,18 @@ class SearchBooksPagingSource @AssistedInject constructor(
         try {
             val offset = params.key ?: 0
             val response = service.searchBooks(keyword = keyword, maxResults = LOAD_SIZE, offset = offset)
-            val body = response.body() ?: return LoadResult.Error(Exception())
+            val body = response.body()?.let { list ->
+                val ids = useCase.fetchFavoriteList().map { it.id }
+                list.apply {
+                    items.map { items ->
+                        if (ids.any { it == items.id }) {
+                            val isFavorite = items.bookInfo.isFavorite
+                            items.copy(bookInfo = items.bookInfo.copy(isFavorite = isFavorite.not()))
+                        } else items
+                    }
+                }
+            } ?: return LoadResult.Error(Exception())
+
             val itemSize = body.items.size
             return LoadResult.Page(
                 data = body.items,

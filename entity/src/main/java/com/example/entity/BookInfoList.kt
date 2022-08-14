@@ -32,7 +32,8 @@ data class VolumeInfo(
     @Json(name = "imageLinks")
     val images: ImageLinks?,
     val language: String,
-    val previewLink: String
+    val previewLink: String,
+    val isFavorite: Boolean = false
 ): Parcelable {
     // TODO non-nullにして他画面でも表記統一させたい
     val averageReviewRate: Int
@@ -41,7 +42,6 @@ data class VolumeInfo(
         get() = pageCount
     val author
         get() = authors.joinToString().ifEmpty { "不明" }
-
 }
 
 @Parcelize

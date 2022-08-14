@@ -1,10 +1,11 @@
-package com.example.core_cache.di
+package com.example.core_cache.cache_home.di
 
 import android.content.Context
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.core_cache.AppDatabase
+import com.example.core_cache.cache_home.HomeRecommendDatabase
+import com.example.core_cache.cache_home.dao.HomeRecommendDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,23 +15,23 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object BookIInfoModule {
+object HomeRecommendModule {
 
     @Singleton
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context
-    ): AppDatabase =
+    ): HomeRecommendDatabase =
         Room.databaseBuilder(
             context,
-            AppDatabase::class.java,
-            "book_info"
+            HomeRecommendDatabase::class.java,
+            "bookRecommend"
         ).addMigrations(MIGRATION_1_2)
             .build()
 
     @Singleton
     @Provides
-    fun provideDao(db: AppDatabase) = db.bookInfoDao()
+    fun provideDao(db: HomeRecommendDatabase): HomeRecommendDao = db.homeRecommendDao()
 
 
     private val MIGRATION_1_2 = object : Migration(1, 2) {
