@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_close.xml" value="0.2" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_detail.xml" value="0.214" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_download.xml" value="0.214" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_favorite.xml" value="0.214" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_game.xml" value="0.227" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_home.xml" value="0.247" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_info.xml" value="0.227" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_launcher_background.xml" value="0.214" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_no_favorite.xml" value="0.227" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_not_found_image.xml" value="0.1845" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/drawable/ic_notice.xml" value="0.1845" />

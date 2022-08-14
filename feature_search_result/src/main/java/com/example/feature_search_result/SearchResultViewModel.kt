@@ -37,7 +37,7 @@ class SearchResultViewModel @Inject constructor(
 
 
     fun updateState(state: CombinedLoadStates) {
-        _searchResultState.value = when(state.refresh) {
+        _searchResultState.value = when(state.append) {
             is LoadState.Loading -> SearchResultUiType.LOADING
             is LoadState.Error -> SearchResultUiType.ERROR  // TODO エラーの判別したい
             is LoadState.NotLoading -> SearchResultUiType.SUCCESS

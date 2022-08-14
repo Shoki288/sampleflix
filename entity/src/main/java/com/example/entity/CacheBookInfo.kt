@@ -19,5 +19,6 @@ data class CacheBookInfo(
     @ColumnInfo val image: String,
     @ColumnInfo val language: String,
     @ColumnInfo val previewLink: String,
-    @ColumnInfo val price: Int
+    @ColumnInfo val price: Int,
+    @ColumnInfo val isFavorite: Boolean
 )
