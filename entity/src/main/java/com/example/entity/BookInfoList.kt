@@ -40,7 +40,7 @@ data class VolumeInfo(
         get() = pageCount % 6
     val totalReviewCount: Int
         get() = pageCount
-    val author
+    val author: String
         get() = authors.joinToString().ifEmpty { "不明" }
 }
 

@@ -1,4 +1,4 @@
-package com.example.extension.binding
+package com.example.core_design.binding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

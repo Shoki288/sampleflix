@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.core_design.databinding.ItemBookInfoListBinding
 import com.example.entity.BookInfo
 import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHolder
-import com.example.feature_search_result.databinding.ItemSearchResultBinding
 
 class SearchResultAdapter(
     private val onClickItem: (BookInfo) -> Unit
@@ -23,7 +23,7 @@ class SearchResultAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
         return SearchResultViewHolder(
-            ItemSearchResultBinding.inflate(
+            ItemBookInfoListBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -47,6 +47,6 @@ class SearchResultAdapter(
         holder.itemView.setOnClickListener { onClickItem(item) }
     }
 
-    inner class SearchResultViewHolder(val binding: ItemSearchResultBinding) :
+    inner class SearchResultViewHolder(val binding: ItemBookInfoListBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
