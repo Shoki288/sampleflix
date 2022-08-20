@@ -1,10 +1,11 @@
 package com.example.feature_favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,7 +14,6 @@ import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.feature_favorite.databinding.FragmentFavoriteListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -40,7 +40,8 @@ class FavoriteListFragment : Fragment() {
         binding.list.adapter = adapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.favoriteList.filterNotNull().collectLatest {
+                viewModel.favoriteList.collectLatest {
+                    binding.emptyTitle.isVisible = it.isEmpty()
                     adapter.submitList(cacheBookInfoAdapter(it).items)
                 }
             }
