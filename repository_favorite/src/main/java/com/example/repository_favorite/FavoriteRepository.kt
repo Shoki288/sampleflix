@@ -1,6 +1,6 @@
 package com.example.repository_favorite
 
-import com.example.core_cache.cache_search_result.dao.FavoriteListDao
+import com.example.core_cache.favorite.dao.FavoriteListDao
 import com.example.entity.CacheBookInfo
 import javax.inject.Inject
 

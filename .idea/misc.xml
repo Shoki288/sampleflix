@@ -30,10 +30,13 @@
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/layout/recommend_category_carousel.xml" value="0.315625" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/layout/recommend_item_carousel.xml" value="0.33" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_favorite.xml" value="0.214" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_more.xml" value="0.2" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_no_favorite.xml" value="0.214" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_not_review.xml" value="0.1725" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_review_star.xml" value="0.1725" />
-        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/layout/item_book_info_list.xml" value="0.33" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/drawable/ic_search.xml" value="0.214" />
+        <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/layout/item_book_info_list.xml" value="0.25" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/layout/review_starts_view.xml" value="0.5380359612724758" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/core_design/src/main/res/layout/sample_review_starts_view.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/chiar/AndroidStudioProjects/sampleflix/extension/src/main/res/drawable/ic_not_found_image.xml" value="0.2745" />

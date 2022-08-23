@@ -43,12 +43,22 @@ class SearchResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = SearchResultAdapter {
-            val action = SearchResultFragmentDirections.actionSearchResultFragmentToBookDetailFragment(it)
-            findNavController().navigate(action)
-        }.apply { addLoadStateListener { viewModel.updateState(it) } }
+        val adapter = SearchResultAdapter(
+            onClickItem = {
+                val action = SearchResultFragmentDirections.actionSearchResultFragmentToBookDetailFragment(it)
+                findNavController().navigate(action)
+            },
+            onClickFavorite = {
+
+            }
+        ).apply { addLoadStateListener { viewModel.updateState(it) } }
         binding.searchResultList.adapter = adapter
-        binding.searchResultList.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        binding.searchResultList.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.searchResult.collectLatest {
@@ -60,7 +70,8 @@ class SearchResultFragment : Fragment() {
         binding.textField.editText?.setText(args.keyword)
         binding.textField.setOnKeyListener { _, code, event ->
             if (event.action == KeyEvent.ACTION_DOWN && code == KeyEvent.KEYCODE_ENTER) {
-                val keyword = binding.textField.editText?.text?.toString() ?: return@setOnKeyListener true
+                val keyword =
+                    binding.textField.editText?.text?.toString() ?: return@setOnKeyListener true
 //                viewModel.search(keyword)
                 return@setOnKeyListener false
             }

@@ -1,9 +1,9 @@
-package com.example.core_cache.cache_search_result.di
+package com.example.core_cache.favorite.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.core_cache.cache_search_result.FavoriteListDatabase
-import com.example.core_cache.cache_search_result.dao.FavoriteListDao
+import com.example.core_cache.favorite.FavoriteListDatabase
+import com.example.core_cache.favorite.dao.FavoriteListDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

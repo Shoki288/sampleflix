@@ -4,8 +4,8 @@ import com.example.entity.CacheBookInfo
 import com.example.repository_favorite.FavoriteRepository
 import javax.inject.Inject
 
-class FavoriteListUseCase @Inject constructor(
-    private val repository: FavoriteRepository
+class GetFavoriteListUseCase @Inject constructor(
+    private val repository: FavoriteRepository,
 ) {
     suspend fun fetchFavoriteList(): List<CacheBookInfo> = repository.fetchFavoriteList()
 }

@@ -1,8 +1,8 @@
-package com.example.core_cache.cache_search_result
+package com.example.core_cache.favorite
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.core_cache.cache_search_result.dao.FavoriteListDao
+import com.example.core_cache.favorite.dao.FavoriteListDao
 import com.example.entity.CacheBookInfo
 
 @Database(entities = [CacheBookInfo::class], version = 1, exportSchema = false)

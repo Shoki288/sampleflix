@@ -3,7 +3,7 @@ package com.example.feature_favorite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entity.CacheBookInfo
-import com.example.repository_favorite.use_case.FavoriteListUseCase
+import com.example.repository_favorite.use_case.GetFavoriteListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteListViewModel @Inject constructor(
-    private val useCase: FavoriteListUseCase
+    private val useCase: GetFavoriteListUseCase
 ): ViewModel() {
 
     init {

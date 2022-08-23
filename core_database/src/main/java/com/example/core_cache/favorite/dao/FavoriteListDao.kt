@@ -1,4 +1,4 @@
-package com.example.core_cache.cache_search_result.dao
+package com.example.core_cache.favorite.dao
 
 import androidx.room.*
 import com.example.core_cache.DBTransaction

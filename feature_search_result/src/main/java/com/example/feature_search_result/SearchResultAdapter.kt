@@ -1,6 +1,7 @@
 package com.example.feature_search_result
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,8 @@ import com.example.entity.BookInfo
 import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHolder
 
 class SearchResultAdapter(
-    private val onClickItem: (BookInfo) -> Unit
+    private val onClickItem: (BookInfo) -> Unit,
+    private val onClickFavorite: (BookInfo) -> Unit
 ) : PagingDataAdapter<BookInfo, SearchResultViewHolder>(diffCallback) {
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
@@ -42,6 +44,9 @@ class SearchResultAdapter(
             reviewAverageResult = item.bookInfo.averageReviewRate
             description = item.bookInfo.description
             price = item.salesInfo.listPrice.price
+            onClickFavorite = View.OnClickListener {
+                onClickFavorite(item)
+            }
         }
 
         holder.itemView.setOnClickListener { onClickItem(item) }
