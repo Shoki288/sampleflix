@@ -53,4 +53,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+
+    /** DataBinding **/
+    implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
 }

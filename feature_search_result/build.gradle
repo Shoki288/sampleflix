@@ -71,4 +71,7 @@ dependencies {
 
     /** paging **/
     implementation "androidx.paging:paging-runtime:3.1.1"
+
+    /** DataBinding **/
+    implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
 }

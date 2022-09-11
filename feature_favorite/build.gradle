@@ -55,4 +55,7 @@ dependencies {
     /** fragment ktx **/
     implementation "androidx.fragment:fragment-ktx:1.5.1"
 
+    /** DataBinding **/
+    implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
+
 }

@@ -61,5 +61,5 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.2'
 
     /** DataBinding **/
-    implementation 'com.github.wada811:DataBinding-ktx:6.1.0'
+    implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
 }
