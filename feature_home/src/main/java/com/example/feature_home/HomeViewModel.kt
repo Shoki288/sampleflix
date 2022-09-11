@@ -2,12 +2,10 @@ package com.example.feature_home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.entity.BookInfo
 import com.example.extension.api.Exception
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
-import com.example.feature_home.HomeUiState.ApiError
-import com.example.entity.BookInfo
-import com.example.repository_favorite.use_case.UpdateFavoriteListUseCase
 import com.example.search_repository.usecase.SearchBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -25,9 +23,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             books.value = when (val res = searchUseCase.searchBookInit()) {
                 is Success -> HomeUiState.Success(res.data.items)
-                is HttpError -> ApiError(res.message)
-                is Exception -> ApiError(res.e.message ?: "接続できませんでした。もう一度時間をおいて確認してください。")
-                else -> ApiError("接続できませんでした。もう一度時間をおいて確認してください。")
+                is HttpError -> HomeUiState.Error.ApiError(res.message)
+                is Exception -> HomeUiState.Error.NetworkError
+                else -> HomeUiState.Error.NetworkError
             }
         }
 
