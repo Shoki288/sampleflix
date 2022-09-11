@@ -23,6 +23,7 @@ buildscript {
         coroutine_version = '2.4.2'
         room_version = '2.4.2'
         data_binding_version = '6.1.0'
+        mockk_version = '1.12.4'
     }
 }
 

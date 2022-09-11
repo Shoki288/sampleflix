@@ -5,11 +5,11 @@ import retrofit2.HttpException
 import retrofit2.Response
 
 class ApiZipSuccess<T : Any>(val data: Pair<T, T>) :
-    Result<T>
+    ApiResult<T>
 
-suspend fun <T : Any> Result<T>.onZipSuccess(
+suspend fun <T : Any> ApiResult<T>.onZipSuccess(
     executable: suspend (first: T, second: T) -> Unit
-): Result<T> = also {
+): ApiResult<T> = also {
     if (it is ApiZipSuccess<T>) {
         executable(it.data.first, it.data.second)
     }
@@ -18,7 +18,7 @@ suspend fun <T : Any> Result<T>.onZipSuccess(
 suspend fun <T : Any> zip(
     firstExecute: suspend () -> Deferred<Response<T>>,
     secondExecute: suspend () -> Deferred<Response<T>>,
-): Result<T> {
+): ApiResult<T> {
     return try {
         val res1 = firstExecute().await()
         val res2 = secondExecute().await()

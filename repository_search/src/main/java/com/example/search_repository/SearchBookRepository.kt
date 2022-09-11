@@ -26,7 +26,7 @@ class SearchBookRepository @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun searchBooksInit(): Result<BookInfoList> =
+    suspend fun searchBooksInit(): ApiResult<BookInfoList> =
         withContext(defaultDispatcher) {
             val cache = dao.getAll()
             if (cache.isEmpty()) {

@@ -1,9 +1,9 @@
 package com.example.feature_home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entity.BookInfo
-import com.example.extension.api.Exception
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
 import com.example.search_repository.usecase.SearchBookUseCase
@@ -17,14 +17,14 @@ class HomeViewModel @Inject constructor(
     private val searchUseCase: SearchBookUseCase
 ) : ViewModel() {
 
-    private val books = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
+    @VisibleForTesting
+    val books = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
 
     init {
         viewModelScope.launch {
             books.value = when (val res = searchUseCase.searchBookInit()) {
                 is Success -> HomeUiState.Success(res.data.items)
                 is HttpError -> HomeUiState.Error.ApiError(res.message)
-                is Exception -> HomeUiState.Error.NetworkError
                 else -> HomeUiState.Error.NetworkError
             }
         }

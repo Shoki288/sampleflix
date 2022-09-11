@@ -3,30 +3,30 @@ package com.example.extension.api
 import retrofit2.HttpException
 import retrofit2.Response
 
-sealed interface Result<T : Any>
-class Success<T : Any>(val data: T) : Result<T>
-class HttpError<T : Any>(val code: Int, val message: String) : Result<T>
-class Exception<T : Any>(val e: Throwable) : Result<T>
+sealed interface ApiResult<T : Any>
+class Success<T : Any>(val data: T) : ApiResult<T>
+class HttpError<T : Any>(val code: Int, val message: String) : ApiResult<T>
+class Exception<T : Any>(val e: Throwable) : ApiResult<T>
 
-suspend fun <T: Any> Result<T>.onSuccess(
+suspend fun <T: Any> ApiResult<T>.onSuccess(
     executable: suspend (T) -> Unit
-): Result<T> = also {
+): ApiResult<T> = also {
     if (it is Success<T>) {
         executable(it.data)
     }
 }
 
-suspend fun <T: Any> Result<T>.onHttpError(
+suspend fun <T: Any> ApiResult<T>.onHttpError(
     executable: suspend (Int, String) -> Unit
-): Result<T> = also {
+): ApiResult<T> = also {
     if (it is HttpError<T>) {
         executable(it.code, it.message)
     }
 }
 
-suspend fun <T: Any> Result<T>.onException(
+suspend fun <T: Any> ApiResult<T>.onException(
     executable: suspend (Throwable) -> Unit
-): Result<T> = also {
+): ApiResult<T> = also {
     if (it is Exception<T>) {
         executable(it.e)
     }
@@ -34,7 +34,7 @@ suspend fun <T: Any> Result<T>.onException(
 
 suspend fun <T : Any> api(
     execute: suspend () -> Response<T>
-): Result<T> {
+): ApiResult<T> {
     return try {
         val response = execute()
         val body = response.body()
