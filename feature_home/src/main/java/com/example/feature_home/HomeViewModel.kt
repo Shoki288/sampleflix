@@ -78,7 +78,7 @@ class HomeViewModel @Inject constructor(
     // 本をさらに見る
     val categories = books.filterIsInstance<HomeUiState.Success>().map {
         // APIから取得したデータのカテゴリを吸い取っている
-        val categories = it.books.map { books -> books.bookInfo.categories }.flatten().apply {
+        val categories = it.books.map { books -> books.bookInfo.categories }.flatten().run {
             filterNot { list -> list.isEmpty() }.distinct()
         }
         categories.subList(0, 9)
