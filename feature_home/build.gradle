@@ -39,6 +39,7 @@ android {
 
 dependencies {
     api project(":core_design")
+    api project(":core_navigation")
     api project(":extension")
     api project(':repository_search')
 

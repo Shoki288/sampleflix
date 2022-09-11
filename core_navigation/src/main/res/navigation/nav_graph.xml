@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.feature_home.HomeFragment"
-        android:label="fragment_home"/>
+        android:label="fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_search"
         android:name="com.example.feature_search.SearchFragment"

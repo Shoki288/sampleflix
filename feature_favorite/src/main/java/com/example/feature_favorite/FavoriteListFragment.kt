@@ -2,7 +2,6 @@ package com.example.feature_favorite
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -22,13 +21,19 @@ class FavoriteListFragment : Fragment(R.layout.fragment_favorite_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         withBinding<FragmentFavoriteListBinding> { binding ->
+            binding.viewModel = viewModel
+
+            // お気に入りリスト
             val adapter = FavoriteListAdapter()
             binding.list.adapter = adapter
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.favoriteList.collectLatest {
-                        binding.emptyTitle.isVisible = it.isEmpty()
-                        adapter.submitList(cacheBookInfoAdapter(it).items)
+                        when(it) {
+                            is FavoriteListUiState.Success -> adapter.submitList(cacheBookInfoAdapter(it.bookInfoList).items)
+                            is FavoriteListUiState.Error -> binding.errorFrame.text = it.message
+                            else -> { /** nop **/ }
+                        }
                     }
                 }
             }

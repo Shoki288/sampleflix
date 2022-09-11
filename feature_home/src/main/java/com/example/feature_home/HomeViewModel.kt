@@ -2,11 +2,12 @@ package com.example.feature_home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.extension.api.ApiException
+import com.example.extension.api.Exception
 import com.example.extension.api.HttpError
-import com.example.extension.api.ApiSuccess
+import com.example.extension.api.Success
 import com.example.feature_home.HomeUiState.ApiError
 import com.example.entity.BookInfo
+import com.example.repository_favorite.use_case.UpdateFavoriteListUseCase
 import com.example.search_repository.usecase.SearchBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -15,17 +16,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val useCase: SearchBookUseCase
+    private val searchUseCase: SearchBookUseCase
 ) : ViewModel() {
 
     private val books = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
 
     init {
         viewModelScope.launch {
-            books.value = when (val res = useCase.searchBookInit()) {
-                is ApiSuccess -> HomeUiState.Success(res.data.items)
+            books.value = when (val res = searchUseCase.searchBookInit()) {
+                is Success -> HomeUiState.Success(res.data.items)
                 is HttpError -> ApiError(res.message)
-                is ApiException -> ApiError(res.e.message ?: "接続できませんでした。もう一度時間をおいて確認してください。")
+                is Exception -> ApiError(res.e.message ?: "接続できませんでした。もう一度時間をおいて確認してください。")
                 else -> ApiError("接続できませんでした。もう一度時間をおいて確認してください。")
             }
         }

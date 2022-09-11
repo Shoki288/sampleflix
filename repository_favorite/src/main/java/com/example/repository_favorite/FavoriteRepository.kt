@@ -8,4 +8,6 @@ class FavoriteRepository @Inject constructor(
     private val dao: FavoriteListDao
 ) {
     suspend fun fetchFavoriteList(): List<CacheBookInfo> = dao.getAll()
+
+    suspend fun updateFavoriteList(bookInfo: CacheBookInfo): Any = dao.updateFavorite(bookInfo)
 }

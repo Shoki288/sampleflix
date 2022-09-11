@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.entity.BookInfo
 import com.example.feature_home.databinding.FragmentHomeBinding
 import com.wada811.databinding.withBinding
@@ -114,7 +115,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
             }
 
             //本をさらに見る
-            val categoriesAdapter = RecommendCategoryAdapter()
+            val categoriesAdapter = RecommendCategoryAdapter{
+                findNavController().navigate(HomeFragmentDirections.actionNavHomeToSearchResultFragment(it))
+            }
             binding.recommendCategoryList.carousel.adapter = categoriesAdapter
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -123,8 +126,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
                     }
                 }
             }
-
-            binding.similarTitleList.title.setOnClickListener {  }
         }
     }
 

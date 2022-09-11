@@ -34,15 +34,15 @@ class SearchBookRepository @Inject constructor(
                     firstExecute = { async { searchBookAndroid() } }, secondExecute = { async { searchBookFF() } },
                 ).onZipSuccess { first, second ->
                     val response = updateBookInfo(first.items + second.items)
-                    ApiSuccess(data = response)
+                    Success(data = response)
                     saveCache(response)
                 }.onHttpError { code, message ->
                     HttpError<BookInfoList>(code, message)
                 }.onException { e ->
-                    ApiException<BookInfoList>(e)
+                    Exception<BookInfoList>(e)
                 }
             } else {
-                ApiSuccess(data = cacheBookInfoAdapter(cache))
+                Success(data = cacheBookInfoAdapter(cache))
             }
         }
     private suspend fun searchBookAndroid(): Response<BookInfoList> =

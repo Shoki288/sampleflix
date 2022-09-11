@@ -13,10 +13,8 @@ import com.example.feature_favorite.FavoriteListAdapter.FavoriteListViewHolder
 class FavoriteListAdapter : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCallback) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
-            override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean {
-                return oldItem.id == newItem.id
-            }
-
+            override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =
+                oldItem.id == newItem.id
             override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =
                 oldItem == newItem
         }
@@ -44,6 +42,5 @@ class FavoriteListAdapter : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCa
         }
     }
 
-    inner class FavoriteListViewHolder(val binding: ItemBookInfoListBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class FavoriteListViewHolder(val binding: ItemBookInfoListBinding) : RecyclerView.ViewHolder(binding.root)
 }

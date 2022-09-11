@@ -20,6 +20,7 @@
             android:orientation="vertical"
             tools:context="com.example.feature_home.HomeFragment">
 
+            <!-- 読み始めたシリーズを続ける -->
             <include
                 android:id="@+id/recentlyReadingBooksList"
                 layout="@layout/recommend_item_carousel"
@@ -28,6 +29,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/recently_reading_carousel_title}" />
 
+            <!-- すぐ読める本 -->
             <include
                 android:id="@+id/recommendList"
                 layout="@layout/recommend_item_carousel"
@@ -36,6 +38,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/recommend_carousel_title}" />
 
+            <!-- プライム会員特定で読めるベストセラー -->
             <include
                 android:id="@+id/bestSellerList"
                 layout="@layout/recommend_item_carousel"
@@ -44,6 +47,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/best_seller_carousel_title}" />
 
+            <!-- 最近読んだ本に基づくおすすめ -->
             <include
                 android:id="@+id/recentlyReadHistoryList"
                 layout="@layout/recommend_item_carousel"
@@ -52,6 +56,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/recently_read_history_carousel_title}" />
 
+            <!-- もうすぐ読み放題が終了するタイトル -->
             <include
                 android:id="@+id/endUnlimitedReadingList"
                 layout="@layout/recommend_item_carousel"
@@ -60,6 +65,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/end_unlimited_reading_carousel_title}" />
 
+            <!-- 近日配信開始のタイトルのおすすめ -->
             <include
                 android:id="@+id/recentlyReleaseList"
                 layout="@layout/recommend_item_carousel"
@@ -68,6 +74,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/recently_release_carousel_title}" />
 
+            <!-- 類似タイトルに基づくおすすめ -->
             <include
                 android:id="@+id/similarTitleList"
                 layout="@layout/recommend_item_carousel"
@@ -76,6 +83,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/similar_title_carousel_title}" />
 
+            <!-- 読書履歴に基づくおすすめ -->
             <include
                 android:id="@+id/readingHistoryList"
                 layout="@layout/recommend_item_carousel"
@@ -84,6 +92,7 @@
                 android:layout_marginTop="16dp"
                 app:carouselTitle="@{@string/reading_history_carousel_title}" />
 
+            <!-- 本をさらに見る -->
             <include
                 android:id="@+id/recommendCategoryList"
                 layout="@layout/recommend_item_carousel"
