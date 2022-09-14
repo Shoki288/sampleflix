@@ -40,6 +40,7 @@ fun updateBookInfo(books: List<BookInfo>): BookInfoList =
                     averageRating = it.bookInfo.averageReviewRate,
                     ratingCount = it.bookInfo.totalReviewCount,
                     images = ImageLinks(
+                        // TODO 正規表現のほうが早い気がする
                         thumbnail = it.bookInfo.images?.imageUrl?.replace("http:", "https:")
                     ),
                     language = it.bookInfo.language,

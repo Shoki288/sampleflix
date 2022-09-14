@@ -4,6 +4,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entity.BookInfo
+import com.example.extension.api.ApiZipSuccess
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
 import com.example.search_repository.usecase.SearchBookUseCase

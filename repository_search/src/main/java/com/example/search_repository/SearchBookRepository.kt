@@ -1,19 +1,19 @@
 package com.example.search_repository
 
+import androidx.annotation.VisibleForTesting
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.core_cache.cache_home.dao.HomeRecommendDao
 import com.example.core_retrofit.SearchBooksService
 import com.example.entity.BookInfo
-import com.example.extension.api.*
-import com.example.extension.dispatcher.DefaultDispatcher
 import com.example.entity.BookInfoList
 import com.example.entity.adeapter.bookInfoListAdapter
 import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.entity.adeapter.updateBookInfo
+import com.example.extension.api.*
 import com.example.search_repository.SearchBooksPagingSource.SearchBooksPagingSourceFactory
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -23,37 +23,32 @@ import javax.inject.Inject
 class SearchBookRepository @Inject constructor(
     private val service: SearchBooksService,
     private val dao: HomeRecommendDao,
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
     suspend fun searchBooksInit(): ApiResult<BookInfoList> =
-        withContext(defaultDispatcher) {
+        withContext(Dispatchers.IO) {
             val cache = dao.getAll()
             if (cache.isEmpty()) {
                 zip(
-                    firstExecute = { async { searchBookAndroid() } }, secondExecute = { async { searchBookFF() } },
-                ).onZipSuccess { first, second ->
-                    val response = updateBookInfo(first.items + second.items)
-                    Success(data = response)
-                    saveCache(response)
-                }.onHttpError { code, message ->
-                    HttpError<BookInfoList>(code, message)
-                }.onException { e ->
-                    Exception<BookInfoList>(e)
-                }
+                    firstExecute = { async { searchBookAndroid() } },
+                    secondExecute = { async { searchBookFF() } },
+                    { first, second -> updateBookInfo(first.items + second.items) }
+                ).onSuccess { saveCache(it) }
             } else {
                 Success(data = cacheBookInfoAdapter(cache))
             }
         }
-    private suspend fun searchBookAndroid(): Response<BookInfoList> =
-        searchBooks(keyword = "android", maxResultSize = 40)
-    private suspend fun searchBookFF(): Response<BookInfoList> =
-        searchBooks(keyword = "FF14", maxResultSize = 40)
+
+    @VisibleForTesting
+    suspend fun searchBookAndroid(): Response<BookInfoList> = searchBooks(keyword = "android", maxResultSize = 40)
+    @VisibleForTesting
+    suspend fun searchBookFF(): Response<BookInfoList> = searchBooks(keyword = "FF14", maxResultSize = 40)
 
     suspend fun searchBooks(keyword: String, maxResultSize: Int? = null): Response<BookInfoList> =
         service.searchBooks(keyword, maxResultSize)
 
-    private suspend fun saveCache(items: BookInfoList) {
+    @VisibleForTesting
+    suspend fun saveCache(items: BookInfoList) {
         dao.insertAll(bookInfoListAdapter(items))
     }
 
