@@ -50,7 +50,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                 onClickFavorite = {
 
                 }
-            ).apply { addLoadStateListener { viewModel.updateState(it) } }
+            )
             binding.searchResultList.adapter = adapter
             binding.searchResultList.addItemDecoration(
                 DividerItemDecoration(

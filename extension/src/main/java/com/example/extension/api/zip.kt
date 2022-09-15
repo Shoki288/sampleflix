@@ -17,7 +17,7 @@ suspend fun <T : Any> ApiResult<T>.onZipSuccess(
 suspend fun <T : Any> zip(
     firstExecute: suspend () -> Deferred<Response<T>>,
     secondExecute: suspend () -> Deferred<Response<T>>,
-    merge: (first: T, second: T) -> T
+    zipper: (first: T, second: T) -> T
 ): ApiResult<T> {
     return try {
         val res1 = firstExecute().await()
@@ -26,7 +26,7 @@ suspend fun <T : Any> zip(
         val body2 = res2.body()
 
         if (res1.isSuccessful && body1 != null && res2.isSuccessful && body2 != null) {
-            Success(merge(body1, body2))
+            Success(zipper(body1, body2))
         } else {
             HttpError(code = res1.code(), message = res1.message())
         }

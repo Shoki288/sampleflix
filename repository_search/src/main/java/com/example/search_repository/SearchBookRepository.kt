@@ -13,6 +13,7 @@ import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.entity.adeapter.updateBookInfo
 import com.example.extension.api.*
 import com.example.search_repository.SearchBooksPagingSource.SearchBooksPagingSourceFactory
+import com.example.search_repository.SearchBooksPagingSource.SearchResultState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
@@ -54,8 +55,8 @@ class SearchBookRepository @Inject constructor(
 
     @Inject
     lateinit var factory: SearchBooksPagingSourceFactory
-    fun searchPagingBooks(keyword: String): Flow<PagingData<BookInfo>> = Pager(
+    fun searchPagingBooks(keyword: String, errorListener: (SearchResultState) -> Unit): Flow<PagingData<BookInfo>> = Pager(
         config = PagingConfig(pageSize = 20),
-        pagingSourceFactory = { factory.create(keyword) }
+        pagingSourceFactory = { factory.create(keyword, errorListener) }
     ).flow
 }

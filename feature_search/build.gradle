@@ -40,6 +40,7 @@ dependencies {
     api project(":extension")
     api project(":repository_category")
     api project(":core_navigation")
+    api project(":core_unit_test")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -56,4 +57,10 @@ dependencies {
 
     /** DataBinding **/
     implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
+
+    /** mockk **/
+    implementation "io.mockk:mockk:$mockk_version"
+    implementation "io.mockk:mockk-agent-jvm:$mockk_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
 }

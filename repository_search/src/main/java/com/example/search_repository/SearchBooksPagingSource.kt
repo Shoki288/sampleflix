@@ -8,12 +8,12 @@ import com.example.repository_favorite.use_case.GetFavoriteListUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import retrofit2.HttpException
 
 class SearchBooksPagingSource @AssistedInject constructor(
     private val service: SearchBooksService,
     private val useCase: GetFavoriteListUseCase,
-    @Assisted private val keyword: String
+    @Assisted private val keyword: String,
+    @Assisted private val stateListener: (SearchResultState) -> Unit
 ): PagingSource<Int, BookInfo>() {
     companion object {
         private const val LOAD_SIZE = 20
@@ -30,27 +30,32 @@ class SearchBooksPagingSource @AssistedInject constructor(
         try {
             val offset = params.key ?: 0
             val response = service.searchBooks(keyword = keyword, maxResults = LOAD_SIZE, offset = offset)
-            val body = response.body()?.let { list ->
-                val ids = useCase.fetchFavoriteList().map { it.id }
-                list.apply {
-                    items.map { items ->
-                        if (ids.any { it == items.id }) {
-                            val isFavorite = items.bookInfo.isFavorite
-                            items.copy(bookInfo = items.bookInfo.copy(isFavorite = isFavorite.not()))
-                        } else items
-                    }
+            val body = response.body()
+
+            if (body == null) {
+                stateListener(SearchResultState.ERROR)
+                return LoadResult.Error(Exception())
+            }
+
+            val ids = useCase.fetchFavoriteList().map { it.id }
+            body.apply {
+                items.map { items ->
+                    if (ids.any { it == items.id }) {
+                        val isFavorite = items.bookInfo.isFavorite
+                        items.copy(bookInfo = items.bookInfo.copy(isFavorite = isFavorite.not()))
+                    } else items
                 }
-            } ?: return LoadResult.Error(Exception())
+            }
 
             val itemSize = body.items.size
+            stateListener(SearchResultState.SUCCESS)
             return LoadResult.Page(
                 data = body.items,
                 prevKey = if (offset == 1) null else offset.minus(itemSize),
                 nextKey = if (itemSize < 20) null else offset.plus(itemSize),
             )
-        } catch (e: HttpException) {
-            return LoadResult.Error(e)
         } catch (e: Exception) {
+            stateListener(SearchResultState.ERROR)
             return LoadResult.Error(e)
         }
 
@@ -58,6 +63,8 @@ class SearchBooksPagingSource @AssistedInject constructor(
 
     @AssistedFactory
     interface SearchBooksPagingSourceFactory {
-        fun create(keyword: String): SearchBooksPagingSource
+        fun create(keyword: String, errorListener: (SearchResultState) -> Unit): SearchBooksPagingSource
     }
+
+    enum class SearchResultState { LOADING, SUCCESS, ERROR }
 }
