@@ -20,7 +20,7 @@
 
         <!-- サムネイル -->
         <ImageView
-            android:id="@+id/thumbnail"
+            android:id="@+id/bookThumbnail"
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:contentDescription="@null"
@@ -36,7 +36,7 @@
             android:layout_marginStart="12dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/thumbnail"
+            app:layout_constraintStart_toEndOf="@id/bookThumbnail"
             app:layout_constraintTop_toTopOf="parent">
 
             <!-- タイトル -->
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="thumbnail,infoFrame" />
+            app:constraint_referenced_ids="bookThumbnail,infoFrame" />
 
         <!-- 購入ボタン -->
         <com.google.android.material.button.MaterialButton

@@ -1,6 +1,7 @@
 package com.example.feature_home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -31,6 +32,9 @@ class RecommendCarouselAdapter(
     override fun onBindViewHolder(holder: RecommendCarouselViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding.imageUrl = item.imgUrl
+        holder.binding.onClickFavorite = View.OnClickListener {
+            // TODO("Not yet implemented")
+        }
 
         holder.itemView.setOnClickListener {
             listener.onClickItem(

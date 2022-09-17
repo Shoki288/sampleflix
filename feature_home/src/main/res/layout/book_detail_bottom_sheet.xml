@@ -23,7 +23,7 @@
             type="int" />
 
         <variable
-            name="bookDescription"
+            name="description"
             type="String" />
 
         <variable
@@ -38,7 +38,7 @@
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/thumbnail"
+            android:id="@+id/bookThumbnail"
             android:layout_width="70dp"
             android:layout_height="105dp"
             android:contentDescription="@null"
@@ -59,7 +59,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Bold"
             app:layout_constraintEnd_toStartOf="@id/close"
             app:layout_constraintStart_toStartOf="@id/barrier"
-            app:layout_constraintTop_toTopOf="@id/thumbnail"
+            app:layout_constraintTop_toTopOf="@id/bookThumbnail"
             tools:text="たいとるたいとるたいとるたいとる" />
 
         <com.google.android.material.card.MaterialCardView
@@ -71,7 +71,7 @@
             app:cardCornerRadius="18dp"
             android:onClick="@{() -> owner.onClickClose()}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/thumbnail">
+            app:layout_constraintTop_toTopOf="@id/bookThumbnail">
 
             <ImageView
                 android:layout_width="24dp"
@@ -94,13 +94,13 @@
             tools:text="2020 5エピソード" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/bookDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:lines="3"
-            android:text="@{bookDescription}"
+            android:text="@{description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/barrier"
             app:layout_constraintTop_toBottomOf="@id/publish_info"
@@ -113,7 +113,7 @@
             android:orientation="vertical"
             app:barrierDirection="end"
             app:barrierMargin="12dp"
-            app:constraint_referenced_ids="thumbnail" />
+            app:constraint_referenced_ids="bookThumbnail" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/bottom_barrier"
@@ -122,7 +122,7 @@
             android:orientation="horizontal"
             app:barrierDirection="bottom"
             app:barrierMargin="4dp"
-            app:constraint_referenced_ids="description,thumbnail" />
+            app:constraint_referenced_ids="bookDescription,bookThumbnail" />
 
         <include
             layout="@layout/horizontal_divider"

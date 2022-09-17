@@ -7,6 +7,10 @@
             name="imageUrl"
             type="String" />
 
+        <variable
+            name="onClickFavorite"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,6 +29,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="12dp"
+            android:textOff="@null"
+            android:textOn="@null"
+            android:background="@drawable/btn_favorite"
+            android:onClick="@{onClickFavorite}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

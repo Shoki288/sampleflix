@@ -9,7 +9,6 @@ import javax.inject.Inject
 class SearchBookUseCase @Inject constructor(
     private val repository: SearchBookRepository
 ) {
-    suspend fun searchBookInit(): ApiResult<BookInfoList> = repository.searchBooksInit()
     suspend fun searchBook(keyword: String): Response<BookInfoList> =
         repository.searchBooks(keyword = keyword)
 }

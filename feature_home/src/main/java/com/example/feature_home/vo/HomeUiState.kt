@@ -1,4 +1,4 @@
-package com.example.feature_home
+package com.example.feature_home.vo
 
 import com.example.entity.BookInfo
 

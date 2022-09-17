@@ -41,7 +41,7 @@ class BookDetailBottomSheet: BottomSheetDialogFragment() {
             publishDate = argument.publishDate
             imageUrl = argument.imageUrl
             episodeNum = (1..100).random()
-            bookDescription = argument.description
+            description = argument.description
             owner = this@BookDetailBottomSheet
         }.root
     }

@@ -4,10 +4,10 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entity.BookInfo
-import com.example.extension.api.ApiZipSuccess
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
-import com.example.search_repository.usecase.SearchBookUseCase
+import com.example.feature_home.vo.HomeUiState
+import com.example.search_repository.usecase.GetRecommendBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val searchUseCase: SearchBookUseCase
+    private val getRecommendBookUseCase: GetRecommendBookUseCase,
 ) : ViewModel() {
 
     @VisibleForTesting
@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            books.value = when (val res = searchUseCase.searchBookInit()) {
+            books.value = when (val res = getRecommendBookUseCase.searchBookInit()) {
                 is Success -> HomeUiState.Success(res.data.items)
                 is HttpError -> HomeUiState.Error.ApiError(res.message)
                 else -> HomeUiState.Error.NetworkError
