@@ -1,10 +1,10 @@
-package com.example.core_unit_test
+package com.example.core_unit_test.fixture
 
 import com.example.entity.*
 
 fun createBookInfoList(
     list: List<BookInfo> = emptyList()
-) = BookInfoList(list)
+) = BookInfoListResponse(list)
 
 fun createBookInfo(
     id: String = "id",
@@ -21,14 +21,14 @@ fun createBookInfo(
 fun createVolumeInfo(
     title: String = "title",
     authors: List<String> = emptyList(),
-    publisher: String? = "publisher",
-    publishedDate: String? = "publishedDate",  // YYYY-MM-ddで返る
+    publisher: String = "publisher",
+    publishedDate: String = "publishedDate",  // YYYY-MM-ddで返る
     description: String = "description",
     pageCount: Int = 0,
     categories: List<String> = emptyList(),
     averageRating: Int? = 0,
     ratingCount: Int = 0,
-    images: ImageLinks? = createImageLinks(),
+    images: ImageLinks = createImageLinks(),
     language: String = "language",
     previewLink: String = "previewLink",
     isFavorite: Boolean = false
@@ -50,7 +50,7 @@ fun createVolumeInfo(
     )
 
 fun createImageLinks(
-    thumbnail: String? = "thumbnail"
+    thumbnail: String = "thumbnail"
 ) = ImageLinks(
     thumbnail = thumbnail
 )

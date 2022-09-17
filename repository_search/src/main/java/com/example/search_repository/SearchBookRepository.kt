@@ -7,10 +7,10 @@ import androidx.paging.PagingData
 import com.example.core_cache.cache_home.dao.HomeRecommendDao
 import com.example.core_retrofit.SearchBooksService
 import com.example.entity.BookInfo
-import com.example.entity.BookInfoList
-import com.example.entity.adeapter.bookInfoListAdapter
+import com.example.entity.BookInfoListResponse
+import com.example.entity.adeapter.convertBookInfoResponseToCacheBookInfoList
 import com.example.entity.adeapter.cacheBookInfoAdapter
-import com.example.entity.adeapter.updateBookInfo
+import com.example.entity.adeapter.modifyBookInfo
 import com.example.extension.api.*
 import com.example.search_repository.SearchBooksPagingSource.SearchBooksPagingSourceFactory
 import com.example.search_repository.SearchBooksPagingSource.SearchResultState
@@ -26,14 +26,14 @@ class SearchBookRepository @Inject constructor(
     private val dao: HomeRecommendDao,
 ) {
 
-    suspend fun searchBooksInit(): ApiResult<BookInfoList> =
+    suspend fun searchBooksInit(): ApiResult<BookInfoListResponse> =
         withContext(Dispatchers.IO) {
             val cache = dao.getAll()
             if (cache.isEmpty()) {
                 zip(
                     firstExecute = { async { searchBookAndroid() } },
                     secondExecute = { async { searchBookFF() } },
-                    { first, second -> updateBookInfo(first.items + second.items) }
+                    { first, second -> modifyBookInfo(first.items + second.items) }
                 ).onSuccess { saveCache(it) }
             } else {
                 Success(data = cacheBookInfoAdapter(cache))
@@ -41,16 +41,16 @@ class SearchBookRepository @Inject constructor(
         }
 
     @VisibleForTesting
-    suspend fun searchBookAndroid(): Response<BookInfoList> = searchBooks(keyword = "android", maxResultSize = 40)
+    suspend fun searchBookAndroid(): Response<BookInfoListResponse> = searchBooks(keyword = "android", maxResultSize = 40)
     @VisibleForTesting
-    suspend fun searchBookFF(): Response<BookInfoList> = searchBooks(keyword = "FF14", maxResultSize = 40)
+    suspend fun searchBookFF(): Response<BookInfoListResponse> = searchBooks(keyword = "FF14", maxResultSize = 40)
 
-    suspend fun searchBooks(keyword: String, maxResultSize: Int? = null): Response<BookInfoList> =
+    suspend fun searchBooks(keyword: String, maxResultSize: Int? = null): Response<BookInfoListResponse> =
         service.searchBooks(keyword, maxResultSize)
 
     @VisibleForTesting
-    suspend fun saveCache(items: BookInfoList) {
-        dao.insertAll(bookInfoListAdapter(items))
+    suspend fun saveCache(items: BookInfoListResponse) {
+        dao.insertAll(convertBookInfoResponseToCacheBookInfoList(items))
     }
 
     @Inject

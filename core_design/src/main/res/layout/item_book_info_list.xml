@@ -135,6 +135,7 @@
             android:textOn="@null"
             android:textOff="@null"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="4dp"
             android:background="@drawable/btn_favorite"
             android:onClick="@{onClickFavorite}"
             android:button="@null"

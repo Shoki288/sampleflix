@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.core_cache.cache_home.dao.HomeRecommendDao
 import com.example.core_retrofit.SearchBooksService
 import com.example.core_unit_test.*
-import com.example.core_unit_test.fixture.createCacheBookInfo
+import com.example.core_unit_test.fixture.*
 import com.example.extension.api.Success
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -101,13 +101,16 @@ class SearchBookRepositoryTest {
 
         val response = runBlocking { repository.searchBooksInit() } as Success
 
-        Assert.assertEquals(createBookInfoList(listOf(createBookInfo(
+        Assert.assertEquals(
+            createBookInfoList(listOf(
+                createBookInfo(
             bookInfo = createVolumeInfo(
                 authors = listOf("authors"),
                 categories = listOf("categories"),
                 images = createImageLinks("image")
             )
-            , accessInfo = null))),
+            , accessInfo = null)
+            )),
             response.data)
     }
 }

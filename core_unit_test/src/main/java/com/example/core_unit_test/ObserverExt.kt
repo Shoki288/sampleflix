@@ -2,7 +2,6 @@ package com.example.core_unit_test
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
-import io.mockk.InternalPlatformDsl.toStr
 import io.mockk.spyk
 import kotlinx.coroutines.flow.Flow
 

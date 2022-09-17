@@ -1,8 +1,7 @@
 package com.example.sampleflix
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,5 +17,4 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_nav).setupWithNavController(navHost.navController)
     }
 
-    override fun onBackPressed() { super.onBackPressed() }
 }

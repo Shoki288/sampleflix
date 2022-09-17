@@ -1,26 +1,21 @@
 package com.example.feature_home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feature_home.BookDetailBottomSheet.BookInfoItem
+import com.example.entity.BookInfo
 import com.example.feature_home.databinding.ItemRecommendBinding
 
 class RecommendCarouselAdapter(
-    private val listener: RecommendCarouselListener
-) : ListAdapter<RecommendItem, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
+    private val listener: RecommendCarouselListener,
+    private val viewModel: HomeViewModel
+) : ListAdapter<BookInfo, RecommendCarouselAdapter.RecommendCarouselViewHolder>(diffCalBack) {
     companion object {
-        private val diffCalBack = object : DiffUtil.ItemCallback<RecommendItem>() {
-            override fun areItemsTheSame(oldItem: RecommendItem, newItem: RecommendItem): Boolean =
-                oldItem.id == newItem.id
-
-            override fun areContentsTheSame(
-                oldItem: RecommendItem,
-                newItem: RecommendItem
-            ): Boolean = oldItem == newItem
+        private val diffCalBack = object : DiffUtil.ItemCallback<BookInfo>() {
+            override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean = oldItem == newItem
         }
     }
 
@@ -31,34 +26,21 @@ class RecommendCarouselAdapter(
 
     override fun onBindViewHolder(holder: RecommendCarouselViewHolder, position: Int) {
         val item = getItem(position)
-        holder.binding.imageUrl = item.imgUrl
-        holder.binding.onClickFavorite = View.OnClickListener {
-            // TODO("Not yet implemented")
-        }
+        holder.binding.imageUrl = item.bookInfo.images.imageUrl
+        holder.binding.viewModel = viewModel
 
         holder.itemView.setOnClickListener {
-            listener.onClickItem(
-                BookInfoItem(
-                    title = item.title,
-                    publishDate = item.publishDate,
-                    imageUrl = item.imgUrl,
-                    description = item.description
-                )
-            )
+            listener.onClickItem(item)
+        }
+
+        holder.binding.favoriteButton.setOnCheckedChangeListener { _, isCheck ->
+            viewModel.updateFavoriteState(isCheck, item)
         }
     }
 
     class RecommendCarouselViewHolder(val binding: ItemRecommendBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface RecommendCarouselListener {
-        fun onClickItem(item: BookInfoItem)
+        fun onClickItem(item: BookInfo)
     }
 }
-
-data class RecommendItem(
-    val id: String,
-    val title: String,
-    val publishDate: String,
-    val description: String,
-    val imgUrl: String,
-)

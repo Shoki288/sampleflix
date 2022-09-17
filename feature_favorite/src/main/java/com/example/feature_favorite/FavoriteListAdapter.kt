@@ -30,10 +30,10 @@ class FavoriteListAdapter : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCa
         val bookInfo = getItem(position).bookInfo
         val salesInfo = getItem(position).salesInfo
         holder.binding.apply {
-            thumbnailUrl = bookInfo.images?.imageUrl ?: ""
+            thumbnailUrl = bookInfo.images.imageUrl
             title = bookInfo.title
             author = bookInfo.author
-            publisher = bookInfo.publisher ?: "不明"
+            publisher = bookInfo.publisher
             reviewTotalResult = bookInfo.totalReviewCount
             reviewAverageResult = bookInfo.averageReviewRate
             description = bookInfo.description

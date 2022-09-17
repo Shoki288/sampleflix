@@ -1,6 +1,6 @@
 package com.example.core_retrofit
 
-import com.example.entity.BookInfoList
+import com.example.entity.BookInfoListResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,6 +16,6 @@ interface SearchBooksService {
         @Query("q") keyword: String,
         @Query("maxResults") maxResults: Int? = null,
         @Query("startIndex") offset: Int = 0
-    ): Response<BookInfoList>
+    ): Response<BookInfoListResponse>
 
 }

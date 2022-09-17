@@ -8,8 +8,8 @@
             type="String" />
 
         <variable
-            name="onClickFavorite"
-            type="android.view.View.OnClickListener" />
+            name="viewModel"
+            type="com.example.feature_home.HomeViewModel" />
 
     </data>
 
@@ -30,13 +30,17 @@
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/favoriteButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="12dp"
+            android:padding="4dp"
             android:textOff="@null"
             android:textOn="@null"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="@{viewModel.isDisableUpdateFavoriteState}"
+            android:focusable="@{viewModel.isDisableUpdateFavoriteState}"
             android:background="@drawable/btn_favorite"
-            android:onClick="@{onClickFavorite}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

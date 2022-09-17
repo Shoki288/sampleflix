@@ -3,7 +3,7 @@ package com.example.entity.adeapter
 import com.example.entity.*
 
 fun cacheBookInfoAdapter(cache: List<CacheBookInfo>) =
-        BookInfoList(
+        BookInfoListResponse(
             items = cache.map {
                 BookInfo(
                     id = it.id,

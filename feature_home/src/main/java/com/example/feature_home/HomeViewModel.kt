@@ -7,6 +7,7 @@ import com.example.entity.BookInfo
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
 import com.example.feature_home.vo.HomeUiState
+import com.example.repository_favorite.use_case.AddFavoriteListUseCase
 import com.example.search_repository.usecase.GetRecommendBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getRecommendBookUseCase: GetRecommendBookUseCase,
+    private val addFavoriteListUseCase: AddFavoriteListUseCase
 ) : ViewModel() {
 
     @VisibleForTesting
@@ -33,6 +35,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { books.collect() }
     }
 
+    val isDisableUpdateFavoriteState = MutableStateFlow(false)
 
     // 読み始めたシリーズを続ける
     val recentlyReadingBooks = books.filterIsInstance<HomeUiState.Success>().map {
@@ -83,4 +86,14 @@ class HomeViewModel @Inject constructor(
         }
         categories.filterIndexed { index, _ -> index in 0..9 }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    fun updateFavoriteState(isCheck: Boolean, bookInfo: BookInfo) {
+        viewModelScope.launch {
+            isDisableUpdateFavoriteState.value = true
+            if (isCheck) {
+                addFavoriteListUseCase.addFavoriteList(bookInfo)
+            }
+            isDisableUpdateFavoriteState.value = false
+        }
+    }
 }
