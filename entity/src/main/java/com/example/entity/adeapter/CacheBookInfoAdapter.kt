@@ -7,7 +7,7 @@ fun cacheBookInfoAdapter(cache: List<CacheBookInfo>) =
             items = cache.map {
                 BookInfo(
                     id = it.id,
-                    bookInfo = VolumeInfo(
+                    volumeInfo = VolumeInfo(
                         title = it.title,
                         authors = it.authors.split(","),
                         publisher = it.publisher,
@@ -24,7 +24,7 @@ fun cacheBookInfoAdapter(cache: List<CacheBookInfo>) =
                         previewLink = it.previewLink,
                         isFavorite = it.isFavorite
                     ),
-                    salesInfo = SaleInfo(
+                    saleInfo = SaleInfo(
                         listPrice = Price(
                             price = it.price
                         )

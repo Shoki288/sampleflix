@@ -8,20 +8,20 @@ fun convertBookInfoResponseToCacheBookInfoList(response: BookInfoListResponse): 
 fun convertBookInfoToCacheBookInfo(bookInfo: BookInfo): CacheBookInfo =
     CacheBookInfo(
         id = bookInfo.id,
-        title = bookInfo.bookInfo.title,
-        authors = bookInfo.bookInfo.author,
-        publisher = bookInfo.bookInfo.publisher,
-        publishedDate = bookInfo.bookInfo.publishedDate,
-        description = bookInfo.bookInfo.description,
-        pageCount = bookInfo.bookInfo.pageCount,
-        categories = bookInfo.bookInfo.categories.joinToString(),
-        averageRating = bookInfo.bookInfo.averageReviewRate,
-        ratingCount = bookInfo.bookInfo.totalReviewCount,
-        image = bookInfo.bookInfo.images.imageUrl,
-        language = bookInfo.bookInfo.language,
-        previewLink = bookInfo.bookInfo.previewLink,
-        price = bookInfo.salesInfo.listPrice.price,
-        isFavorite = bookInfo.bookInfo.isFavorite
+        title = bookInfo.volumeInfo.title,
+        authors = bookInfo.volumeInfo.author,
+        publisher = bookInfo.volumeInfo.publisher,
+        publishedDate = bookInfo.volumeInfo.publishedDate,
+        description = bookInfo.volumeInfo.description,
+        pageCount = bookInfo.volumeInfo.pageCount,
+        categories = bookInfo.volumeInfo.categories.joinToString(),
+        averageRating = bookInfo.volumeInfo.averageReviewRate,
+        ratingCount = bookInfo.volumeInfo.totalReviewCount,
+        image = bookInfo.volumeInfo.images.imageUrl,
+        language = bookInfo.volumeInfo.language,
+        previewLink = bookInfo.volumeInfo.previewLink,
+        price = bookInfo.saleInfo.listPrice.price,
+        isFavorite = bookInfo.volumeInfo.isFavorite
     )
 
 // APIから返ったレスポンスの中身のimageUrlがhttpなのでhttpsに置換する
@@ -30,25 +30,25 @@ fun modifyBookInfo(books: List<BookInfo>): BookInfoListResponse =
         books.map {
             BookInfo(
                 id = it.id,
-                bookInfo = VolumeInfo(
-                    title = it.bookInfo.title,
-                    authors = it.bookInfo.author.split(","),
-                    publisher = it.bookInfo.publisher,
-                    publishedDate = it.bookInfo.publishedDate,
-                    description = it.bookInfo.description,
-                    pageCount = it.bookInfo.pageCount,
-                    categories = it.bookInfo.categories,
-                    averageRating = it.bookInfo.averageReviewRate,
-                    ratingCount = it.bookInfo.totalReviewCount,
+                volumeInfo = VolumeInfo(
+                    title = it.volumeInfo.title,
+                    authors = it.volumeInfo.author.split(","),
+                    publisher = it.volumeInfo.publisher,
+                    publishedDate = it.volumeInfo.publishedDate,
+                    description = it.volumeInfo.description,
+                    pageCount = it.volumeInfo.pageCount,
+                    categories = it.volumeInfo.categories,
+                    averageRating = it.volumeInfo.averageReviewRate,
+                    ratingCount = it.volumeInfo.totalReviewCount,
                     images = ImageLinks(
                         // TODO 正規表現のほうが早い気がする
-                        thumbnail = it.bookInfo.images.imageUrl
+                        thumbnail = it.volumeInfo.images.imageUrl
                     ),
-                    language = it.bookInfo.language,
-                    previewLink = it.bookInfo.previewLink,
+                    language = it.volumeInfo.language,
+                    previewLink = it.volumeInfo.previewLink,
                     isFavorite = false
                 ),
-                salesInfo = it.salesInfo,
+                saleInfo = it.saleInfo,
                 accessInfo = it.accessInfo
             )
         }

@@ -95,10 +95,11 @@
 
         <com.example.core_design.ReviewStartsView
             android:id="@+id/review"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="@id/thumbnailEndGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bookAuthor"
             app:setReviewAverage="@{reviewAverageResult}"
             app:setReviewTotalResult="@{reviewTotalResult}" />

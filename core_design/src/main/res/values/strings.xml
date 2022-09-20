@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="author_and_publisher">%1$s（%2$s）</string>
-    <string name="price">\%d</string>
+    <string name="price">%d円</string>
 </resources>

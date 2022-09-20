@@ -13,8 +13,8 @@ fun createBookInfo(
     accessInfo: AccessInfo? = createAccessInfo(),
 ) = BookInfo(
     id = id,
-    bookInfo = bookInfo,
-    salesInfo = salesInfo,
+    volumeInfo = bookInfo,
+    saleInfo = salesInfo,
     accessInfo = accessInfo,
 )
 

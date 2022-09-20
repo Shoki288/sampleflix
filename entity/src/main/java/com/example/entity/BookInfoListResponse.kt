@@ -11,10 +11,8 @@ data class BookInfoListResponse(
 @Parcelize
 data class BookInfo(
     val id: String,
-    @Json(name = "volumeInfo")
-    val bookInfo: VolumeInfo,
-    @Json(name ="saleInfo")
-    val salesInfo: SaleInfo,
+    val volumeInfo: VolumeInfo,
+    val saleInfo: SaleInfo,
     val accessInfo: AccessInfo?
 ): Parcelable
 

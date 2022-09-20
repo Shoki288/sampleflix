@@ -9,5 +9,5 @@ class FavoriteRepository @Inject constructor(
 ) {
     suspend fun fetchFavoriteList(): List<CacheBookInfo> = dao.getAll()
 
-    suspend fun updateFavoriteList(bookInfo: CacheBookInfo): Any = dao.updateFavorite(bookInfo)
+    suspend fun addFavoriteList(bookInfo: CacheBookInfo): Any = dao.insertFavoriteItem(bookInfo)
 }

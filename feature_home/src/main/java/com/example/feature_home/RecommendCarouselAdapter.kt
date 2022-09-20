@@ -15,7 +15,9 @@ class RecommendCarouselAdapter(
     companion object {
         private val diffCalBack = object : DiffUtil.ItemCallback<BookInfo>() {
             override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean = oldItem == newItem
+            override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean {
+                return oldItem.volumeInfo.isFavorite == newItem.volumeInfo.isFavorite && oldItem == newItem
+            }
         }
     }
 
@@ -26,7 +28,8 @@ class RecommendCarouselAdapter(
 
     override fun onBindViewHolder(holder: RecommendCarouselViewHolder, position: Int) {
         val item = getItem(position)
-        holder.binding.imageUrl = item.bookInfo.images.imageUrl
+        holder.binding.imageUrl = item.volumeInfo.images.imageUrl
+        holder.binding.isFavorite = item.volumeInfo.isFavorite
         holder.binding.viewModel = viewModel
 
         holder.itemView.setOnClickListener {

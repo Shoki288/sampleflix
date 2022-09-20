@@ -8,6 +8,10 @@
             type="String" />
 
         <variable
+            name="isFavorite"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.example.feature_home.HomeViewModel" />
 
@@ -37,9 +41,10 @@
             android:padding="4dp"
             android:textOff="@null"
             android:textOn="@null"
+            android:checked="@{isFavorite}"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="@{viewModel.isDisableUpdateFavoriteState}"
-            android:focusable="@{viewModel.isDisableUpdateFavoriteState}"
+            android:clickable="@{!viewModel.isDisableUpdateFavoriteState}"
+            android:focusable="@{!viewModel.isDisableUpdateFavoriteState}"
             android:background="@drawable/btn_favorite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

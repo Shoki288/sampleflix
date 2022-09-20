@@ -8,6 +8,7 @@ import com.example.core_cache.cache_home.dao.HomeRecommendDao
 import com.example.core_retrofit.SearchBooksService
 import com.example.entity.BookInfo
 import com.example.entity.BookInfoListResponse
+import com.example.entity.CacheBookInfo
 import com.example.entity.adeapter.convertBookInfoResponseToCacheBookInfoList
 import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.entity.adeapter.modifyBookInfo
@@ -52,6 +53,8 @@ class SearchBookRepository @Inject constructor(
     suspend fun saveCache(items: BookInfoListResponse) {
         dao.insertAll(convertBookInfoResponseToCacheBookInfoList(items))
     }
+
+    suspend fun updateFavoriteState(bookInfo: CacheBookInfo) = dao.updateFavoriteState(bookInfo)
 
     @Inject
     lateinit var factory: SearchBooksPagingSourceFactory

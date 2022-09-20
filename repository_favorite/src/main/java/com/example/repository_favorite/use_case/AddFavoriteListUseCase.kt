@@ -9,5 +9,5 @@ class AddFavoriteListUseCase @Inject constructor(
     private val repository: FavoriteRepository
 ) {
     suspend fun addFavoriteList(bookInfo: BookInfo): Any =
-        repository.updateFavoriteList(convertBookInfoToCacheBookInfo(bookInfo))
+        repository.addFavoriteList(convertBookInfoToCacheBookInfo(bookInfo))
 }

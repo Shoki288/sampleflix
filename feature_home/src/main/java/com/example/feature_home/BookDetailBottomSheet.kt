@@ -36,11 +36,11 @@ class BookDetailBottomSheet: BottomSheetDialogFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         return BookDetailBottomSheetBinding.inflate(inflater, container, false).apply {
             // TODO xmlと記述の順番を合わせる
-            bookTitle = argument.bookInfo.title
-            publishDate = argument.bookInfo.publishedDate
-            imageUrl = argument.bookInfo.images.imageUrl
+            bookTitle = argument.volumeInfo.title
+            publishDate = argument.volumeInfo.publishedDate
+            imageUrl = argument.volumeInfo.images.imageUrl
             episodeNum = (1..100).random()
-            description = argument.bookInfo.description
+            description = argument.volumeInfo.description
             owner = this@BookDetailBottomSheet
         }.root
     }

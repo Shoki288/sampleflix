@@ -9,6 +9,7 @@ import com.example.extension.api.Success
 import com.example.feature_home.vo.HomeUiState
 import com.example.repository_favorite.use_case.AddFavoriteListUseCase
 import com.example.search_repository.usecase.GetRecommendBookUseCase
+import com.example.search_repository.usecase.UpdateRecommendFavoriteStateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getRecommendBookUseCase: GetRecommendBookUseCase,
-    private val addFavoriteListUseCase: AddFavoriteListUseCase
+    private val addFavoriteListUseCase: AddFavoriteListUseCase,
+    private val updateRecommendFavoriteStateUseCase: UpdateRecommendFavoriteStateUseCase
 ) : ViewModel() {
 
     @VisibleForTesting
@@ -81,19 +83,42 @@ class HomeViewModel @Inject constructor(
     // 本をさらに見る
     val categories = books.filterIsInstance<HomeUiState.Success>().map {
         // APIから取得したデータのカテゴリを吸い取っている
-        val categories = it.books.map { books -> books.bookInfo.categories }.flatten().run {
+        val categories = it.books.map { books -> books.volumeInfo.categories }.flatten().run {
             filterNot { list -> list.isEmpty() }.distinct()
         }
         categories.filterIndexed { index, _ -> index in 0..9 }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     fun updateFavoriteState(isCheck: Boolean, bookInfo: BookInfo) {
+        if (books.value !is HomeUiState.Success) return
+        val position = (books.value as HomeUiState.Success).books.indexOfFirst { it.id == bookInfo.id }
+
         viewModelScope.launch {
             isDisableUpdateFavoriteState.value = true
             if (isCheck) {
                 addFavoriteListUseCase.addFavoriteList(bookInfo)
             }
+
             isDisableUpdateFavoriteState.value = false
+
+            updateRecommendFavoriteStateUseCase.updateFavoriteState(bookInfo)
+        }
+
+
+        books.update { state ->
+            if (state is HomeUiState.Success) {
+                state.copy(
+                    books = state.books.mapIndexed { index, bookInfo ->
+                        if (position == index) {
+                            bookInfo.copy(volumeInfo = bookInfo.volumeInfo.copy(isFavorite = isCheck))
+                        } else {
+                            bookInfo
+                        }
+                    }
+                )
+            } else {
+                state
+            }
         }
     }
 }

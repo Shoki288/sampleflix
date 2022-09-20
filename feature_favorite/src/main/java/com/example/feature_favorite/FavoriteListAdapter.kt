@@ -27,8 +27,8 @@ class FavoriteListAdapter : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCa
     }
 
     override fun onBindViewHolder(holder: FavoriteListViewHolder, position: Int) {
-        val bookInfo = getItem(position).bookInfo
-        val salesInfo = getItem(position).salesInfo
+        val bookInfo = getItem(position).volumeInfo
+        val salesInfo = getItem(position).saleInfo
         holder.binding.apply {
             thumbnailUrl = bookInfo.images.imageUrl
             title = bookInfo.title

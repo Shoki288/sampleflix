@@ -36,14 +36,14 @@ class SearchResultAdapter(
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         val item = getItem(position) ?: return
         holder.binding.apply {
-            thumbnailUrl = item.bookInfo.images.imageUrl
-            title = item.bookInfo.title
-            author = item.bookInfo.author
-            publisher = item.bookInfo.publisher
-            reviewTotalResult = item.bookInfo.totalReviewCount
-            reviewAverageResult = item.bookInfo.averageReviewRate
-            description = item.bookInfo.description
-            price = item.salesInfo.listPrice.price
+            thumbnailUrl = item.volumeInfo.images.imageUrl
+            title = item.volumeInfo.title
+            author = item.volumeInfo.author
+            publisher = item.volumeInfo.publisher
+            reviewTotalResult = item.volumeInfo.totalReviewCount
+            reviewAverageResult = item.volumeInfo.averageReviewRate
+            description = item.volumeInfo.description
+            price = item.saleInfo.listPrice.price
             onClickFavorite = View.OnClickListener {
                 onClickFavorite(item)
             }

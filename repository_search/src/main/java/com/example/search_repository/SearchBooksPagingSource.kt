@@ -41,8 +41,8 @@ class SearchBooksPagingSource @AssistedInject constructor(
             body.apply {
                 items.map { items ->
                     if (ids.any { it == items.id }) {
-                        val isFavorite = items.bookInfo.isFavorite
-                        items.copy(bookInfo = items.bookInfo.copy(isFavorite = isFavorite.not()))
+                        val isFavorite = items.volumeInfo.isFavorite
+                        items.copy(volumeInfo = items.volumeInfo.copy(isFavorite = isFavorite.not()))
                     } else items
                 }
             }

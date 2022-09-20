@@ -14,4 +14,7 @@ abstract class HomeRecommendDao(override val database: RoomDatabase): DBTransact
 
     @Query("SELECT categories FROM cachebookinfo")
     abstract suspend fun getAllBooksCategory(): List<String>
+
+    @Update
+    abstract suspend fun updateFavoriteState(update: CacheBookInfo)
 }
