@@ -8,6 +8,7 @@ import com.example.extension.api.HttpError
 import com.example.extension.api.Success
 import com.example.feature_home.vo.HomeUiState
 import com.example.repository_favorite.use_case.AddFavoriteListUseCase
+import com.example.repository_favorite.use_case.DeleteFavoriteListUseCase
 import com.example.search_repository.usecase.GetRecommendBookUseCase
 import com.example.search_repository.usecase.UpdateRecommendFavoriteStateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getRecommendBookUseCase: GetRecommendBookUseCase,
     private val addFavoriteListUseCase: AddFavoriteListUseCase,
-    private val updateRecommendFavoriteStateUseCase: UpdateRecommendFavoriteStateUseCase
+    private val updateRecommendFavoriteStateUseCase: UpdateRecommendFavoriteStateUseCase,
+    private val deleteFavoriteListUseCase: DeleteFavoriteListUseCase
 ) : ViewModel() {
 
     @VisibleForTesting
@@ -97,11 +99,13 @@ class HomeViewModel @Inject constructor(
             isDisableUpdateFavoriteState.value = true
             if (isCheck) {
                 addFavoriteListUseCase.addFavoriteList(bookInfo)
+            } else {
+                deleteFavoriteListUseCase.deleteFavoriteItem(bookInfo)
             }
 
             isDisableUpdateFavoriteState.value = false
 
-            updateRecommendFavoriteStateUseCase.updateFavoriteState(bookInfo)
+            updateRecommendFavoriteStateUseCase.updateFavoriteState(bookInfo.copy(volumeInfo = bookInfo.volumeInfo.copy(isFavorite = isCheck)))
         }
 
 

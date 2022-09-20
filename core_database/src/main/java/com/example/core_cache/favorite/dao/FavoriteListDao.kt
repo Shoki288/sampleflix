@@ -11,4 +11,7 @@ abstract class FavoriteListDao(override val database: RoomDatabase): DBTransacti
 
     @Query("SELECT * FROM cachebookinfo")
     abstract suspend fun getAll(): List<CacheBookInfo>
+
+    @Delete
+    abstract suspend fun deleteFavoriteItem(bookInfo: CacheBookInfo)
 }

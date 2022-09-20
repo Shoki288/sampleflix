@@ -24,7 +24,9 @@ class FavoriteListFragment : Fragment(R.layout.fragment_favorite_list) {
             binding.viewModel = viewModel
 
             // お気に入りリスト
-            val adapter = FavoriteListAdapter()
+            val adapter = FavoriteListAdapter { item, isFavorite ->
+                viewModel.updateFavoriteState(item, isFavorite)
+            }
             binding.list.adapter = adapter
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

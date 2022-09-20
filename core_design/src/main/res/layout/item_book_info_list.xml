@@ -38,6 +38,10 @@
             type="Integer" />
 
         <variable
+            name="isFavorite"
+            type="Boolean" />
+
+        <variable
             name="onClickFavorite"
             type="android.view.View.OnClickListener" />
 
@@ -130,6 +134,7 @@
             tools:text="￥2,000" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/favoriteButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="12dp"
@@ -138,7 +143,7 @@
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
             android:background="@drawable/btn_favorite"
-            android:onClick="@{onClickFavorite}"
+            android:checked="@{isFavorite}"
             android:button="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/favoriteButtonStartGuideline"

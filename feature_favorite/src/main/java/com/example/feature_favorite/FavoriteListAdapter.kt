@@ -1,7 +1,6 @@
 package com.example.feature_favorite
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,7 +9,7 @@ import com.example.core_design.databinding.ItemBookInfoListBinding
 import com.example.entity.BookInfo
 import com.example.feature_favorite.FavoriteListAdapter.FavoriteListViewHolder
 
-class FavoriteListAdapter : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCallback) {
+class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Unit) : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCallback) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
             override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =
@@ -38,7 +37,11 @@ class FavoriteListAdapter : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCa
             reviewAverageResult = bookInfo.averageReviewRate
             description = bookInfo.description
             price = salesInfo.listPrice.price
-            onClickFavorite = View.OnClickListener {}
+            isFavorite = bookInfo.isFavorite
+        }
+
+        holder.binding.favoriteButton.setOnCheckedChangeListener { _, isCheck ->
+            onClickFavorite(getItem(position), isCheck)
         }
     }
 
