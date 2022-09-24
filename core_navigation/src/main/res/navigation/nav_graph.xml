@@ -9,37 +9,41 @@
         android:name="com.example.feature_home.HomeFragment"
         android:label="fragment_home">
         <action
-            android:id="@+id/action_nav_home_to_searchResultFragment"
-            app:destination="@id/searchResultFragment" />
+            android:id="@+id/action_nav_home_to_search_result_fragment"
+            app:destination="@id/search_result_fragment" />
         <action
-            android:id="@+id/action_nav_home_to_RecommendListFragment"
-            app:destination="@id/RecommendListFragment" />
+            android:id="@+id/action_nav_home_to_recommend_list_fragment"
+            app:destination="@id/recommend_list_fragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_search"
         android:name="com.example.feature_search.SearchFragment"
         android:label="fragment_search">
         <action
-            android:id="@+id/action_nav_search_to_searchResultFragment"
-            app:destination="@id/searchResultFragment" />
+            android:id="@+id/action_nav_search_to_search_result_fragment"
+            app:destination="@id/search_result_fragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_favorite"
         android:name="com.example.feature_favorite.FavoriteListFragment"
-        android:label="fragment_favorite" />
+        android:label="fragment_favorite" >
+        <action
+            android:id="@+id/action_nav_favorite_to_book_detail_fragment"
+            app:destination="@id/book_detail_fragment" />
+    </fragment>
     <fragment
-        android:id="@+id/searchResultFragment"
+        android:id="@+id/search_result_fragment"
         android:name="com.example.feature_search_result.SearchResultFragment"
         android:label="SearchResultFragment" >
         <argument
             android:name="keyword"
             app:argType="string" />
         <action
-            android:id="@+id/action_searchResultFragment_to_BookDetailFragment"
-            app:destination="@id/BookDetailFragment" />
+            android:id="@+id/action_search_result_fragment_to_book_detail_fragment"
+            app:destination="@id/book_detail_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/BookDetailFragment"
+        android:id="@+id/book_detail_fragment"
         android:name="com.example.feature_book_detail.BookDetailFragment"
         android:label="BookDetailFragment" >
         <argument
@@ -47,11 +51,14 @@
             app:argType="com.example.entity.BookInfo" />
     </fragment>
     <fragment
-        android:id="@+id/RecommendListFragment"
+        android:id="@+id/recommend_list_fragment"
         android:name="com.example.feature_recommend_list.RecommendListFragment"
         android:label="RecommendListFragment" >
         <argument
             android:name="book_info_response"
             app:argType="com.example.entity.BookInfoListResponse" />
+        <action
+            android:id="@+id/action_recommend_list_fragment_to_book_detail_fragment"
+            app:destination="@id/book_detail_fragment" />
     </fragment>
 </navigation>

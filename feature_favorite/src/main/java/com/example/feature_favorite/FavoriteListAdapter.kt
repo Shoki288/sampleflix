@@ -9,7 +9,7 @@ import com.example.core_design.databinding.ItemBookInfoListBinding
 import com.example.entity.BookInfo
 import com.example.feature_favorite.FavoriteListAdapter.FavoriteListViewHolder
 
-class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Unit) : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCallback) {
+class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Unit, private val onClickItem: (BookInfo) -> Unit) : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCallback) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
             override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =
@@ -42,6 +42,9 @@ class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Un
 
         holder.binding.favoriteButton.setOnCheckedChangeListener { _, isCheck ->
             onClickFavorite(getItem(position), isCheck)
+        }
+        holder.binding.root.setOnClickListener {
+            onClickItem(getItem(position))
         }
     }
 

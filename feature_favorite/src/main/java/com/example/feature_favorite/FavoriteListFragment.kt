@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.feature_favorite.databinding.FragmentFavoriteListBinding
 import com.wada811.databinding.withBinding
@@ -24,9 +25,16 @@ class FavoriteListFragment : Fragment(R.layout.fragment_favorite_list) {
             binding.viewModel = viewModel
 
             // お気に入りリスト
-            val adapter = FavoriteListAdapter { item, isFavorite ->
+            val adapter = FavoriteListAdapter (
+                onClickFavorite = { item, isFavorite ->
                 viewModel.updateFavoriteState(item, isFavorite)
-            }
+                },
+                onClickItem = {
+                    findNavController().navigate(
+                        FavoriteListFragmentDirections.actionNavFavoriteToBookDetailFragment(it)
+                    )
+                }
+            )
             binding.list.adapter = adapter
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

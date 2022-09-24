@@ -9,7 +9,7 @@ import com.example.entity.BookInfo
 import com.example.feature_recommend_list.RecommendItemAdapter.RecommendItemViewHolder
 import com.example.feature_recommend_list.databinding.ItemRecommendBinding
 
-class RecommendItemAdapter: ListAdapter<BookInfo, RecommendItemViewHolder>(diffCallback) {
+class RecommendItemAdapter(private val onItemClick: (BookInfo) -> Unit): ListAdapter<BookInfo, RecommendItemViewHolder>(diffCallback) {
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
             override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo) = oldItem.id == newItem.id
@@ -22,6 +22,7 @@ class RecommendItemAdapter: ListAdapter<BookInfo, RecommendItemViewHolder>(diffC
 
     override fun onBindViewHolder(holder: RecommendItemViewHolder, position: Int) {
         holder.binding.bookInfo = getItem(position)
+        holder.itemView.setOnClickListener { onItemClick(getItem(position) )}
     }
 
     class RecommendItemViewHolder(val binding: ItemRecommendBinding): RecyclerView.ViewHolder(binding.root)
