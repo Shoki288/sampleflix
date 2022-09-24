@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_nav_home_to_searchResultFragment"
             app:destination="@id/searchResultFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_RecommendListFragment"
+            app:destination="@id/RecommendListFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_search"
@@ -42,5 +45,13 @@
         <argument
             android:name="book_info"
             app:argType="com.example.entity.BookInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/RecommendListFragment"
+        android:name="com.example.feature_recommend_list.RecommendListFragment"
+        android:label="RecommendListFragment" >
+        <argument
+            android:name="book_info_response"
+            app:argType="com.example.entity.BookInfoListResponse" />
     </fragment>
 </navigation>

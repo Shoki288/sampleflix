@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.entity.BookInfo
-import com.example.feature_home.databinding.ItemRecommendBinding
+import com.example.feature_home.databinding.ItemHomeRecommendBinding
 
 class RecommendCarouselAdapter(
     private val listener: RecommendCarouselListener,
@@ -22,7 +22,7 @@ class RecommendCarouselAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendCarouselViewHolder {
-        val binding = ItemRecommendBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemHomeRecommendBinding.inflate(LayoutInflater.from(parent.context))
         return RecommendCarouselViewHolder(binding)
     }
 
@@ -41,7 +41,7 @@ class RecommendCarouselAdapter(
         }
     }
 
-    class RecommendCarouselViewHolder(val binding: ItemRecommendBinding) : RecyclerView.ViewHolder(binding.root)
+    class RecommendCarouselViewHolder(val binding: ItemHomeRecommendBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface RecommendCarouselListener {
         fun onClickItem(item: BookInfo)

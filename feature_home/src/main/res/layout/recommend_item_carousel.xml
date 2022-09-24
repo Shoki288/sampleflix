@@ -7,10 +7,6 @@
             name="carouselTitle"
             type="String" />
 
-        <variable
-            name="onClickShowAll"
-            type="android.view.View.OnClickListener" />
-
     </data>
 
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -44,12 +40,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_recommend" />
+                tools:listitem="@layout/item_home_recommend" />
 
             <TextView
+                android:id="@+id/showAll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{ onClickShowAll }"
                 android:padding="12dp"
                 android:text="@string/show_all"
                 android:textColor="@color/link" />

@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.entity.BookInfo
+import com.example.entity.BookInfoListResponse
 import com.example.feature_home.databinding.FragmentHomeBinding
 import com.wada811.databinding.withBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +29,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //読み始めたシリーズを続ける
             val recentlyReadingBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.recentlyReadingBooksList.carousel.adapter = recentlyReadingBooksAdapter
+            binding.recentlyReadingBooksList.apply {
+                carousel.adapter = recentlyReadingBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.recentlyReadingBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recentlyReadingBooks.collect {
@@ -39,7 +47,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //すぐ読める本
             val recommendBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.recommendList.carousel.adapter = recommendBooksAdapter
+            binding.recommendList.apply {
+                carousel.adapter = recommendBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.recommendBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recommendBooks.collect {
@@ -50,7 +65,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //プライム会員特定で読めるベストセラー
             val bestSellerBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.bestSellerList.carousel.adapter = bestSellerBooksAdapter
+            binding.bestSellerList.apply {
+                carousel.adapter = bestSellerBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.bestSellerBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.bestSellerBooks.collect {
@@ -61,7 +83,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //最近読んだ本に基づくおすすめ
             val recentlyReadHistoryRecommendBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.recentlyReadHistoryList.carousel.adapter = recentlyReadHistoryRecommendBooksAdapter
+            binding.recentlyReadHistoryList.apply {
+                carousel.adapter = recentlyReadHistoryRecommendBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.recentlyReadHistoryBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recentlyReadHistoryBooks.collect {
@@ -72,7 +101,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //もうすぐ読み放題が終了するタイトル
             val endUnlimitedReadingBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.endUnlimitedReadingList.carousel.adapter = endUnlimitedReadingBooksAdapter
+            binding.endUnlimitedReadingList.apply {
+                carousel.adapter = endUnlimitedReadingBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.endUnlimitedReadingBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.endUnlimitedReadingBooks.collect {
@@ -83,7 +119,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //近日配信開始のタイトルのおすすめ
             val recentlyReleaseBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.recentlyReleaseList.carousel.adapter = recentlyReleaseBooksAdapter
+            binding.recentlyReleaseList.apply {
+                carousel.adapter = recentlyReleaseBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.recentlyReleaseBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recentlyReleaseBooks.collect {
@@ -94,7 +137,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //類似タイトルに基づくおすすめ
             val similarTitleBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.similarTitleList.carousel.adapter = similarTitleBooksAdapter
+            binding.similarTitleList.apply {
+                carousel.adapter = similarTitleBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.similarTitleBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.similarTitleBooks.collect {
@@ -105,7 +155,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.
 
             //読書履歴に基づくおすすめ
             val readingHistoryRecommendBooksAdapter = RecommendCarouselAdapter(this, viewModel)
-            binding.readingHistoryList.carousel.adapter = readingHistoryRecommendBooksAdapter
+            binding.readingHistoryList.apply {
+                carousel.adapter = readingHistoryRecommendBooksAdapter
+                showAll.setOnClickListener {
+                    HomeFragmentDirections.actionNavHomeToRecommendListFragment(
+                        BookInfoListResponse(viewModel.readingHistoryBooks.value)
+                    ).also { action -> findNavController() .navigate(action) }
+                }
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.readingHistoryBooks.collect {

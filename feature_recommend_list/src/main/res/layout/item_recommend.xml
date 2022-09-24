@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bookInfo"
+            type="com.example.entity.BookInfo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:imageUrl="@{bookInfo.volumeInfo.images.imageUrl}"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{bookInfo.volumeInfo.title}"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="@id/end_line"
+            app:layout_constraintStart_toStartOf="@id/start_line"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail"
+            tools:text="たいとるたいとるたいとるたいとる" />
+
+        <com.example.core_design.ReviewStartsView
+            android:id="@+id/review"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@id/end_line"
+            app:layout_constraintStart_toStartOf="@id/start_line"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:setReviewAverage="@{bookInfo.volumeInfo.averageReviewRate}"
+            app:setReviewTotalResult="@{bookInfo.volumeInfo.totalReviewCount}" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{@string/price(bookInfo.saleInfo.listPrice.price)}"
+            app:layout_constraintEnd_toEndOf="@id/end_line"
+            app:layout_constraintStart_toStartOf="@id/start_line"
+            app:layout_constraintTop_toBottomOf="@id/review"
+            tools:text="1,000,000円" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/favoriteButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="12dp"
+            android:textOn="@null"
+            android:textOff="@null"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            android:background="@drawable/btn_favorite"
+            android:checked="@{bookInfo.volumeInfo.favorite}"
+            android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

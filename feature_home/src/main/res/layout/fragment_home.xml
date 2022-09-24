@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.example.feature_home.HomeViewModel" />
+
+        <import type="java.util.List" />
     </data>
 
     <ScrollView
@@ -27,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/recently_reading_carousel_title}" />
+                app:carouselTitle="@{@string/recently_reading_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.recentlyReadingBooks.isEmpty() }" />
 
             <!-- すぐ読める本 -->
             <include
@@ -36,7 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/recommend_carousel_title}" />
+                app:carouselTitle="@{@string/recommend_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.recommendBooks.isEmpty() }" />
 
             <!-- プライム会員特定で読めるベストセラー -->
             <include
@@ -45,7 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/best_seller_carousel_title}" />
+                app:carouselTitle="@{@string/best_seller_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.bestSellerBooks.isEmpty() }" />
 
             <!-- 最近読んだ本に基づくおすすめ -->
             <include
@@ -54,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/recently_read_history_carousel_title}" />
+                app:carouselTitle="@{@string/recently_read_history_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.recentlyReadHistoryBooks.isEmpty() }" />
 
             <!-- もうすぐ読み放題が終了するタイトル -->
             <include
@@ -63,7 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/end_unlimited_reading_carousel_title}" />
+                app:carouselTitle="@{@string/end_unlimited_reading_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.endUnlimitedReadingBooks.isEmpty() }" />
 
             <!-- 近日配信開始のタイトルのおすすめ -->
             <include
@@ -72,7 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/recently_release_carousel_title}" />
+                app:carouselTitle="@{@string/recently_release_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.recentlyReleaseBooks.isEmpty() }" />
 
             <!-- 類似タイトルに基づくおすすめ -->
             <include
@@ -81,7 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/similar_title_carousel_title}" />
+                app:carouselTitle="@{@string/similar_title_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.similarTitleBooks.isEmpty() }" />
 
             <!-- 読書履歴に基づくおすすめ -->
             <include
@@ -90,7 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/reading_history_carousel_title}" />
+                app:carouselTitle="@{@string/reading_history_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.readingHistoryBooks.isEmpty() }" />
 
             <!-- 本をさらに見る -->
             <include
@@ -99,7 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:carouselTitle="@{@string/recommend_category_carousel_title}" />
+                app:carouselTitle="@{@string/recommend_category_carousel_title}"
+                app:isVisibleOrGone="@{ !viewModel.categories.isEmpty() }" />
 
         </LinearLayout>
     </ScrollView>
