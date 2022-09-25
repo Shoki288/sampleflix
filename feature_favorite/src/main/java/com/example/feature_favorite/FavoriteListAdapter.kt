@@ -1,7 +1,9 @@
 package com.example.feature_favorite
 
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,25 +28,13 @@ class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Un
     }
 
     override fun onBindViewHolder(holder: FavoriteListViewHolder, position: Int) {
-        val bookInfo = getItem(position).volumeInfo
-        val salesInfo = getItem(position).saleInfo
+        val item = getItem(position)
         holder.binding.apply {
-            thumbnailUrl = bookInfo.images.imageUrl
-            title = bookInfo.title
-            author = bookInfo.author
-            publisher = bookInfo.publisher
-            reviewTotalResult = bookInfo.totalReviewCount
-            reviewAverageResult = bookInfo.averageReviewRate
-            description = bookInfo.description
-            price = salesInfo.listPrice.price
-            isFavorite = bookInfo.isFavorite
-        }
-
-        holder.binding.favoriteButton.setOnCheckedChangeListener { _, isCheck ->
-            onClickFavorite(getItem(position), isCheck)
-        }
-        holder.binding.root.setOnClickListener {
-            onClickItem(getItem(position))
+            bookInfo = item
+            onItemClickListener = OnClickListener { onClickItem(item) }
+            onChangeFavoriteStateListener = OnCheckedChangeListener { _, isCheck ->
+                onClickFavorite(item, isCheck)
+            }
         }
     }
 

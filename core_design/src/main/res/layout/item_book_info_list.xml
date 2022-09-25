@@ -6,50 +6,25 @@
     <data>
 
         <variable
-            name="thumbnailUrl"
-            type="String" />
+            name="bookInfo"
+            type="com.example.entity.BookInfo" />
 
         <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="author"
-            type="String" />
-
-        <variable
-            name="publisher"
-            type="String" />
-
-        <variable
-            name="reviewTotalResult"
-            type="Integer" />
-
-        <variable
-            name="reviewAverageResult"
-            type="Integer" />
-
-        <variable
-            name="description"
-            type="String" />
-
-        <variable
-            name="price"
-            type="Integer" />
-
-        <variable
-            name="isFavorite"
-            type="Boolean" />
-
-        <variable
-            name="onClickFavorite"
+            name="onItemClickListener"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onChangeFavoriteStateListener"
+            type="android.widget.CompoundButton.OnCheckedChangeListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{onItemClickListener}"
         android:paddingHorizontal="8dp"
         android:paddingVertical="2dp">
 
@@ -58,7 +33,7 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:contentDescription="@null"
-            app:imageUrl="@{thumbnailUrl}"
+            app:imageUrl="@{bookInfo.volumeInfo.images.imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/blue"
@@ -79,7 +54,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="@{title}"
+            android:text="@{bookInfo.volumeInfo.title}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/thumbnailEndGuideline"
@@ -90,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{@string/author_and_publisher(author, publisher)}"
+            android:text="@{@string/author_and_publisher(bookInfo.volumeInfo.author, bookInfo.volumeInfo.publisher)}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/thumbnailEndGuideline"
@@ -105,8 +80,8 @@
             app:layout_constraintStart_toStartOf="@id/thumbnailEndGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bookAuthor"
-            app:setReviewAverage="@{reviewAverageResult}"
-            app:setReviewTotalResult="@{reviewTotalResult}" />
+            app:setReviewAverage="@{bookInfo.volumeInfo.averageReviewRate}"
+            app:setReviewTotalResult="@{bookInfo.volumeInfo.totalReviewCount}" />
 
         <TextView
             android:id="@+id/bookDescription"
@@ -115,7 +90,7 @@
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="@{description}"
+            android:text="@{bookInfo.volumeInfo.description}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/favoriteButtonStartGuideline"
             app:layout_constraintStart_toStartOf="@id/thumbnailEndGuideline"
@@ -126,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{@string/price(price)}"
+            android:text="@{@string/price(bookInfo.saleInfo.listPrice.price)}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/favoriteButtonStartGuideline"
             app:layout_constraintStart_toStartOf="@id/thumbnailEndGuideline"
@@ -143,7 +118,8 @@
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
             android:background="@drawable/btn_favorite"
-            android:checked="@{isFavorite}"
+            android:onCheckedChanged="@{onChangeFavoriteStateListener}"
+            android:checked="@{bookInfo.volumeInfo.favorite}"
             android:button="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/favoriteButtonStartGuideline"

@@ -1,8 +1,9 @@
 package com.example.feature_search_result
 
 import android.view.LayoutInflater
-import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHol
 
 class SearchResultAdapter(
     private val onClickItem: (BookInfo) -> Unit,
-    private val onClickFavorite: (BookInfo) -> Unit
+    private val onClickFavorite: (BookInfo, Boolean) -> Unit
 ) : PagingDataAdapter<BookInfo, SearchResultViewHolder>(diffCallback) {
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
@@ -36,20 +37,12 @@ class SearchResultAdapter(
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         val item = getItem(position) ?: return
         holder.binding.apply {
-            thumbnailUrl = item.volumeInfo.images.imageUrl
-            title = item.volumeInfo.title
-            author = item.volumeInfo.author
-            publisher = item.volumeInfo.publisher
-            reviewTotalResult = item.volumeInfo.totalReviewCount
-            reviewAverageResult = item.volumeInfo.averageReviewRate
-            description = item.volumeInfo.description
-            price = item.saleInfo.listPrice.price
-            onClickFavorite = View.OnClickListener {
-                onClickFavorite(item)
+            bookInfo = item
+            onItemClickListener = OnClickListener { onClickItem(item) }
+            onChangeFavoriteStateListener = OnCheckedChangeListener { _, isCheck ->
+                onClickFavorite(item, isCheck)
             }
         }
-
-        holder.itemView.setOnClickListener { onClickItem(item) }
     }
 
     inner class SearchResultViewHolder(val binding: ItemBookInfoListBinding) :

@@ -34,7 +34,6 @@ data class VolumeInfo(
     val previewLink: String,
     val isFavorite: Boolean = false
 ): Parcelable {
-    // TODO non-nullにして他画面でも表記統一させたい
     val averageReviewRate: Int
         get() = pageCount % 6
     val totalReviewCount: Int

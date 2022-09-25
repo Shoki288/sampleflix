@@ -47,7 +47,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                     val action = SearchResultFragmentDirections.actionSearchResultFragmentToBookDetailFragment(it)
                     findNavController().navigate(action)
                 },
-                onClickFavorite = {
+                onClickFavorite = { bookInfo, isCheck ->
 
                 }
             )
