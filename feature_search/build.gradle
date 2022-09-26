@@ -5,6 +5,4 @@ android {
 
 dependencies {
     api project(":repository_category")
-
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 }

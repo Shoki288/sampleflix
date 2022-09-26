@@ -6,8 +6,4 @@ android {
 dependencies {
     api project(':repository_search')
     api project(":repository_favorite")
-
-    /** navigation component **/
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }
