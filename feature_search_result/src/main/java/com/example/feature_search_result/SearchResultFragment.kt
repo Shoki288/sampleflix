@@ -48,7 +48,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                     findNavController().navigate(action)
                 },
                 onClickFavorite = { bookInfo, isCheck ->
-
+                    // TODO pagingでAPI叩いた結果をそのまま返しているから今実装しても意味ない
                 }
             )
             binding.searchResultList.adapter = adapter
