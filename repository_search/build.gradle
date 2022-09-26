@@ -7,5 +7,5 @@ dependencies {
     api project(":repository_favorite")
 
     /** paging **/
-    implementation "androidx.paging:paging-runtime:3.1.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
 }
