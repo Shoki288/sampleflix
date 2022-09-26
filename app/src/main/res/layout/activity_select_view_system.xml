@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="androidViewClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="composeClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="どちらで表示しますか？"
+            app:layout_constraintBottom_toBottomOf="@id/horizontalCenterLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontalCenterLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/verticalCenterLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/androidViewFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:elevation="2dp"
+            android:onClick="@{androidViewClickListener}"
+            android:padding="16dp"
+            android:text="Android View"
+            android:textColor="@color/white"
+            app:cornerRadius="14dp"
+            app:layout_constraintEnd_toEndOf="@id/verticalCenterLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/horizontalCenterLine" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/jetpackComposeFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="?attr/colorAccent"
+            android:elevation="2dp"
+            android:onClick="@{composeClickListener}"
+            android:padding="16dp"
+            android:text="jetpackCompose"
+            android:textColor="@color/white"
+            app:cornerRadius="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/verticalCenterLine"
+            app:layout_constraintTop_toTopOf="@id/horizontalCenterLine" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

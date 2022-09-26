@@ -50,6 +50,9 @@ dependencies {
     /** material **/
     implementation "com.google.android.material:material:$material_components_android_version"
 
+    /** constraint **/
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+
     /** junit **/
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$android_junit_version"

@@ -3,9 +3,3 @@ apply from: "$rootProject.projectDir/gradle/feature_template.gradle"
 android {
     namespace 'com.example.feature_book_detail'
 }
-
-dependencies {
-// todo いる？
-    /** fragment ktx **/
-//    implementation "androidx.fragment:fragment-ktx:1.5.3"
-}

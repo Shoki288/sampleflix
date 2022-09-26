@@ -45,6 +45,7 @@ buildscript {
         compose_ui_version = "1.2.1"
         compose_animation_version = "1.2.1"
         lifecycle_viewmodel_compose_version = "2.5.1"
+        compose_navigation_version = "2.5.2"
     }
 }
 
