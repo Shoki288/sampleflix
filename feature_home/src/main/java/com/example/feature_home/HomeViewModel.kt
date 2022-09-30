@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.entity.BookInfo
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
-import com.example.feature_home.vo.HomeUiState
+import com.example.feature_home.android_view.vo.HomeUiState
 import com.example.repository_favorite.use_case.AddFavoriteListUseCase
 import com.example.repository_favorite.use_case.DeleteFavoriteListUseCase
 import com.example.search_repository.usecase.GetRecommendBookUseCase

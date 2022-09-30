@@ -1,4 +1,4 @@
-package com.example.feature_home
+package com.example.feature_home.android_view
 
 import android.os.Bundle
 import android.view.View
@@ -10,13 +10,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.entity.BookInfo
 import com.example.entity.BookInfoListResponse
+import com.example.feature_home.HomeViewModel
+import com.example.feature_home.R
 import com.example.feature_home.databinding.FragmentHomeBinding
 import com.wada811.databinding.withBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home), RecommendCarouselAdapter.RecommendCarouselListener {
+class HomeFragment : Fragment(R.layout.fragment_home),
+    RecommendCarouselAdapter.RecommendCarouselListener {
     private val viewModel by viewModels<HomeViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

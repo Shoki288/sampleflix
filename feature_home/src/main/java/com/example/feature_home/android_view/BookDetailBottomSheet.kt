@@ -1,4 +1,4 @@
-package com.example.feature_home
+package com.example.feature_home.android_view
 
 import android.os.Bundle
 import android.view.LayoutInflater

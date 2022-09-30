@@ -1,4 +1,4 @@
-package com.example.feature_search
+package com.example.feature_search.android_view
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feature_search.R
+import com.example.feature_search.SearchViewModel
 import com.example.feature_search.databinding.FragmentSearchBinding
 import com.wada811.databinding.withBinding
 import dagger.hilt.android.AndroidEntryPoint

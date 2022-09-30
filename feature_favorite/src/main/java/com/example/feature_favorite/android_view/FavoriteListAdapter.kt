@@ -1,4 +1,4 @@
-package com.example.feature_favorite
+package com.example.feature_favorite.android_view
 
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core_design.databinding.ItemBookInfoListBinding
 import com.example.entity.BookInfo
-import com.example.feature_favorite.FavoriteListAdapter.FavoriteListViewHolder
+import com.example.feature_favorite.android_view.FavoriteListAdapter.FavoriteListViewHolder
 
-class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Unit, private val onClickItem: (BookInfo) -> Unit) : ListAdapter<BookInfo, FavoriteListViewHolder>(diffCallback) {
+class FavoriteListAdapter(private val onClickFavorite: (BookInfo, Boolean) -> Unit, private val onClickItem: (BookInfo) -> Unit) : ListAdapter<BookInfo, FavoriteListViewHolder>(
+    diffCallback
+) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<BookInfo>() {
             override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean =

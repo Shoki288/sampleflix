@@ -5,7 +5,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.feature_home.HomeFragment"
+        android:name="com.example.feature_home.android_view.HomeFragment"
         android:label="fragment_home">
         <action
             android:id="@+id/action_nav_home_to_search_result_fragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.example.feature_search.SearchFragment"
+        android:name="com.example.feature_search.android_view.SearchFragment"
         android:label="fragment_search">
         <action
             android:id="@+id/action_nav_search_to_search_result_fragment"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_favorite"
-        android:name="com.example.feature_favorite.FavoriteListFragment"
+        android:name="com.example.feature_favorite.android_view.FavoriteListFragment"
         android:label="fragment_favorite" >
         <action
             android:id="@+id/action_nav_favorite_to_book_detail_fragment"

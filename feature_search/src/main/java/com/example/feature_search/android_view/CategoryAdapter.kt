@@ -1,4 +1,4 @@
-package com.example.feature_search
+package com.example.feature_search.android_view
 
 import com.example.core_design.R
 import android.view.LayoutInflater
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feature_search.databinding.ItemSearchCategoryBinding
 
-class CategoryAdapter(val onClick: (String) -> Unit): ListAdapter<String, CategoryAdapter.CategoryViewHolder>(diffCallback) {
+class CategoryAdapter(val onClick: (String) -> Unit): ListAdapter<String, CategoryAdapter.CategoryViewHolder>(
+    diffCallback
+) {
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<String>() {
             override fun areItemsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
@@ -25,7 +27,7 @@ class CategoryAdapter(val onClick: (String) -> Unit): ListAdapter<String, Catego
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.binding.title = getItem(position)
         val resources = holder.binding.root.resources
-        holder.binding.card.setCardBackgroundColor(resources.getColor(colorList[position%colorList.size], null))
+        holder.binding.card.setCardBackgroundColor(resources.getColor(colorList[position% colorList.size], null))
         holder.binding.root.setOnClickListener { onClick(getItem(position)) }
     }
 

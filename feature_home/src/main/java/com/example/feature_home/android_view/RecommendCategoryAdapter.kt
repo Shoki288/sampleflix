@@ -1,4 +1,4 @@
-package com.example.feature_home
+package com.example.feature_home.android_view
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feature_home.R
 import com.example.feature_home.databinding.ItemRecommendCategoryBinding
 
-class RecommendCategoryAdapter(private val onClickCategory: (String) -> Unit): ListAdapter<String, RecommendCategoryAdapter.RecommendCategoryViewHolder>(diffCallBack) {
+class RecommendCategoryAdapter(private val onClickCategory: (String) -> Unit): ListAdapter<String, RecommendCategoryAdapter.RecommendCategoryViewHolder>(
+    diffCallBack
+) {
     companion object {
         private val diffCallBack = object : DiffUtil.ItemCallback<String>() {
             override fun areItemsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem

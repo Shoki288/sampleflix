@@ -34,6 +34,7 @@ android {
 
 dependencies {
     api project(":entity")
+    api project(":core_design")
 
     /** core **/
     implementation "androidx.core:core-ktx:$core_version"

@@ -27,7 +27,7 @@
 
         <variable
             name="owner"
-            type="com.example.feature_home.BookDetailBottomSheet" />
+            type="com.example.feature_home.android_view.BookDetailBottomSheet" />
 
     </data>
 

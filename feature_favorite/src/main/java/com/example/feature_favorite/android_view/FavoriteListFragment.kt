@@ -1,4 +1,4 @@
-package com.example.feature_favorite
+package com.example.feature_favorite.android_view
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.entity.adeapter.cacheBookInfoAdapter
+import com.example.feature_favorite.FavoriteListViewModel
+import com.example.feature_favorite.R
 import com.example.feature_favorite.databinding.FragmentFavoriteListBinding
 import com.wada811.databinding.withBinding
 import dagger.hilt.android.AndroidEntryPoint

@@ -29,7 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = kotlin_compose_version
+    }
     buildFeatures {
+        compose true
         dataBinding true
     }
 }
@@ -82,4 +86,15 @@ dependencies {
 
     /** coroutine **/
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
+    /** jetpack compose **/
+    implementation "androidx.activity:activity-compose:$activity_version"
+    implementation "androidx.compose.animation:animation:$compose_animation_version"
+    implementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    implementation "androidx.compose.ui:ui:$compose_ui_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
+    implementation "androidx.compose.material:material:$compose_material_version"
+    implementation "androidx.compose.material3:material3:$compose_material3_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_viewmodel_compose_version"
+    implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
 }

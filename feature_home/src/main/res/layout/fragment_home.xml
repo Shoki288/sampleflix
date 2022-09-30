@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context="com.example.feature_home.HomeFragment">
+            tools:context="com.example.feature_home.android_view.HomeFragment">
 
             <!-- 読み始めたシリーズを続ける -->
             <include

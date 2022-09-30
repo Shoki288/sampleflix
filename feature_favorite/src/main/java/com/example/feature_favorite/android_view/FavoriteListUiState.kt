@@ -1,4 +1,4 @@
-package com.example.feature_favorite
+package com.example.feature_favorite.android_view
 
 import com.example.entity.CacheBookInfo
 

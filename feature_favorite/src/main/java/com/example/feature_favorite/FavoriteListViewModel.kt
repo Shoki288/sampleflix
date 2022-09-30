@@ -3,6 +3,7 @@ package com.example.feature_favorite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entity.BookInfo
+import com.example.feature_favorite.android_view.FavoriteListUiState
 import com.example.repository_favorite.use_case.AddFavoriteListUseCase
 import com.example.repository_favorite.use_case.DeleteFavoriteListUseCase
 import com.example.repository_favorite.use_case.GetFavoriteListUseCase
