@@ -24,4 +24,62 @@
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
+
+    <!-- light theme -->
+    <color name="resource_md_theme_light_primary">#FF2d6b20</color>
+    <color name="resource_md_theme_light_onPrimary">#FFffffff</color>
+    <color name="resource_md_theme_light_primaryContainer">#FFaef497</color>
+    <color name="resource_md_theme_light_onPrimaryContainer">#FF002200</color>
+    <color name="resource_md_theme_light_secondary">#FF54634d</color>
+    <color name="resource_md_theme_light_onSecondary">#FFffffff</color>
+    <color name="resource_md_theme_light_secondaryContainer">#FFd7e8cc</color>
+    <color name="resource_md_theme_light_onSecondaryContainer">#FF121f0e</color>
+    <color name="resource_md_theme_light_tertiary">#FF386568</color>
+    <color name="resource_md_theme_light_onTertiary">#FFffffff</color>
+    <color name="resource_md_theme_light_tertiaryContainer">#FFbcebee</color>
+    <color name="resource_md_theme_light_onTertiaryContainer">#FF002022</color>
+    <color name="resource_md_theme_light_error">#FFba1b1b</color>
+    <color name="resource_md_theme_light_errorContainer">#FFffdad4</color>
+    <color name="resource_md_theme_light_onError">#FFffffff</color>
+    <color name="resource_md_theme_light_onErrorContainer">#FF410001</color>
+    <color name="resource_md_theme_light_background">#FFfdfdf6</color>
+    <color name="resource_md_theme_light_onBackground">#FF1a1c19</color>
+    <color name="resource_md_theme_light_surface">#FFfdfdf6</color>
+    <color name="resource_md_theme_light_onSurface">#FF1a1c19</color>
+    <color name="resource_md_theme_light_surfaceVariant">#FFdfe5d7</color>
+    <color name="resource_md_theme_light_onSurfaceVariant">#FF43493f</color>
+    <color name="resource_md_theme_light_outline">#FF73796e</color>
+    <color name="resource_md_theme_light_inverseOnSurface">#FFf1f1eb</color>
+    <color name="resource_md_theme_light_inverseSurface">#FF2f312d</color>
+    <color name="resource_md_theme_light_inversePrimary">#FF93d87e</color>
+    <color name="resource_md_theme_light_shadow">#FF000000</color>
+
+    <!-- dark theme -->
+    <color name="resource_md_theme_dark_primary">#FF93d87e</color>
+    <color name="resource_md_theme_dark_onPrimary">#FF003a00</color>
+    <color name="resource_md_theme_dark_primaryContainer">#FF115206</color>
+    <color name="resource_md_theme_dark_onPrimaryContainer">#FFaef497</color>
+    <color name="resource_md_theme_dark_secondary">#FFbbcbb1</color>
+    <color name="resource_md_theme_dark_onSecondary">#FF273422</color>
+    <color name="resource_md_theme_dark_secondaryContainer">#FF3d4b37</color>
+    <color name="resource_md_theme_dark_onSecondaryContainer">#FFd7e8cc</color>
+    <color name="resource_md_theme_dark_tertiary">#FFa0cfd1</color>
+    <color name="resource_md_theme_dark_onTertiary">#FF003739</color>
+    <color name="resource_md_theme_dark_tertiaryContainer">#FF1e4d50</color>
+    <color name="resource_md_theme_dark_onTertiaryContainer">#FFbcebee</color>
+    <color name="resource_md_theme_dark_error">#FFffb4a9</color>
+    <color name="resource_md_theme_dark_errorContainer">#FF930006</color>
+    <color name="resource_md_theme_dark_onError">#FF680003</color>
+    <color name="resource_md_theme_dark_onErrorContainer">#FFffdad4</color>
+    <color name="resource_md_theme_dark_background">#FF1a1c19</color>
+    <color name="resource_md_theme_dark_onBackground">#FFe3e3dd</color>
+    <color name="resource_md_theme_dark_surface">#FF1a1c19</color>
+    <color name="resource_md_theme_dark_onSurface">#FFe3e3dd</color>
+    <color name="resource_md_theme_dark_surfaceVariant">#FF43493f</color>
+    <color name="resource_md_theme_dark_onSurfaceVariant">#FFc2c8bb</color>
+    <color name="resource_md_theme_dark_outline">#FF8d9387</color>
+    <color name="resource_md_theme_dark_inverseOnSurface">#FF1a1c19</color>
+    <color name="resource_md_theme_dark_inverseSurface">#FFe3e3dd</color>
+    <color name="resource_md_theme_dark_inversePrimary">#FF2d6b20</color>
+    <color name="resource_md_theme_dark_shadow">#FF000000</color>
 </resources>
