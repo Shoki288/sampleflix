@@ -59,7 +59,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                 )
             )
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.searchResult.collectLatest {
                         adapter.submitData(it)
                     }

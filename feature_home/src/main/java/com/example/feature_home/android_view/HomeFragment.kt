@@ -41,7 +41,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recentlyReadingBooks.collect {
                         recentlyReadingBooksAdapter.submitList(it)
                     }
@@ -59,7 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recommendBooks.collect {
                         recommendBooksAdapter.submitList(it)
                     }
@@ -77,7 +77,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.bestSellerBooks.collect {
                         bestSellerBooksAdapter.submitList(it)
                     }
@@ -95,7 +95,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recentlyReadHistoryBooks.collect {
                         recentlyReadHistoryRecommendBooksAdapter.submitList(it)
                     }
@@ -113,7 +113,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.endUnlimitedReadingBooks.collect {
                         endUnlimitedReadingBooksAdapter.submitList(it)
                     }
@@ -131,7 +131,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.recentlyReleaseBooks.collect {
                         recentlyReleaseBooksAdapter.submitList(it)
                     }
@@ -149,7 +149,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.similarTitleBooks.collect {
                         similarTitleBooksAdapter.submitList(it)
                     }
@@ -167,7 +167,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.readingHistoryBooks.collect {
                         readingHistoryRecommendBooksAdapter.submitList(it)
                     }
@@ -180,7 +180,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             }
             binding.recommendCategoryList.carousel.adapter = categoriesAdapter
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.categories.collect {
                         categoriesAdapter.submitList(it)
                     }

@@ -39,7 +39,7 @@ class FavoriteListFragment : Fragment(R.layout.fragment_favorite_list) {
             )
             binding.list.adapter = adapter
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.favoriteList.collectLatest {
                         when(it) {
                             is FavoriteListUiState.Success -> adapter.submitList(cacheBookInfoAdapter(it.bookInfoList).items)

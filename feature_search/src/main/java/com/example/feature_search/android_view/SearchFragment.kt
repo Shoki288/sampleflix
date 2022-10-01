@@ -50,7 +50,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 it.addItemDecoration(itemOffset)
             }
             viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.categories.collect {
                         adapter.submitList(it)
                     }
