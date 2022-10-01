@@ -3,6 +3,7 @@ package com.example.feature_home.android_view.vo
 import com.example.entity.BookInfo
 
 sealed class HomeUiState {
+    object None: HomeUiState()
     object Loading : HomeUiState()
     data class Success(val books: List<BookInfo>) : HomeUiState()
     sealed class Error(open val message: String): HomeUiState() {

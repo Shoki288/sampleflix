@@ -2,7 +2,7 @@ package com.example.feature_search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.core_unit_test.MainCoroutineScopeRule
-import com.example.core_unit_test.asLivedataObserver
+import com.example.core_unit_test.asTestObserver
 import com.example.repository_category.usecase.GetAllCategoryUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -41,7 +41,7 @@ class SearchViewModelTest {
     fun `init_カテゴリ情報の一覧を表示させること`() {
         coEvery { useCase.getCategory() } returns (0..10).map { "category$it" }
         viewModel = SearchViewModel(useCase = useCase)
-        val observer = viewModel.categories.asLivedataObserver()
+        val observer = viewModel.categories.asTestObserver()
 
         verify {
             observer.onChanged((0..10).map { "category$it" })

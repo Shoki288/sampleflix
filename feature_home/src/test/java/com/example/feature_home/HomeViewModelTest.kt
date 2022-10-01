@@ -9,12 +9,14 @@ import com.example.extension.api.Exception
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
 import com.example.feature_home.android_view.vo.HomeUiState
-import com.example.search_repository.usecase.SearchBookUseCase
+import com.example.repository_favorite.use_case.AddFavoriteListUseCase
+import com.example.repository_favorite.use_case.DeleteFavoriteListUseCase
+import com.example.search_repository.usecase.GetRecommendBookUseCase
+import com.example.search_repository.usecase.UpdateRecommendFavoriteStateUseCase
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,19 +25,23 @@ import org.junit.Test
 class HomeViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
-
     @get:Rule
     val coroutineScope = MainCoroutineScopeRule()
 
     private lateinit var viewModel: HomeViewModel
 
-    @MockK(relaxed = true)
-    private lateinit var useCase: SearchBookUseCase
+    @MockK
+    private lateinit var getRecommendBookUseCase: GetRecommendBookUseCase
+    @MockK
+    private lateinit var addFavoriteListUseCase: AddFavoriteListUseCase
+    @MockK
+    private lateinit var updateRecommendFavoriteStateUseCase: UpdateRecommendFavoriteStateUseCase
+    @MockK
+    private lateinit var deleteFavoriteListUseCase: DeleteFavoriteListUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        createViewModel(useCase)
     }
 
     @After
@@ -43,66 +49,57 @@ class HomeViewModelTest {
         unmockkAll()
     }
 
-    private fun createViewModel(useCase: SearchBookUseCase) {
-        viewModel = HomeViewModel(searchUseCase = useCase)
-    }
-
-    @Test
-    fun `init_レコメンド検索を呼んでない場合、ロード中のステートを投げること`() {
-        createViewModel(
-            useCase.apply {
-                coJustRun { useCase.searchBookInit() }
-            }
+    private fun createViewModel() {
+        viewModel = HomeViewModel(
+            getRecommendBookUseCase = getRecommendBookUseCase,
+            addFavoriteListUseCase = addFavoriteListUseCase,
+            updateRecommendFavoriteStateUseCase = updateRecommendFavoriteStateUseCase,
+            deleteFavoriteListUseCase = deleteFavoriteListUseCase,
         )
-
-        assertTrue(viewModel.books.value is HomeUiState.Loading)
     }
 
     @Test
     fun `init_レコメンド検索が成功した場合、レコメンド結果を表示させること`() {
-        val response = createBookInfoList()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(createBookInfoList())
+        createViewModel()
+        val observer = viewModel.books.asTestObserver()
 
-        createViewModel(
-            useCase.apply {
-                coEvery { useCase.searchBookInit() } returns Success(data = response)
-            }
-        )
-
-        assertTrue(viewModel.books.value is HomeUiState.Success)
+        verify {
+            observer.onChanged(HomeUiState.Success(createBookInfoList().items))
+        }
     }
 
     @Test
     fun `init_レコメンド検索がAPIエラーだった場合、APIエラーのステートを表示させること`() {
-        createViewModel(
-            useCase.apply {
-                coEvery { useCase.searchBookInit() } returns HttpError(code = 404, "エラー")
-            }
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns HttpError(
+            code = 400, message = "message"
         )
+        createViewModel()
+        val observer = viewModel.books.asTestObserver()
 
-        assertTrue(viewModel.books.value is HomeUiState.Error.ApiError)
+        verify {
+            observer.onChanged(HomeUiState.Error.ApiError("message"))
+        }
     }
 
     @Test
     fun `init_レコメンド検索がAPIエラー以外のエラーだった場合、ネットワークエラーのステートを表示させること`() {
-        createViewModel(
-            useCase.apply {
-                coEvery { useCase.searchBookInit() } returns Exception(Throwable())
-            }
-        )
-        val observer = viewModel.books.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Exception(Throwable())
+        createViewModel()
+        val observer = viewModel.books.asTestObserver()
 
-        verify { observer.onChanged(HomeUiState.Error.NetworkError) }
+        verify {
+            observer.onChanged(HomeUiState.Error.NetworkError)
+        }
     }
 
     @Test
     fun `recentlyReadingBooks_レコメンド検索のレスポンスの0から10番目の値を表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (0..10).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(
-            useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) }
-        )
-        val observer = viewModel.recentlyReadingBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.recentlyReadingBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
 
@@ -112,9 +109,9 @@ class HomeViewModelTest {
     fun `recommendBooks_レコメンド検索のレスポンスの11から20番目を読み始めたシリーズを続けるとして表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (11..20).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.recommendBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.recommendBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -123,9 +120,9 @@ class HomeViewModelTest {
     fun `bestSellerBooks_レコメンド検索のレスポンスの21から30番目をすぐ読める本として表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (21..30).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.bestSellerBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.bestSellerBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -134,9 +131,9 @@ class HomeViewModelTest {
     fun `recentlyReadHistoryBooks_レコメンド検索のレスポンスの31から40番目をプライム会員特定で読めるベストセラーとして表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (31..40).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.recentlyReadHistoryBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.recentlyReadHistoryBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -145,9 +142,9 @@ class HomeViewModelTest {
     fun `endUnlimitedReadingBooks_レコメンド検索のレスポンスの41から50番目を最近読んだ本に基づくおすすめとして表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (41..50).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.endUnlimitedReadingBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.endUnlimitedReadingBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -156,9 +153,9 @@ class HomeViewModelTest {
     fun `recentlyReleaseBooks_レコメンド検索のレスポンスの51から60番目をもうすぐ読み放題が終了するタイトルとして表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (51..60).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.recentlyReleaseBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.recentlyReleaseBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -167,9 +164,9 @@ class HomeViewModelTest {
     fun `similarTitleBooks_レコメンド検索のレスポンスの61から70番目を近日配信開始のタイトルのおすすめとして表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (61..70).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.similarTitleBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.similarTitleBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -178,9 +175,9 @@ class HomeViewModelTest {
     fun `readingHistoryBooks_レコメンド検索のレスポンスの71から79番目を類似タイトルに基づくおすすめとして表示させること`() {
         val response = createBookInfoList(list = (0..79).map { createBookInfo(id = it.toString()) })
         val expectedResponse = (71..79).map { createBookInfo(id = it.toString()) }
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.readingHistoryBooks.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.readingHistoryBooks.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
@@ -194,9 +191,9 @@ class HomeViewModelTest {
             )
         })
         val expectedResponse = List(10){it.toString()}
-
-        createViewModel(useCase.apply { coEvery { useCase.searchBookInit() } returns Success(data = response) })
-        val observer = viewModel.categories.asLivedataObserver()
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.categories.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
     }
