@@ -1,4 +1,4 @@
-package com.example.sampleflix.compose.theme
+package com.example.core_design.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -22,8 +22,10 @@ import com.example.core_navigation.Screen.BottomNavigationScreen
 import com.example.feature_favorite.compose.FavoriteListScreen
 import com.example.feature_home.compose.HomeScreen
 import com.example.feature_search.compose.SearchTopScreen
-import com.example.sampleflix.compose.theme.AppTheme
+import com.example.core_design.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ComposeMainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -73,7 +75,7 @@ class ComposeMainActivity : ComponentActivity() {
                         startDestination = BottomNavigationScreen.Home.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable(BottomNavigationScreen.Home.route) { HomeScreen(navController) }
+                        composable(BottomNavigationScreen.Home.route) { HomeScreen() }
                         composable(BottomNavigationScreen.SearchTop.route) {
                             SearchTopScreen(
                                 navController

@@ -6,4 +6,6 @@ android {
 dependencies {
     api project(':repository_search')
     api project(":repository_favorite")
+
+    implementation "io.coil-kt:coil-compose:$compose_coil"
 }

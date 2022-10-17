@@ -27,8 +27,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
         withBinding<FragmentHomeBinding> { binding ->
             binding.viewModel = viewModel
-            binding.lifecycleOwner = viewLifecycleOwner
-
 
             //読み始めたシリーズを続ける
             val recentlyReadingBooksAdapter = RecommendCarouselAdapter(this, viewModel)
