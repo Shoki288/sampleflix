@@ -52,4 +52,5 @@ dependencies {
     /** navigation component **/
     implementation "androidx.navigation:navigation-fragment-ktx:$naviagtion_version"
     implementation "androidx.navigation:navigation-ui-ktx:$naviagtion_version"
+    implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
 }

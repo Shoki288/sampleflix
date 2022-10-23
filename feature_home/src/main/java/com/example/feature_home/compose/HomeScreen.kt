@@ -15,15 +15,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.feature_home.HomeViewModel
 import com.example.feature_home.R
 import com.example.feature_home.compose.widget.RecommendBooks
 import com.example.feature_home.compose.widget.RecommendCategories
 
-@Preview
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
+    navController: NavHostController
 ) {
     val context = LocalContext.current
 
