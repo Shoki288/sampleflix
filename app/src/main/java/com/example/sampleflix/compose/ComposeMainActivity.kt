@@ -55,7 +55,7 @@ class ComposeMainActivity : ComponentActivity() {
 private fun GlobalNavigation(
     navController: NavHostController,
 ) {
-    val bottomNavigationScreens = BottomNavigationScreen::class.sealedSubclasses.mapNotNull { it.objectInstance }
+    val bottomNavigationScreens = listOf(BottomNavigationScreen.Home, BottomNavigationScreen.SearchTop, BottomNavigationScreen.Favorite)
 
     BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
