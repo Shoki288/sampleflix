@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/search_result_fragment"
-        android:name="com.example.feature_search_result.SearchResultFragment"
+        android:name="com.example.feature_search_result.android_view.SearchResultFragment"
         android:label="SearchResultFragment" >
         <argument
             android:name="keyword"

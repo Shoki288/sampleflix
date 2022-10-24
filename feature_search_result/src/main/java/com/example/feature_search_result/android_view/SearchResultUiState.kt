@@ -1,4 +1,4 @@
-package com.example.feature_search_result
+package com.example.feature_search_result.android_view
 
 import com.example.entity.BookInfo
 

@@ -1,4 +1,4 @@
-package com.example.feature_search_result
+package com.example.feature_search_result.android_view
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,6 +11,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.feature_search_result.R
+import com.example.feature_search_result.SearchResultViewModel
 import com.example.feature_search_result.databinding.FragmentSearchResultBinding
 import com.wada811.databinding.withBinding
 import dagger.hilt.android.AndroidEntryPoint

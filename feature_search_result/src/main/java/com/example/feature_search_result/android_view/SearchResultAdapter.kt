@@ -1,4 +1,4 @@
-package com.example.feature_search_result
+package com.example.feature_search_result.android_view
 
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core_design.databinding.ItemBookInfoListBinding
 import com.example.entity.BookInfo
-import com.example.feature_search_result.SearchResultAdapter.SearchResultViewHolder
+import com.example.feature_search_result.android_view.SearchResultAdapter.SearchResultViewHolder
 
 class SearchResultAdapter(
     private val onClickItem: (BookInfo) -> Unit,
