@@ -12,7 +12,7 @@ import com.example.feature_search_result.compose.SearchResultScreen
 fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     // ホーム画面
     composable(BottomNavigationScreen.Home.route) {
-        HomeScreen(navController = navController)
+        HomeScreen()
     }
     // 検索TOP
     composable(BottomNavigationScreen.SearchTop.route) {
