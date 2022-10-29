@@ -32,6 +32,6 @@ interface BottomNavigationScreen : SampleDestination {
 object SearchResult : SampleDestination {
     override val route = "searchResult"
     const val keywordArgs = "keyword"
-    val routeWithArgs = "$route/$keywordArgs"
+    val routeWithArgs = "$route/{$keywordArgs}"
     val argument = listOf(navArgument(keywordArgs) { type = NavType.StringType })
 }

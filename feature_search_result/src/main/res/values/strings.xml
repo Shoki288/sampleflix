@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="zero_match_search_result">検索結果が見つかりませんでした。</string>
-    <string name="search_box_hint">キーワードから検索する</string>
 </resources>

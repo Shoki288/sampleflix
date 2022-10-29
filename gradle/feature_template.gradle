@@ -37,7 +37,6 @@ android {
         dataBinding true
     }
 }
-
 dependencies {
     api project(":core_design")
     api project(':core_unit_test')
@@ -61,6 +60,12 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$android_junit_version"
 
+    /** mockk **/
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "io.mockk:mockk-agent-jvm:$mockk_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_core_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
+
     /** navigation component **/
     implementation "androidx.navigation:navigation-fragment-ktx:$naviagtion_version"
     implementation "androidx.navigation:navigation-ui-ktx:$naviagtion_version"
@@ -76,11 +81,6 @@ dependencies {
     /** DataBinding **/
     implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
 
-    /** mockk **/
-    testImplementation "io.mockk:mockk:$mockk_version"
-    testImplementation "io.mockk:mockk-agent-jvm:$mockk_version"
-    testImplementation "androidx.arch.core:core-testing:$arch_core_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
 
     /** lifecycle **/
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
@@ -94,8 +94,12 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_viewmodel_compose_version"
+    /** compose material **/
     implementation "androidx.compose.material:material:$compose_material_version"
     implementation "androidx.compose.material3:material3:$compose_material3_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_viewmodel_compose_version"
+    /** compose navigation **/
     implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
+    /** compose coil **/
+    implementation "io.coil-kt:coil-compose:$compose_coil_version"
 }

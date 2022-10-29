@@ -22,15 +22,16 @@ fun SearchTopScreen(
     val keyword = rememberSaveable { mutableStateOf("") }
 
     Column {
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         SearchBox(
-            value = keyword.value,
-            onChangeValue = { keyword.value = it }
+            keyword = keyword.value,
+            onChangeValue = { keyword.value = it },
+            onClickEnter = { onSearch(keyword.value) }
         )
         Spacer(modifier = Modifier.height(16.dp))
         CategoryList(
             categories = viewModel.categories.collectAsState().value,
-            onClickCategory = {}
+            onClickCategory = onSearch
         )
     }
 }

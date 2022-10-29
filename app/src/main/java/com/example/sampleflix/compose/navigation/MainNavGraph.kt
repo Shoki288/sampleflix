@@ -10,17 +10,21 @@ import com.example.feature_search.compose.SearchTopScreen
 import com.example.feature_search_result.compose.SearchResultScreen
 
 fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
+    // ホーム画面
     composable(BottomNavigationScreen.Home.route) {
         HomeScreen(navController = navController)
     }
+    // 検索TOP
     composable(BottomNavigationScreen.SearchTop.route) {
         SearchTopScreen(
             onSearch = { navController.navigationSearchResult(it) }
         )
     }
+    // お気に入りリスト
     composable(BottomNavigationScreen.Favorite.route) {
         FavoriteListScreen(navController = navController)
     }
+    // 検索結果
     composable(
         route = SearchResult.routeWithArgs,
         arguments = SearchResult.argument

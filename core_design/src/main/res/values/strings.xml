@@ -2,4 +2,5 @@
 <resources>
     <string name="author_and_publisher">%1$s（%2$s）</string>
     <string name="price">%d円</string>
+    <string name="search_box_hint">キーワードから検索する</string>
 </resources>

@@ -1,23 +1,19 @@
 package com.example.feature_search_result.compose
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.Icon
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
@@ -39,17 +35,19 @@ fun SearchResultScreen(
     val state = viewModel.searchResultState.collectAsState().value
     val pagingItems = viewModel.searchResult.collectAsLazyPagingItems()
 
-    Spacer(modifier = Modifier.height(2.dp))
-    SearchBox(
-        value = keyword.value,
-        onChangeValue = { keyword.value = it }
-    )
-    Spacer(modifier = Modifier.height(16.dp))
-    SearchResultList(
-        state = state,
-        books = pagingItems,
-        onClickItem = {}
-    )
+    Column {
+        Spacer(modifier = Modifier.height(8.dp))
+        SearchBox(
+            value = keyword.value,
+            onChangeValue = { keyword.value = it }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        SearchResultList(
+            state = state,
+            books = pagingItems,
+            onClickItem = {}
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,28 +56,20 @@ fun SearchBox(
     value: String,
     onChangeValue: (String) -> Unit
 ) {
-    BasicTextField(
+    OutlinedTextField(
         value = value,
         onValueChange = onChangeValue,
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = drawable.ic_search),
+                contentDescription = null,
+            )
+        },
         modifier = Modifier
             .padding(horizontal = 16.dp)
             .fillMaxWidth(),
         singleLine = true,
-        decorationBox = @Composable { innerTextField ->
-            TextFieldDefaults.TextFieldDecorationBox(
-                value = value,
-                innerTextField = innerTextField,
-                enabled = true,
-                singleLine = true,
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = MaterialTheme.colorScheme.outline,
-                    focusedBorderColor = MaterialTheme.colorScheme.outline,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.outline
-                ),
-                visualTransformation = VisualTransformation.None,
-                interactionSource = remember { MutableInteractionSource() }
-            )
-        }
+        placeholder = { stringResource(id = com.example.core_design.R.string.search_box_hint) }
     )
 }
 
