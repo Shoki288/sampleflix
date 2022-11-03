@@ -1,4 +1,4 @@
-package com.example.feature_home.android_view.vo
+package com.example.feature_home.vo
 
 import com.example.entity.BookInfo
 

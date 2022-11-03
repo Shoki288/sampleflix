@@ -81,7 +81,6 @@ dependencies {
     /** DataBinding **/
     implementation "com.github.wada811:DataBinding-ktx:$data_binding_version"
 
-
     /** lifecycle **/
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
@@ -102,4 +101,6 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
     /** compose coil **/
     implementation "io.coil-kt:coil-compose:$compose_coil_version"
+    /** constraint layout **/
+    implementation "androidx.constraintlayout:constraintlayout-compose:$compose_constraint_layout_version"
 }

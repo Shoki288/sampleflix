@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.entity.BookInfo
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
-import com.example.feature_home.android_view.vo.HomeUiState
+import com.example.feature_home.vo.BookDetailBottomSheetUiState
+import com.example.feature_home.vo.HomeUiState
 import com.example.repository_favorite.use_case.AddFavoriteListUseCase
 import com.example.repository_favorite.use_case.DeleteFavoriteListUseCase
 import com.example.search_repository.usecase.GetRecommendBookUseCase
@@ -26,6 +27,9 @@ class HomeViewModel @Inject constructor(
 
     @VisibleForTesting
     val books = MutableStateFlow<HomeUiState>(HomeUiState.None)
+
+    private val _selectBook = MutableStateFlow<BookDetailBottomSheetUiState>(BookDetailBottomSheetUiState.Loading)
+    val selectBook = _selectBook.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -124,6 +128,13 @@ class HomeViewModel @Inject constructor(
             } else {
                 state
             }
+        }
+    }
+
+    fun onItemClick(book: BookInfo) {
+        _selectBook.value = BookDetailBottomSheetUiState.Loading
+        (books.value as? HomeUiState.Success)?.let {
+            _selectBook.value = BookDetailBottomSheetUiState.Success(book)
         }
     }
 }
