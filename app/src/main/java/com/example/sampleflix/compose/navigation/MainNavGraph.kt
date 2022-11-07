@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import com.example.feature_favorite.compose.FavoriteListScreen
 import com.example.feature_home.compose.HomeScreenRoute
 import com.example.feature_search.compose.SearchTopScreen
-import com.example.feature_search_result.compose.SearchResultScreen
+import com.example.feature_search_result.compose.SearchResultRoute
 
 fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     // ホーム画面
@@ -39,7 +39,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
         arguments = SearchResult.argument
     ) { navBackStackEntry ->
         val keyword = navBackStackEntry.arguments?.getString(SearchResult.keywordArgs)
-        SearchResultScreen(arg = keyword)
+        SearchResultRoute(arg = keyword)
     }
 }
 
