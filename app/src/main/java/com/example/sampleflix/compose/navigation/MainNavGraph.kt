@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.entity.BookInfo
 import com.example.feature_favorite.compose.FavoriteListScreen
 import com.example.feature_home.compose.HomeScreenRoute
 import com.example.feature_search.compose.SearchTopScreen
@@ -39,7 +41,18 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
         arguments = SearchResult.argument
     ) { navBackStackEntry ->
         val keyword = navBackStackEntry.arguments?.getString(SearchResult.keywordArgs)
-        SearchResultRoute(arg = keyword)
+        SearchResultRoute(
+            arg = keyword,
+            onClickItem = { navController.openBookDetail(it) }
+        )
+    }
+
+    // 商品詳細
+    composable(
+        route = BookDetail.route
+    ) { navBackStackEntry ->
+        val info = navController.previousBackStackEntry?.savedStateHandle?.get<BookInfo>(BookDetail.bookInfoArgs)
+        // TODO savedStateHandleでintent取得しているのでassistedのViewModelに変える
     }
 }
 
@@ -60,4 +73,13 @@ fun NavHostController.openScreen(root: String) {
         launchSingleTop = true
         restoreState = true
     }
+}
+
+fun NavHostController.openBookDetail(
+    bookInfo: BookInfo
+) {
+    currentBackStackEntry?.savedStateHandle?.apply {
+        set(BookDetail.bookInfoArgs, bookInfo)
+    }
+    navigate(BookDetail.route)
 }

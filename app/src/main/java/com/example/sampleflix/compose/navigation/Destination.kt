@@ -35,3 +35,9 @@ object SearchResult : SampleDestination {
     val routeWithArgs = "$route/{$keywordArgs}"
     val argument = listOf(navArgument(keywordArgs) { type = NavType.StringType })
 }
+
+object BookDetail: SampleDestination {
+    override val route = "detail"
+    const val bookInfoArgs = "book_info"
+    val routeWithArgs = "$route/{$bookInfoArgs}"
+}

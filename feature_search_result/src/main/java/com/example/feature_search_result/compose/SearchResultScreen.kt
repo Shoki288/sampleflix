@@ -19,8 +19,9 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SearchResultRoute(
+    viewModel: SearchResultViewModel = hiltViewModel(),
     arg: String?,
-    viewModel: SearchResultViewModel = hiltViewModel()
+    onClickItem: (BookInfo) -> Unit
 ) {
     val keyword = rememberSaveable { mutableStateOf(arg ?: "") }
 
@@ -28,7 +29,7 @@ fun SearchResultRoute(
         keyword = keyword,
         state = viewModel.searchResultState.collectAsState().value,
         pagingItems = viewModel.searchResult.collectAsLazyPagingItems(),
-        onClickItem = { },
+        onClickItem = onClickItem,
     )
 }
 @Composable

@@ -1,4 +1,4 @@
-package com.example.feature_book_detail.adapter
+package com.example.feature_book_detail.android_view.adapter
 
 import com.example.entity.BookInfo
 import com.example.feature_book_detail.BookDetailInfo

@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/book_detail_fragment"
-        android:name="com.example.feature_book_detail.BookDetailFragment"
+        android:name="com.example.feature_book_detail.android_view.BookDetailFragment"
         android:label="BookDetailFragment" >
         <argument
             android:name="book_info"
