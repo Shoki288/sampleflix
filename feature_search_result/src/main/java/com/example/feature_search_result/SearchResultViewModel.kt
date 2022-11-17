@@ -1,31 +1,27 @@
 package com.example.feature_search_result
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.search_repository.SearchBooksPagingSource.SearchResultState
 import com.example.search_repository.usecase.SearchPagingBooksUseCase
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class SearchResultViewModel @AssistedInject constructor(
+@HiltViewModel
+class SearchResultViewModel @Inject constructor(
     useCase: SearchPagingBooksUseCase,
-    @Assisted keyword: String
+    state: SavedStateHandle
 ): ViewModel() {
 
     val searchResult = useCase.searchBooks(
-        keyword = keyword,
+        keyword = requireNotNull(state.get<String>("keyword")),
         stateListener = { _searchResultState.value = it }
     ).cachedIn(viewModelScope)
 
     private val _searchResultState = MutableStateFlow(SearchResultState.LOADING)
     val searchResultState = _searchResultState.asStateFlow()
-
-    @AssistedFactory
-    interface Factory {
-        fun create(keyword: String): SearchResultViewModel
-    }
 }

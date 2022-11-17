@@ -1,28 +1,23 @@
 package com.example.feature_book_detail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.entity.BookInfo
 import com.example.feature_book_detail.android_view.adapter.convertBookInfoToBookDetailInfo
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class BookDetailViewModel @AssistedInject constructor(
-    @Assisted bookInfo: BookInfo
+@HiltViewModel
+class BookDetailViewModel @Inject constructor(
+    state: SavedStateHandle
 ): ViewModel() {
 
     private val _bookInfoDetail = MutableStateFlow(BookDetailInfoUiState(loading = true))
     val bookInfoDetail = _bookInfoDetail.asStateFlow()
 
     init {
-        _bookInfoDetail.value = BookDetailInfoUiState(
-            bookDetailInfo = convertBookInfoToBookDetailInfo(bookInfo)
-        )
-    }
-
-    @AssistedFactory
-    interface Factory {
-        fun create(bookInfo: BookInfo): BookDetailViewModel
+        val args = requireNotNull(state.get<BookInfo>("book_info"))
+        _bookInfoDetail.value = BookDetailInfoUiState(bookDetailInfo = convertBookInfoToBookDetailInfo(args))
     }
 }

@@ -11,7 +11,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.extension.view_model.assistedViewModels
 import com.example.feature_search_result.R
 import com.example.feature_search_result.SearchResultViewModel
 import com.example.feature_search_result.databinding.FragmentSearchResultBinding
@@ -19,16 +18,13 @@ import com.wada811.databinding.withBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
 
     private val args by navArgs<SearchResultFragmentArgs>()
 
-    @Inject
-    lateinit var factory: SearchResultViewModel.Factory
-    private val viewModel by assistedViewModels { factory.create(args.keyword) }
+    private val viewModel by viewModels<SearchResultViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
