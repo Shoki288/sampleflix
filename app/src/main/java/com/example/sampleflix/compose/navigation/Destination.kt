@@ -3,6 +3,8 @@ package com.example.sampleflix.compose.navigation
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.core_design.R
+import com.example.entity.BookInfo
+import com.example.extension.createCustomNavType
 
 interface SampleDestination {
     val route: String
@@ -38,6 +40,7 @@ object SearchResult : SampleDestination {
 
 object BookDetail: SampleDestination {
     override val route = "detail"
-    const val bookInfoArgs = "book_info"
+    private const val bookInfoArgs = "book_info"
     val routeWithArgs = "$route/{$bookInfoArgs}"
+    val argument = listOf(navArgument(bookInfoArgs) { type = createCustomNavType<BookInfo>() })
 }

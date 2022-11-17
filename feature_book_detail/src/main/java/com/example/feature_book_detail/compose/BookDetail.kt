@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.core_design.compose.StarsRating
 import com.example.feature_book_detail.BookDetailInfo
@@ -34,7 +35,7 @@ import com.example.extension.R as ExtensionR
 
 @Composable
 fun BookDetailRoute(
-    viewModel: BookDetailViewModel
+    viewModel: BookDetailViewModel = viewModel()
 ) {
     val context = LocalContext.current
 
