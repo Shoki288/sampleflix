@@ -55,7 +55,7 @@ fun BookDetailScreen(
     ConstraintLayout(
         modifier = modifier.fillMaxSize()
     ) {
-        val (image, bookDetail, purchaseButton, description, info) = createRefs()
+        val (image, bookDetail, purchaseButton, description, info, userReviews) = createRefs()
         // 商品画像
         AsyncImage(
             model = uiState.bookDetailInfo.image,
@@ -187,7 +187,8 @@ fun BookDetailScreen(
                                 top.linkTo(parent.top)
                                 end.linkTo(more.start)
                                 width = Dimension.fillToConstraints
-                            }
+                            },
+                        maxLines = 3
                     )
                     Image(
                         painter = painterResource(id = Core_designR.drawable.ic_more),
@@ -321,6 +322,10 @@ fun BookDetailScreen(
         // カスタマーレビュー
         Column(
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 24.dp)
+                .constrainAs(userReviews) {
+                    top.linkTo(info.bottom)
+                    start.linkTo(parent.start)
+                }
         ) {
             Text(
                 text = stringResource(id = R.string.customer_review_title),
