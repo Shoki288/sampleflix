@@ -2,13 +2,15 @@ package com.example.feature_book_detail.compose
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -20,17 +22,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.example.core_design.compose.StarsRating
 import com.example.feature_book_detail.BookDetailInfo
 import com.example.feature_book_detail.BookDetailInfoUiState
 import com.example.feature_book_detail.BookDetailViewModel
+import com.example.feature_book_detail.BookDetailViewModel.ViewEvent
 import com.example.feature_book_detail.R
-import com.example.core_design.R as Core_designR
 import com.example.extension.R as ExtensionR
 
 @Composable
@@ -41,21 +41,30 @@ fun BookDetailRoute(
 
     BookDetailScreen(
         uiState = viewModel.bookInfoDetail.collectAsState().value,
-        context = context
+        context = context,
+        onClickDescription = { viewModel.onClickDescription(it) }
     )
+
+    when (val event = viewModel.viewEvent.collectAsState(initial = ViewEvent.None).value) {
+        is ViewEvent.OpenDetailInfoDialog -> {
+            DetailInfoDialog(event.text)
+        }
+        ViewEvent.None -> {}
+    }
 }
 
 @Composable
 fun BookDetailScreen(
     uiState: BookDetailInfoUiState,
     context: Context,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickDescription: (String) -> Unit
 ) {
     // TODO statusをみる
     ConstraintLayout(
         modifier = modifier.fillMaxSize()
     ) {
-        val (image, bookDetail, purchaseButton, description, info, userReviews) = createRefs()
+        val (image, bookDetail, purchaseButton, description, about, userReviews) = createRefs()
         // 商品画像
         AsyncImage(
             model = uiState.bookDetailInfo.image,
@@ -72,7 +81,8 @@ fun BookDetailScreen(
                 }
         )
 
-        Column(
+        // タイトル, 著者, レビュー, カテゴリ, 値段
+        Content(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .constrainAs(bookDetail) {
@@ -80,45 +90,14 @@ fun BookDetailScreen(
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
                     width = Dimension.fillToConstraints
-                }
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
-            // タイトル
-            Text(
-                text = uiState.bookDetailInfo.title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                maxLines = 2,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // 著者
-            Text(
-                text = uiState.bookDetailInfo.authors,
-                maxLines = 2,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // レビュー
-            StarsRating(
-                rateAverage = uiState.bookDetailInfo.averageReviewRate,
-                totalAverage = uiState.bookDetailInfo.totalReviewCount,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // カテゴリ
-            Text(
-                text = uiState.bookDetailInfo.categories,
-                maxLines = 1,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // 値段
-            Text(
-                text = stringResource(id = Core_designR.string.price, formatArgs = arrayOf(uiState.bookDetailInfo.price)),
-                maxLines = 2,
-            )
-        }
+                },
+            titleText = uiState.bookDetailInfo.title,
+            authorsText = uiState.bookDetailInfo.authors,
+            averageReviewRateText = uiState.bookDetailInfo.averageReviewRate,
+            totalReviewCountText = uiState.bookDetailInfo.totalReviewCount,
+            categoriesText = uiState.bookDetailInfo.categories,
+            priceText = uiState.bookDetailInfo.price,
+        )
 
         // 購入するボタン
         val purchaseBarrier = createBottomBarrier(image, bookDetail)
@@ -145,206 +124,49 @@ fun BookDetailScreen(
         }
 
         // 詳細説明
-        Column(
+        Description(
             modifier = Modifier
-                .padding(vertical = 8.dp, horizontal = 24.dp)
                 .constrainAs(description) {
                     top.linkTo(purchaseButton.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-        ) {
-            Text(
-                text = stringResource(id = R.string.description),
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.align(Alignment.Start),
-                fontSize = 16.sp
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Card(
-                shape = RoundedCornerShape(size = 8.dp),
-                border = BorderStroke(
-                    width = 2.dp,
-                    color = MaterialTheme.colorScheme.primaryContainer
-                ),
-                colors = CardDefaults.cardColors(Color.Transparent),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { }
-            ) {
-                ConstraintLayout(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    val (text, more) = createRefs()
-
-                    Text(
-                        text = uiState.bookDetailInfo.description,
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .constrainAs(text) {
-                                start.linkTo(parent.start)
-                                top.linkTo(parent.top)
-                                end.linkTo(more.start)
-                                width = Dimension.fillToConstraints
-                            },
-                        maxLines = 3
-                    )
-                    Image(
-                        painter = painterResource(id = Core_designR.drawable.ic_more),
-                        modifier = Modifier.constrainAs(more) {
-                            end.linkTo(parent.end)
-                            top.linkTo(parent.top)
-                            bottom.linkTo(parent.bottom)
-                        },
-                        contentDescription = null
-                    )
-                }
-            }
-        }
+                .padding(vertical = 8.dp, horizontal = 24.dp),
+            onClickDescription = onClickDescription,
+            description = uiState.bookDetailInfo.description
+        )
 
         // 情報
-        Column(
+        About(
             modifier = Modifier
                 .padding(vertical = 8.dp, horizontal = 24.dp)
-                .constrainAs(info) {
+                .constrainAs(about) {
                     top.linkTo(description.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                }
-        ) {
-            Text(
-                text = stringResource(id = R.string.info),
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.align(Alignment.Start),
-                fontSize = 16.sp
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Card(
-                shape = RoundedCornerShape(size = 8.dp),
-                border = BorderStroke(
-                    width = 2.dp,
-                    color = MaterialTheme.colorScheme.primaryContainer
-                ),
-                colors = CardDefaults.cardColors(Color.Transparent),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { }
-            ) {
-                ConstraintLayout(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                ) {
-                    val (publisherTitle, publisher, publishDateTitle, publishDate, languageTitle, language, more) = createRefs()
-                    val titleBarrier = createEndBarrier(publisherTitle, publishDateTitle, languageTitle, margin = 16.dp)
-                    val publisherBarrier = createBottomBarrier(publisherTitle, publisher, margin = 4.dp)
-                    val publisherDateBarrier = createBottomBarrier(publishDateTitle, publishDate, margin = 4.dp)
-
-                    // 出版社タイトル
-                    Text(
-                        text = stringResource(id = R.string.publisher_title),
-                        modifier = Modifier.constrainAs(publisherTitle) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                        }
-                    )
-                    // 出版社
-                    Text(
-                        text = uiState.bookDetailInfo.publisher,
-                        modifier = Modifier.constrainAs(publisher) {
-                            start.linkTo(titleBarrier)
-                            top.linkTo(parent.top)
-                            end.linkTo(more.start)
-                            width = Dimension.fillToConstraints
-                        },
-                        maxLines = 2,
-                    )
-
-                    // 発売日タイトル
-                    Text(
-                        text = stringResource(id = R.string.publish_date_title),
-                        modifier = Modifier.constrainAs(publishDateTitle) {
-                            top.linkTo(publisherBarrier)
-                            start.linkTo(parent.start)
-                        }
-                    )
-                    // 発売日
-                    Text(
-                        text = uiState.bookDetailInfo.publishedDate,
-                        modifier = Modifier
-                            .constrainAs(publishDate) {
-                                start.linkTo(titleBarrier)
-                                top.linkTo(publisherBarrier)
-                                baseline.linkTo(publishDateTitle.baseline)
-                                end.linkTo(more.start)
-                                width = Dimension.fillToConstraints
-                            },
-                        maxLines = 2,
-                    )
-
-                    // 言語タイトル
-                    Text(
-                        text = stringResource(id = R.string.language_title),
-                        modifier = Modifier.constrainAs(languageTitle) {
-                            top.linkTo(publisherDateBarrier)
-                            start.linkTo(parent.start)
-                        }
-                    )
-                    // 言語
-                    Text(
-                        text = uiState.bookDetailInfo.language,
-                        modifier = Modifier
-                            .constrainAs(language) {
-                                top.linkTo(publisherDateBarrier)
-                                start.linkTo(titleBarrier)
-                                end.linkTo(more.start)
-                                baseline.linkTo(languageTitle.baseline)
-                                width = Dimension.fillToConstraints
-                            },
-                        maxLines = 2,
-                    )
-
-                    Image(
-                        painter = painterResource(id = Core_designR.drawable.ic_more),
-                        modifier = Modifier.constrainAs(more) {
-                            end.linkTo(parent.end)
-                            top.linkTo(parent.top)
-                            bottom.linkTo(parent.bottom)
-                        },
-                        contentDescription = null
-                    )
-                }
-            }
-        }
+                },
+            publisherText = uiState.bookDetailInfo.publisher,
+            publishedDateText = uiState.bookDetailInfo.publishedDate,
+            languageText = uiState.bookDetailInfo.language,
+        )
 
         // カスタマーレビュー
-        Column(
-            modifier = Modifier.padding(vertical = 8.dp, horizontal = 24.dp)
+        UserReviews(
+            modifier = Modifier
+                .padding(vertical = 8.dp, horizontal = 24.dp)
                 .constrainAs(userReviews) {
-                    top.linkTo(info.bottom)
+                    top.linkTo(about.bottom)
                     start.linkTo(parent.start)
-                }
-        ) {
-            Text(
-                text = stringResource(id = R.string.customer_review_title),
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.align(Alignment.Start),
-                fontSize = 16.sp
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            StarsRating(
-                rateAverage = uiState.bookDetailInfo.averageReviewRate,
-                totalAverage = uiState.bookDetailInfo.totalReviewCount,
-            )
-        }
+                },
+            averageReviewRate = uiState.bookDetailInfo.averageReviewRate,
+            totalReviewCount = uiState.bookDetailInfo.totalReviewCount
+        )
     }
 }
 
 @Preview
 @Composable
-fun Preview() {
+private fun Preview() {
     val context = LocalContext.current
 
     BookDetailScreen(
@@ -366,6 +188,7 @@ fun Preview() {
             )
         ),
         context = context,
-        modifier = Modifier.background(Color.White)
+        modifier = Modifier.background(Color.White),
+        onClickDescription = {}
     )
 }
