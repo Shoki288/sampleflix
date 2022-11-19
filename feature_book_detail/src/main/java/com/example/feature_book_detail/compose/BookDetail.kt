@@ -42,12 +42,16 @@ fun BookDetailRoute(
     BookDetailScreen(
         uiState = viewModel.bookInfoDetail.collectAsState().value,
         context = context,
-        onClickDescription = { viewModel.onClickDescription(it) }
+        onClickDescription = { viewModel.onClickDescription() },
+        onclickAbout = { viewModel.onClickAbout() }
     )
 
     when (val event = viewModel.viewEvent.collectAsState(initial = ViewEvent.None).value) {
-        is ViewEvent.OpenDetailInfoDialog -> {
-            DetailInfoDialog(event.text)
+        is ViewEvent.OpenDescriptionDialog -> {
+            DescriptionDialog(event.text)
+        }
+        is ViewEvent.OpenAboutDialog -> {
+            AboutDialog(info = event.bookDetailInfo)
         }
         ViewEvent.None -> {}
     }
@@ -58,7 +62,8 @@ fun BookDetailScreen(
     uiState: BookDetailInfoUiState,
     context: Context,
     modifier: Modifier = Modifier,
-    onClickDescription: (String) -> Unit
+    onClickDescription: () -> Unit,
+    onclickAbout: () -> Unit
 ) {
     // TODO statusをみる
     ConstraintLayout(
@@ -146,8 +151,9 @@ fun BookDetailScreen(
                     end.linkTo(parent.end)
                 },
             publisherText = uiState.bookDetailInfo.publisher,
-            publishedDateText = uiState.bookDetailInfo.publishedDate,
+            publishedDateText = uiState.bookDetailInfo.publisherDate,
             languageText = uiState.bookDetailInfo.language,
+            onClickAbout = onclickAbout
         )
 
         // カスタマーレビュー
@@ -175,7 +181,7 @@ private fun Preview() {
                 title = "titletitletitletitletitletitletitletitle",
                 authors = "authorsauthorsauthorsauthorsauthorsauthors",
                 publisher = "出版社出版社出版社出版社出版社出版社",
-                publishedDate = "発売日発売日発売日発売日発売日発売日",
+                publisherDate = "発売日発売日発売日発売日発売日発売日",
                 description = "descriptiondescriptiondescriptiondescriptiondescriptiondescription",
                 pageCount = 100000,
                 categories = "categoriescategoriescategoriescategories",
@@ -189,6 +195,7 @@ private fun Preview() {
         ),
         context = context,
         modifier = Modifier.background(Color.White),
-        onClickDescription = {}
+        onClickDescription = {},
+        onclickAbout = { }
     )
 }

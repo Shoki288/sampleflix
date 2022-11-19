@@ -16,7 +16,8 @@ class BookDetailViewModel @Inject constructor(
 ): ViewModel() {
     sealed class ViewEvent {
         object None: ViewEvent()
-        data class OpenDetailInfoDialog(val text: String): ViewEvent()
+        data class OpenDescriptionDialog(val text: String): ViewEvent()
+        data class OpenAboutDialog(val bookDetailInfo: BookDetailInfo): ViewEvent()
     }
 
     private val _bookInfoDetail = MutableStateFlow(BookDetailInfoUiState(loading = true))
@@ -30,9 +31,16 @@ class BookDetailViewModel @Inject constructor(
         _bookInfoDetail.value = BookDetailInfoUiState(bookDetailInfo = convertBookInfoToBookDetailInfo(args))
     }
     
-    fun onClickDescription(text: String) {
+    fun onClickDescription() {
         viewModelScope.launch {
-            _viewEvent.emit(ViewEvent.OpenDetailInfoDialog(text))
+            _viewEvent.emit(ViewEvent.OpenDescriptionDialog(bookInfoDetail.value.bookDetailInfo.description))
+        }
+    }
+
+    fun onClickAbout() {
+        val aboutInfo = bookInfoDetail.value.bookDetailInfo
+        viewModelScope.launch {
+            _viewEvent.emit(ViewEvent.OpenAboutDialog(aboutInfo))
         }
     }
 }

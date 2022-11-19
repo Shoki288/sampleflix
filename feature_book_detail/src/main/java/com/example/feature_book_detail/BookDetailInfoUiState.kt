@@ -10,7 +10,7 @@ data class BookDetailInfo(
     val title: String = "",
     val authors: String = "",
     val publisher: String = "",
-    val publishedDate: String = "",
+    val publisherDate: String = "",
     val description: String = "",
     val pageCount: Int = 0,
     val categories: String = "",

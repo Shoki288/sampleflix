@@ -25,7 +25,7 @@ import com.example.feature_book_detail.R
 @Composable
 internal fun Description(
     modifier: Modifier,
-    onClickDescription: (String) -> Unit,
+    onClickDescription: () -> Unit,
     description: String
 ) {
     Column(modifier = modifier) {
@@ -46,9 +46,7 @@ internal fun Description(
             colors = CardDefaults.cardColors(Color.Transparent),
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable {
-                    onClickDescription(description)
-                }
+                .clickable { onClickDescription() }
         ) {
             ConstraintLayout(
                 modifier = Modifier.fillMaxWidth()

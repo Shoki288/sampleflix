@@ -28,6 +28,7 @@ internal fun About(
     publisherText: String,
     publishedDateText: String,
     languageText: String,
+    onClickAbout: () -> Unit
 ) {
     Column(modifier = modifier) {
         Text(
@@ -47,7 +48,7 @@ internal fun About(
             colors = CardDefaults.cardColors(Color.Transparent),
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { }
+                .clickable { onClickAbout() }
         ) {
             ConstraintLayout(
                 modifier = Modifier
