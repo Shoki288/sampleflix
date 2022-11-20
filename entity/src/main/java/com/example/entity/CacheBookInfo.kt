@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// TODO お気に入り登録の保存としても使用するためリネーム
-// TODO CacheBookInfoをリストとして持つdata-classを作ってもいいかも
 @Entity
 data class CacheBookInfo(
     @PrimaryKey val id: String,

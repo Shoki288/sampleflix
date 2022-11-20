@@ -19,7 +19,10 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     // ホーム画面
     composable(BottomNavigationScreen.Home.route) {
         HomeScreenRoute(
-            onCategoryClick = {}
+            // TODO 検索結果に飛ばす
+            onCategoryClick = {},
+            // TODO 受け取った値を検索結果で表示
+            onClickShowAll = {}
         )
     }
 

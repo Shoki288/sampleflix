@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -58,7 +59,9 @@ private fun GlobalNavigation(
 ) {
     val bottomNavigationScreens = listOf(BottomNavigationScreen.Home, BottomNavigationScreen.SearchTop, BottomNavigationScreen.Favorite)
 
-    BottomNavigation {
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colors.background,
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDirection = navBackStackEntry?.destination
         bottomNavigationScreens.forEach { screen ->
@@ -71,6 +74,7 @@ private fun GlobalNavigation(
                 },
                 label = { Text(text = screen.name) },
                 selected = currentDirection?.hierarchy?.any { it.route == screen.route } == true,
+                selectedContentColor = MaterialTheme.colors.onBackground,
                 onClick = {
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id) {

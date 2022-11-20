@@ -1,22 +1,21 @@
 package com.example.feature_home.compose
 
-import android.widget.Toast
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
-import androidx.compose.material3.Card
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.entity.BookInfo
 import com.example.feature_home.HomeViewModel
@@ -30,7 +29,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreenRoute(
     viewModel: HomeViewModel = hiltViewModel(),
-    onCategoryClick: (String) -> Unit
+    onCategoryClick: (String) -> Unit,
+    onClickShowAll: (List<BookInfo>) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
@@ -50,6 +50,7 @@ fun HomeScreenRoute(
                 scope.launch { sheetState.show() }
             },
             onCategoryClick = onCategoryClick,
+            onClickShowAll = onClickShowAll,
             recentlyReadingBooks = viewModel.recentlyReadingBooks.collectAsState().value,
             recommendBooks = viewModel.recommendBooks.collectAsState().value,
             bestSellerBooks = viewModel.bestSellerBooks.collectAsState().value,
@@ -66,6 +67,7 @@ fun HomeScreenRoute(
 @Composable
 fun HomeScreen(
     onItemClick: (BookInfo) -> Unit,
+    onClickShowAll: (List<BookInfo>) -> Unit,
     onCategoryClick: (String) -> Unit,
     recentlyReadingBooks: List<BookInfo>,
     recommendBooks: List<BookInfo>,
@@ -77,7 +79,6 @@ fun HomeScreen(
     readingHistoryBooks: List<BookInfo>,
     categories: List<String>
 ) {
-    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -91,9 +92,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.recently_reading_carousel_title),
             books = recentlyReadingBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // すぐ読める本
@@ -101,9 +100,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.recommend_carousel_title),
             books = recommendBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // プライム会員特定で読めるベストセラー
@@ -111,9 +108,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.best_seller_carousel_title),
             books = bestSellerBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // 最近読んだ本に基づくおすすめ
@@ -121,9 +116,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.recently_read_history_carousel_title),
             books = recentlyReadHistoryBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // もうすぐ読み放題が終了するタイトル
@@ -131,9 +124,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.end_unlimited_reading_carousel_title),
             books = endUnlimitedReadingBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // 近日配信開始のタイトルのおすすめ
@@ -141,9 +132,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.recently_release_carousel_title),
             books = recentlyReleaseBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // 類似タイトルに基づくおすすめ
@@ -151,9 +140,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.similar_title_carousel_title),
             books = similarTitleBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // 読書履歴に基づくおすすめ
@@ -161,9 +148,7 @@ fun HomeScreen(
             title = stringResource(id = R.string.reading_history_carousel_title),
             books = readingHistoryBooks,
             onClickItem = onItemClick,
-            onClickShowAll = {
-                Toast.makeText(context, "onClickShowAll", Toast.LENGTH_SHORT).show()
-            }
+            onClickShowAll = onClickShowAll
         )
 
         // 本をさらに見る
