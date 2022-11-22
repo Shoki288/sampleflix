@@ -41,7 +41,6 @@ fun modifyBookInfo(books: List<BookInfo>): BookInfoListResponse =
                     averageRating = it.volumeInfo.averageReviewRate,
                     ratingCount = it.volumeInfo.totalReviewCount,
                     images = ImageLinks(
-                        // TODO 正規表現のほうが早い気がする
                         thumbnail = it.volumeInfo.images.imageUrl
                     ),
                     language = it.volumeInfo.language,

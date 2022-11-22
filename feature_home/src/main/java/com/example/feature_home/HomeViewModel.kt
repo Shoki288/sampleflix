@@ -95,7 +95,6 @@ class HomeViewModel @Inject constructor(
         categories.filterIndexed { index, _ -> index in 0..9 }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    // TODO testがないので書く
     fun updateFavoriteState(isCheck: Boolean, bookInfo: BookInfo) {
         if (books.value !is HomeUiState.Success) return
         val position = (books.value as HomeUiState.Success).books.indexOfFirst { it.id == bookInfo.id }

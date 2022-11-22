@@ -5,6 +5,7 @@ import com.example.core_unit_test.*
 import com.example.core_unit_test.fixture.createBookInfo
 import com.example.core_unit_test.fixture.createBookInfoList
 import com.example.core_unit_test.fixture.createVolumeInfo
+import com.example.extension.api.ApiResult
 import com.example.extension.api.Exception
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success
@@ -196,5 +197,87 @@ class HomeViewModelTest {
         val observer = viewModel.categories.asTestObserver()
 
         verify { observer.onChanged(expectedResponse) }
+    }
+
+    @Test
+    fun `updateFavoriteState_お気に入り登録された場合、ローカルDBで持つお気に入り商品が更新されること`() {
+        coEvery { addFavoriteListUseCase.addFavoriteList(any()) } just Runs
+        coEvery { updateRecommendFavoriteStateUseCase.updateFavoriteState(any()) } just Runs
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(createBookInfoList())
+        val bookInfo = createBookInfo()
+        createViewModel()
+
+        viewModel.updateFavoriteState(isCheck = true, bookInfo = bookInfo)
+
+        coVerify {
+            updateRecommendFavoriteStateUseCase.updateFavoriteState(
+                bookInfo.copy(volumeInfo = bookInfo.volumeInfo.copy(isFavorite = true))
+            )
+        }
+    }
+
+    @Test
+    fun `updateFavoriteState_お気に入り登録された場合、レコメンドが更新されること`() {
+        val response = createBookInfoList(list = (0..10).map {
+            createBookInfo(
+                id = it.toString(),
+                bookInfo = createVolumeInfo(categories = listOf("${it%10}"))
+            )
+        })
+        coEvery { addFavoriteListUseCase.addFavoriteList(any()) } just Runs
+        coEvery { updateRecommendFavoriteStateUseCase.updateFavoriteState(any()) } just Runs
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.books.asTestObserver()
+
+        viewModel.updateFavoriteState(isCheck = true, createBookInfo(id = "3", bookInfo = createVolumeInfo(categories = listOf("3"))))
+
+        verify {
+            observer.onChanged(
+                HomeUiState.Success(
+                    response.items.mapIndexed { index, bookInfo ->
+                        if (index == 3) {
+                            bookInfo.copy(volumeInfo = bookInfo.volumeInfo.copy(isFavorite = true))
+                        } else {
+                            bookInfo
+                        }
+                    }
+                )
+            )
+        }
+    }
+
+    @Test
+    fun `updateFavoriteState_お気に入り登録が解除された場合、レコメンドが更新されること`() {
+        val response = createBookInfoList(list = (0..10).map {
+            createBookInfo(
+                id = it.toString(),
+                bookInfo = createVolumeInfo(
+                    categories = listOf("${it%10}"),
+                    isFavorite = true
+                )
+            )
+        })
+        coEvery { addFavoriteListUseCase.addFavoriteList(any()) } just Runs
+        coEvery { updateRecommendFavoriteStateUseCase.updateFavoriteState(any()) } just Runs
+        coEvery { getRecommendBookUseCase.searchBookInit() } returns Success(response)
+        createViewModel()
+        val observer = viewModel.books.asTestObserver()
+
+        viewModel.updateFavoriteState(isCheck = false, createBookInfo(id = "3", bookInfo = createVolumeInfo(categories = listOf("3"))))
+
+        verify {
+            observer.onChanged(
+                HomeUiState.Success(
+                    response.items.mapIndexed { index, bookInfo ->
+                        if (index == 3) {
+                            bookInfo.copy(volumeInfo = bookInfo.volumeInfo.copy(isFavorite = false))
+                        } else {
+                            bookInfo
+                        }
+                    }
+                )
+            )
+        }
     }
 }

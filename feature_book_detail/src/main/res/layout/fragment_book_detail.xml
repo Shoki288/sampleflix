@@ -16,7 +16,6 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         tools:context=".android_view.BookDetailFragment">
-        <!-- TODO toolbar -->
 
         <!-- サムネイル -->
         <ImageView

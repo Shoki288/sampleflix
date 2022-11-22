@@ -35,7 +35,6 @@ class ComposeMainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                // TODO AppThemeが聞いてない気がする。Manifestで宣言しているThemeが使用されてるっぽい？？
                 val navController = rememberNavController()
                 Scaffold(
                     bottomBar = { GlobalNavigation(navController) }

@@ -8,6 +8,6 @@ import javax.inject.Inject
 class AddFavoriteListUseCase @Inject constructor(
     private val repository: FavoriteRepository
 ) {
-    suspend fun addFavoriteList(bookInfo: BookInfo): Any =
+    suspend fun addFavoriteList(bookInfo: BookInfo) =
         repository.addFavoriteList(convertBookInfoToCacheBookInfo(bookInfo))
 }
