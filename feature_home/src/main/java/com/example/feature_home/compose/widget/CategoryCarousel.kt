@@ -102,7 +102,7 @@ private fun RecommendCategoryCarousel(
 
 @Composable
 @Preview
-private fun preview() {
+private fun Preview() {
     RecommendCategories(
         title = "title",
         categoryNameList = listOf("list1", "list2", "list3", "list4", "list5", "list6", "list7"),

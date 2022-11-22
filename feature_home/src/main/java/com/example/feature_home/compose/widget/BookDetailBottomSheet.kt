@@ -21,7 +21,6 @@ import com.example.core_unit_test.fixture.createBookInfo
 import com.example.feature_home.R
 import com.example.feature_home.vo.BookDetailBottomSheetUiState
 import com.example.core_design.R as CoreR
-import com.example.extension.R as ExtensionR
 
 @Composable
 fun SingleBookDetailBottomSheet(
@@ -62,9 +61,9 @@ fun SingleBookDetailBottomSheet(
             // サムネ
             AsyncImage(
                 model = uiState.book.volumeInfo.images.imageUrl,
-                placeholder = painterResource(id = ExtensionR.drawable.ic_not_found_image),
-                error = painterResource(id = ExtensionR.drawable.ic_not_found_image),
-                fallback = painterResource(id = ExtensionR.drawable.ic_not_found_image),
+                placeholder = painterResource(id = CoreR.drawable.ic_not_found_image),
+                error = painterResource(id = CoreR.drawable.ic_not_found_image),
+                fallback = painterResource(id = CoreR.drawable.ic_not_found_image),
                 contentDescription = null,
                 modifier = Modifier
                     .width(150.dp)
@@ -136,7 +135,7 @@ fun SingleBookDetailBottomSheet(
 
 @Preview
 @Composable
-private fun preview() {
+private fun Preview() {
     SingleBookDetailBottomSheet(
         uiState = BookDetailBottomSheetUiState.Success(createBookInfo()),
         onClickClose = {},

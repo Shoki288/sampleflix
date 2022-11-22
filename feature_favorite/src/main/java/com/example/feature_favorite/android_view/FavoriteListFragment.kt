@@ -29,7 +29,7 @@ class FavoriteListFragment : Fragment(R.layout.fragment_favorite_list) {
             // お気に入りリスト
             val adapter = FavoriteListAdapter (
                 onClickFavorite = { item, isFavorite ->
-                viewModel.updateFavoriteState(item, isFavorite)
+                    viewModel.updateFavoriteState(item, isFavorite)
                 },
                 onClickItem = {
                     findNavController().navigate(

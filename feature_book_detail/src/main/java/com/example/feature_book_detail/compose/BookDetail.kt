@@ -31,7 +31,7 @@ import com.example.feature_book_detail.BookDetailInfoUiState
 import com.example.feature_book_detail.BookDetailViewModel
 import com.example.feature_book_detail.BookDetailViewModel.ViewEvent
 import com.example.feature_book_detail.R
-import com.example.extension.R as ExtensionR
+import com.example.core_design.R as CoreR
 
 @Composable
 fun BookDetailRoute(
@@ -73,9 +73,9 @@ fun BookDetailScreen(
         // 商品画像
         AsyncImage(
             model = uiState.bookDetailInfo.image,
-            placeholder = painterResource(id = ExtensionR.drawable.ic_not_found_image),
-            error = painterResource(id = ExtensionR.drawable.ic_not_found_image),
-            fallback = painterResource(id = ExtensionR.drawable.ic_not_found_image),
+            placeholder = painterResource(id = CoreR.drawable.ic_not_found_image),
+            error = painterResource(id = CoreR.drawable.ic_not_found_image),
+            fallback = painterResource(id = CoreR.drawable.ic_not_found_image),
             contentDescription = null,
             modifier = Modifier
                 .width(150.dp)

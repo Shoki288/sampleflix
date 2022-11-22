@@ -3,7 +3,7 @@ package com.example.core_design.binding
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.example.extension.R
+import com.example.core_design.R
 
 @BindingAdapter("imageUrl")
 fun ImageView.setImageUrl(imageUrl: String) {

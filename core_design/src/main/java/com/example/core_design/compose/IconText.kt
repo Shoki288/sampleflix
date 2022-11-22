@@ -88,7 +88,7 @@ fun IconText(
 
 @Preview
 @Composable
-fun Preview() {
+private fun Preview() {
     IconText(
         startIcon = painterResource(id = R.drawable.ic_home),
         topIcon = painterResource(id = R.drawable.ic_home),

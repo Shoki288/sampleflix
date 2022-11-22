@@ -30,6 +30,7 @@ fun SearchResultRoute(
         state = viewModel.searchResultState.collectAsState().value,
         pagingItems = viewModel.searchResult.collectAsLazyPagingItems(),
         onClickItem = onClickItem,
+        onClickFavorite = { id, isFavorite -> }
     )
 }
 @Composable
@@ -37,7 +38,8 @@ fun SearchResultScreen(
     keyword: MutableState<String>,
     state: SearchResultState,
     pagingItems: LazyPagingItems<BookInfo>,
-    onClickItem: (BookInfo) -> Unit
+    onClickItem: (BookInfo) -> Unit,
+    onClickFavorite: (String, Boolean) -> Unit
 ) {
     Column {
         Spacer(modifier = Modifier.height(8.dp))
@@ -49,7 +51,8 @@ fun SearchResultScreen(
         SearchResultList(
             state = state,
             books = pagingItems,
-            onClickItem = onClickItem
+            onClickItem = onClickItem,
+            onClickFavorite = onClickFavorite
         )
     }
 }
@@ -85,5 +88,6 @@ fun Preview() {
             })
         ).collectAsLazyPagingItems(),
         onClickItem = {},
+        onClickFavorite = { id, isFavorite -> }
     )
 }

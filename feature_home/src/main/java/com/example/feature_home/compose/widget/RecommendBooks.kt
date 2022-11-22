@@ -22,7 +22,7 @@ import com.example.entity.BookInfo
 import com.example.entity.Price
 import com.example.entity.SaleInfo
 import com.example.entity.VolumeInfo
-import com.example.extension.R
+import com.example.core_design.R
 
 @Composable
 fun RecommendBooks(
@@ -113,7 +113,7 @@ private fun LinkText(
 
 @Preview
 @Composable
-fun Preview() {
+private fun Preview() {
     RecommendBooks(
         title = "title",
         books = listOf(

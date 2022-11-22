@@ -10,7 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.extension.convertArgumentToJson
 import com.example.feature_book_detail.compose.BookDetailRoute
-import com.example.feature_favorite.compose.FavoriteListScreen
+import com.example.feature_favorite.compose.FavoriteListRoute
 import com.example.feature_home.compose.HomeScreenRoute
 import com.example.feature_search.compose.SearchTopScreen
 import com.example.feature_search_result.compose.SearchResultRoute
@@ -37,7 +37,9 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
 
     // お気に入りリスト
     composable(BottomNavigationScreen.Favorite.route) {
-        FavoriteListScreen(navController = navController)
+        FavoriteListRoute(
+            onClickItem = {  }
+        )
     }
 
     // 検索結果
