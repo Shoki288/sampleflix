@@ -8,7 +8,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.entity.adeapter.cacheBookInfoAdapter
 import com.example.feature_favorite.FavoriteListViewModel
 import com.example.feature_favorite.R
 import com.example.feature_favorite.databinding.FragmentFavoriteListBinding
@@ -42,7 +41,7 @@ class FavoriteListFragment : Fragment(R.layout.fragment_favorite_list) {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.favoriteList.collectLatest {
                         when(it) {
-                            is FavoriteListUiState.Success -> adapter.submitList(cacheBookInfoAdapter(it.bookInfoList).items)
+                            is FavoriteListUiState.Success -> adapter.submitList(it.bookInfoList)
                             is FavoriteListUiState.Error -> binding.errorFrame.text = it.message
                             else -> { /** nop **/ }
                         }

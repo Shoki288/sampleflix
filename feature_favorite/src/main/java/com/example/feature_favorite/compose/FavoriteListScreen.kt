@@ -10,12 +10,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core_design.compose.SingleColumnItem
+import com.example.core_unit_test.fixture.createBookInfo
 import com.example.entity.BookInfo
-import com.example.entity.CacheBookInfo
 import com.example.feature_favorite.FavoriteListViewModel
 import com.example.feature_favorite.R
 import com.example.feature_favorite.android_view.FavoriteListUiState
@@ -38,8 +39,8 @@ fun FavoriteListRoute(
         is FavoriteListUiState.Success -> {
             FavoriteListScreen(
                 bookInfoList = uiState.bookInfoList,
-                onClickFavorite = { bookInfo, isFavorite -> },
-                onClickItem = {  }
+                onClickItem = onClickItem,
+                onClickFavorite = { bookInfo, isFavorite -> }
             )
         }
         is FavoriteListUiState.Error -> {
@@ -57,33 +58,35 @@ fun FavoriteListRoute(
 
 @Composable
 private fun FavoriteListScreen(
-    bookInfoList: List<CacheBookInfo>,
+    bookInfoList: List<BookInfo>,
     onClickFavorite: (BookInfo, Boolean) -> Unit,
     onClickItem: (BookInfo) -> Unit
 ) {
     Column {
         Text(
             text = stringResource(id = R.string.favorite_title),
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
                 .padding(vertical = 16.dp)
         )
-        LazyColumn {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
             items(
                 items = bookInfoList,
-                key = { it.id }
+                key = { bookInfo -> bookInfo.id }
             ) { bookInfo ->
                 SingleColumnItem(
-                    imageUrl = bookInfo.image,
-                    title = bookInfo.title,
-                    author = bookInfo.authors,
-                    reviewTotalCount = bookInfo.ratingCount,
-                    reviewAverage = bookInfo.averageRating ?: 0,
-                    description = bookInfo.description,
-                    isFavorite = bookInfo.isFavorite,
-                    price = bookInfo.price,
-                    onClickItem = { },
+                    imageUrl = bookInfo.volumeInfo.images.imageUrl,
+                    title = bookInfo.volumeInfo.title,
+                    author = bookInfo.volumeInfo.author,
+                    reviewTotalCount = bookInfo.volumeInfo.totalReviewCount,
+                    reviewAverage = bookInfo.volumeInfo.averageReviewRate,
+                    description = bookInfo.volumeInfo.description,
+                    isFavorite = bookInfo.volumeInfo.isFavorite,
+                    price = bookInfo.saleInfo.listPrice.price,
+                    onClickItem = { onClickItem(bookInfo) },
                     onClickFavorite = { }
                 )
             }
@@ -95,25 +98,7 @@ private fun FavoriteListScreen(
 @Composable
 private fun Preview() {
     FavoriteListScreen(
-        listOf(
-            CacheBookInfo(
-                id = "id",
-                title = "title",
-                authors = "authors",
-                publisher = "publisher",
-                publishedDate = "publishedDate",
-                description = "description",
-                pageCount = 100,
-                categories = "categories",
-                averageRating = 100,
-                ratingCount = 100,
-                image = "image",
-                language = "language",
-                previewLink = "previewLink",
-                price = 100,
-                isFavorite = true,
-            )
-        ),
+        (0..10).map { createBookInfo() },
         onClickFavorite = { info, isFavorite -> },
         onClickItem = {}
     )

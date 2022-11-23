@@ -53,7 +53,7 @@ class FavoriteListViewModel @Inject constructor(
             if (it is FavoriteListUiState.Success) {
                 it.copy(bookInfoList = it.bookInfoList.map { item ->
                     if (item.id == bookInfo.id) {
-                        item.copy(isFavorite = isCheck)
+                        item.copy(volumeInfo = item.volumeInfo.copy(isFavorite = isCheck))
                     } else {
                         item
                     }

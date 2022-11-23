@@ -1,8 +1,10 @@
 package com.example.feature_search_result.compose
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
@@ -17,9 +19,7 @@ fun SearchResultList(
     onClickItem: (BookInfo) -> Unit,
     onClickFavorite: (String, Boolean) -> Unit
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(4.dp)
-    ) {
+    LazyColumn {
         items(
             items = books,
             key = { it.id }
@@ -38,6 +38,7 @@ fun SearchResultList(
                     onClickFavorite = { onClickFavorite(book.id, it) },
                 )
             }
+            Spacer(modifier = Modifier.height(2.dp))
         }
     }
 }

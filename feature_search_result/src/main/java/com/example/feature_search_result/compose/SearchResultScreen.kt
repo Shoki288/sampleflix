@@ -1,8 +1,10 @@
 package com.example.feature_search_result.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -41,13 +43,15 @@ fun SearchResultScreen(
     onClickItem: (BookInfo) -> Unit,
     onClickFavorite: (String, Boolean) -> Unit
 ) {
-    Column {
+    Column(
+        modifier = Modifier.background(MaterialTheme.colorScheme.background)
+    ) {
         Spacer(modifier = Modifier.height(8.dp))
         SearchBox(
             value = keyword.value,
             onChangeValue = { keyword.value = it }
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         SearchResultList(
             state = state,
             books = pagingItems,

@@ -38,7 +38,10 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     // お気に入りリスト
     composable(BottomNavigationScreen.Favorite.route) {
         FavoriteListRoute(
-            onClickItem = {  }
+            onClickItem = { bookInfo ->
+                navController.openHasArgumentScreen(BookDetail.route, convertArgumentToJson(bookInfo)
+                )
+            }
         )
     }
 
