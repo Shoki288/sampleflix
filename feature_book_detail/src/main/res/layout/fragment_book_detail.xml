@@ -141,7 +141,8 @@
                     android:src="@drawable/ic_more"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@null" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,7 +243,8 @@
                     android:src="@drawable/ic_more"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@null" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

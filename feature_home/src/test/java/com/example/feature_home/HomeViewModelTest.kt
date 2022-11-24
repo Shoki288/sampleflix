@@ -1,11 +1,11 @@
 package com.example.feature_home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.core_unit_test.*
+import com.example.core_unit_test.MainCoroutineScopeRule
+import com.example.core_unit_test.asTestObserver
 import com.example.core_unit_test.fixture.createBookInfo
 import com.example.core_unit_test.fixture.createBookInfoList
 import com.example.core_unit_test.fixture.createVolumeInfo
-import com.example.extension.api.ApiResult
 import com.example.extension.api.Exception
 import com.example.extension.api.HttpError
 import com.example.extension.api.Success

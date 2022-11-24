@@ -1,4 +1,5 @@
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -25,7 +26,8 @@
             android:layout_height="16dp"
             app:starOrNot="@{averageReview >= 1}"
             android:layout_gravity="center_vertical"
-            tools:src="@drawable/ic_review_star"/>
+            tools:src="@drawable/ic_review_star"
+            android:contentDescription="@null" />
 
         <ImageView
             android:id="@+id/review_star2"
@@ -33,7 +35,8 @@
             android:layout_height="16dp"
             app:starOrNot="@{averageReview >= 2}"
             android:layout_gravity="center_vertical"
-            tools:src="@drawable/ic_review_star"/>
+            tools:src="@drawable/ic_review_star"
+            android:contentDescription="@null" />
 
         <ImageView
             android:id="@+id/review_star3"
@@ -41,7 +44,8 @@
             android:layout_height="16dp"
             app:starOrNot="@{averageReview >= 3}"
             android:layout_gravity="center_vertical"
-            tools:src="@drawable/ic_not_review"/>
+            tools:src="@drawable/ic_not_review"
+            android:contentDescription="@null" />
 
         <ImageView
             android:id="@+id/review_star4"
@@ -49,7 +53,8 @@
             android:layout_height="16dp"
             app:starOrNot="@{averageReview >= 4}"
             android:layout_gravity="center_vertical"
-            tools:src="@drawable/ic_not_review"/>
+            tools:src="@drawable/ic_not_review"
+            android:contentDescription="@null" />
 
         <ImageView
             android:id="@+id/review_star5"
@@ -57,7 +62,8 @@
             android:layout_height="16dp"
             app:starOrNot="@{averageReview == 5}"
             android:layout_gravity="center_vertical"
-            tools:src="@drawable/ic_not_review"/>
+            tools:src="@drawable/ic_not_review"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"

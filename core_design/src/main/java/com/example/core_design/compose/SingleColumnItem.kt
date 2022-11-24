@@ -128,7 +128,7 @@ fun SingleColumnItem(
         // 値段
         Text(
             text = stringResource(
-                id = com.example.core_design.R.string.price,
+                id = R.string.price,
                 price
             ),
             modifier = Modifier.constrainAs(refPrice) {
