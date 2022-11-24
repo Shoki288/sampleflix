@@ -18,18 +18,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.entity.BookInfo
-import com.example.entity.Price
-import com.example.entity.SaleInfo
-import com.example.entity.VolumeInfo
 import com.example.core_design.R
+import com.example.entity.*
 
 @Composable
 fun RecommendBooks(
     title: String,
     books: List<BookInfo>,
     onClickItem: (BookInfo) -> Unit,
-    onClickShowAll: (List<BookInfo>) -> Unit,
+    onClickShowAll: (String, BookInfoListResponse) -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(size = 20.dp),
@@ -59,7 +56,7 @@ fun RecommendBooks(
 
             // リンク
             LinkText {
-                onClickShowAll(books)
+                onClickShowAll(title, BookInfoListResponse(books))
             }
         }
     }
@@ -116,9 +113,9 @@ private fun LinkText(
 private fun Preview() {
     RecommendBooks(
         title = "title",
-        books = listOf(
+        books = (0..10).map {
             BookInfo(
-                id = "id",
+                id = "id$it",
                 volumeInfo = VolumeInfo(
                     title = "title",
                     authors = listOf("authors"),
@@ -138,8 +135,8 @@ private fun Preview() {
                 ),
                 accessInfo = null
             )
-        ),
+        },
         onClickItem = {},
-        onClickShowAll = {}
+        onClickShowAll = { _, _ -> }
     )
 }

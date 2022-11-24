@@ -8,10 +8,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.entity.BookInfoListResponse
 import com.example.extension.convertArgumentToJson
+import com.example.extension.getNotNullParcelable
 import com.example.feature_book_detail.compose.BookDetailRoute
 import com.example.feature_favorite.compose.FavoriteListRoute
 import com.example.feature_home.compose.HomeScreenRoute
+import com.example.feature_recommend_list.compose.RecommendListScreen
 import com.example.feature_search.compose.SearchTopScreen
 import com.example.feature_search_result.compose.SearchResultRoute
 
@@ -19,10 +22,25 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     // ホーム画面
     composable(BottomNavigationScreen.Home.route) {
         HomeScreenRoute(
-            // TODO 検索結果に飛ばす
-            onCategoryClick = {},
-            // TODO 受け取った値を検索結果で表示
-            onClickShowAll = {}
+            onCategoryClick = { keyword ->
+                navController.openHasArgumentScreen(SearchResult.route, keyword)
+            },
+            onClickShowAll = { title, bookInfoList ->
+                navController.openHasArgumentScreen(Recommend.route, title, convertArgumentToJson(bookInfoList))
+            }
+        )
+    }
+    // レコメンド画面
+    composable(
+        route = Recommend.routeWithArgs,
+        arguments = Recommend.argument
+    ) { navBackStackEntry ->
+        val title = navBackStackEntry.arguments?.getString(Recommend.titleArgs) ?: ""
+        val bookInfoList = navBackStackEntry.arguments?.getNotNullParcelable<BookInfoListResponse>(Recommend.bookInfoArgs) ?: BookInfoListResponse(emptyList())
+
+        RecommendListScreen(
+            title = title,
+            bookInfoList = bookInfoList.items
         )
     }
 
@@ -39,8 +57,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     composable(BottomNavigationScreen.Favorite.route) {
         FavoriteListRoute(
             onClickItem = { bookInfo ->
-                navController.openHasArgumentScreen(BookDetail.route, convertArgumentToJson(bookInfo)
-                )
+                navController.openHasArgumentScreen(BookDetail.route, convertArgumentToJson(bookInfo))
             }
         )
     }
@@ -68,7 +85,9 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     }
 }
 
-fun NavHostController.openHasArgumentScreen(route: String, arg: Any) = openScreen("$route/$arg")
+fun NavHostController.openHasArgumentScreen(route: String, vararg arg: Any) {
+    openScreen("$route/${arg.joinToString("/")}")
+}
 
 @SuppressLint("UnrememberedGetBackStackEntry")
 @Composable

@@ -70,7 +70,7 @@ fun Preview() {
         pagingItems = flowOf(
             PagingData.from((0..10).map {
                 BookInfo(
-                    id = "id",
+                    id = "id$it",
                     volumeInfo = VolumeInfo(
                         title = "title",
                         authors = emptyList(),

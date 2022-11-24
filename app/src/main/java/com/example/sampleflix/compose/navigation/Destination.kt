@@ -4,6 +4,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.core_design.R
 import com.example.entity.BookInfo
+import com.example.entity.BookInfoListResponse
 import com.example.extension.createCustomNavType
 
 interface SampleDestination {
@@ -43,4 +44,15 @@ object BookDetail: SampleDestination {
     private const val bookInfoArgs = "book_info"
     val routeWithArgs = "$route/{$bookInfoArgs}"
     val argument = listOf(navArgument(bookInfoArgs) { type = createCustomNavType<BookInfo>() })
+}
+
+object Recommend : SampleDestination {
+    override val route = "recommend"
+    const val titleArgs = "title"
+    const val bookInfoArgs = "book_info"
+    val routeWithArgs = "$route/{$titleArgs}/{$bookInfoArgs}"
+    val argument = listOf(
+        navArgument(titleArgs) { type = NavType.StringType },
+        navArgument(bookInfoArgs) { type = createCustomNavType<BookInfoListResponse>() }
+    )
 }

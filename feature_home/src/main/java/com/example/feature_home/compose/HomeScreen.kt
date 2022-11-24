@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.entity.BookInfo
+import com.example.entity.BookInfoListResponse
 import com.example.feature_home.HomeViewModel
 import com.example.feature_home.R
 import com.example.feature_home.compose.widget.RecommendBooks
@@ -30,7 +31,7 @@ import kotlinx.coroutines.launch
 fun HomeScreenRoute(
     viewModel: HomeViewModel = hiltViewModel(),
     onCategoryClick: (String) -> Unit,
-    onClickShowAll: (List<BookInfo>) -> Unit
+    onClickShowAll: (String, BookInfoListResponse) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
@@ -67,7 +68,7 @@ fun HomeScreenRoute(
 @Composable
 fun HomeScreen(
     onItemClick: (BookInfo) -> Unit,
-    onClickShowAll: (List<BookInfo>) -> Unit,
+    onClickShowAll: (String, BookInfoListResponse) -> Unit,
     onCategoryClick: (String) -> Unit,
     recentlyReadingBooks: List<BookInfo>,
     recommendBooks: List<BookInfo>,

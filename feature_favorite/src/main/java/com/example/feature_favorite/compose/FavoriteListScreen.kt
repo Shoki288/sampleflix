@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -70,6 +71,7 @@ private fun FavoriteListScreen(
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         )
+        Divider()
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
@@ -98,7 +100,7 @@ private fun FavoriteListScreen(
 @Composable
 private fun Preview() {
     FavoriteListScreen(
-        (0..10).map { createBookInfo() },
+        (0..10).map { createBookInfo(id = "id$it") },
         onClickFavorite = { info, isFavorite -> },
         onClickItem = {}
     )

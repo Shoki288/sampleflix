@@ -1,10 +1,11 @@
-package com.example.feature_recommend_list
+package com.example.feature_recommend_list.android_view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.feature_recommend_list.R
 import com.example.feature_recommend_list.databinding.FragmentRecommendListBinding
 import com.wada811.databinding.withBinding
 

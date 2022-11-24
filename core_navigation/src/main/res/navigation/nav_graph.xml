@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/recommend_list_fragment"
-        android:name="com.example.feature_recommend_list.RecommendListFragment"
+        android:name="com.example.feature_recommend_list.android_view.RecommendListFragment"
         android:label="RecommendListFragment" >
         <argument
             android:name="book_info_response"

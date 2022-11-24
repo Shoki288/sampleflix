@@ -1,4 +1,4 @@
-package com.example.feature_recommend_list
+package com.example.feature_recommend_list.android_view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.entity.BookInfo
-import com.example.feature_recommend_list.RecommendItemAdapter.RecommendItemViewHolder
+import com.example.feature_recommend_list.android_view.RecommendItemAdapter.RecommendItemViewHolder
 import com.example.feature_recommend_list.databinding.ItemRecommendBinding
 
 class RecommendItemAdapter(private val onItemClick: (BookInfo) -> Unit): ListAdapter<BookInfo, RecommendItemViewHolder>(diffCallback) {

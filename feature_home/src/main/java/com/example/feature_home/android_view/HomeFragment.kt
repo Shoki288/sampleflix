@@ -35,7 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.recentlyReadingBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -53,7 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.recommendBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -71,7 +71,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.bestSellerBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -89,7 +89,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.recentlyReadHistoryBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -107,7 +107,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.endUnlimitedReadingBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -125,7 +125,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.recentlyReleaseBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -143,7 +143,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.similarTitleBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -161,7 +161,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 showAll.setOnClickListener {
                     HomeFragmentDirections.actionNavHomeToRecommendListFragment(
                         BookInfoListResponse(viewModel.readingHistoryBooks.value)
-                    ).also { action -> findNavController() .navigate(action) }
+                    ).also { action -> findNavController().navigate(action) }
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
