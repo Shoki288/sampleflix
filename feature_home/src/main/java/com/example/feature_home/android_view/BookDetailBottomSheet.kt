@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.example.entity.BookInfo
+import com.example.extension.getNotNullParcelable
 import com.example.feature_home.databinding.BookDetailBottomSheetBinding
+import com.example.feature_search_result.android_view.SearchResultFragmentDirections
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BookDetailBottomSheet: BottomSheetDialogFragment() {
@@ -24,8 +27,7 @@ class BookDetailBottomSheet: BottomSheetDialogFragment() {
     }
 
     private val argument by lazy {
-        arguments?.getParcelable(KEY_BOOK_INFO) as? BookInfo
-            ?: throw IllegalArgumentException("argument class cast error")
+        arguments.getNotNullParcelable<BookInfo>(KEY_BOOK_INFO)
     }
 
     override fun onCreateView(
@@ -46,6 +48,7 @@ class BookDetailBottomSheet: BottomSheetDialogFragment() {
 
     fun onClickClose() = dismiss()
     fun onClickDetail() {
-        // TODO 詳細画面に飛ばす
+        val action = SearchResultFragmentDirections.actionSearchResultFragmentToBookDetailFragment(argument)
+        findNavController().navigate(action)
     }
 }

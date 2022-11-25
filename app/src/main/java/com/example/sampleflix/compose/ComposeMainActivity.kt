@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -14,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -59,6 +59,7 @@ private fun GlobalNavigation(
 
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.background,
+        modifier = Modifier.zIndex(2F)
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDirection = navBackStackEntry?.destination
@@ -67,12 +68,14 @@ private fun GlobalNavigation(
                 icon = {
                     Icon(
                         painter = painterResource(id = screen.icon),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = if (currentDirection?.hierarchy?.any { it.route == screen.route } == true) Color.Black else Color.Gray.copy(alpha = 0.7f)
                     )
                 },
                 label = { Text(text = screen.name) },
                 selected = currentDirection?.hierarchy?.any { it.route == screen.route } == true,
                 selectedContentColor = MaterialTheme.colors.onBackground,
+                alwaysShowLabel = false,
                 onClick = {
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
