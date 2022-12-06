@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreenRoute(
+fun HomeRoot(
     viewModel: HomeViewModel = hiltViewModel(),
     onCategoryClick: (String) -> Unit,
     onClickShowAll: (String, BookInfoListResponse) -> Unit
@@ -52,15 +52,8 @@ fun HomeScreenRoute(
             },
             onCategoryClick = onCategoryClick,
             onClickShowAll = onClickShowAll,
-            recentlyReadingBooks = viewModel.recentlyReadingBooks.collectAsState().value,
-            recommendBooks = viewModel.recommendBooks.collectAsState().value,
-            bestSellerBooks = viewModel.bestSellerBooks.collectAsState().value,
-            recentlyReadHistoryBooks = viewModel.recentlyReadHistoryBooks.collectAsState().value,
-            endUnlimitedReadingBooks = viewModel.endUnlimitedReadingBooks.collectAsState().value,
-            recentlyReleaseBooks = viewModel.recentlyReleaseBooks.collectAsState().value,
-            similarTitleBooks = viewModel.similarTitleBooks.collectAsState().value,
-            readingHistoryBooks = viewModel.readingHistoryBooks.collectAsState().value,
-            categories = viewModel.categories.collectAsState().value
+            onClickFavorite = { isFavorite, bookInfo -> viewModel.updateFavoriteState(isFavorite, bookInfo) },
+            viewModel = viewModel,
         )
     }
 }
@@ -70,15 +63,8 @@ fun HomeScreen(
     onItemClick: (BookInfo) -> Unit,
     onClickShowAll: (String, BookInfoListResponse) -> Unit,
     onCategoryClick: (String) -> Unit,
-    recentlyReadingBooks: List<BookInfo>,
-    recommendBooks: List<BookInfo>,
-    bestSellerBooks: List<BookInfo>,
-    recentlyReadHistoryBooks: List<BookInfo>,
-    endUnlimitedReadingBooks: List<BookInfo>,
-    recentlyReleaseBooks: List<BookInfo>,
-    similarTitleBooks: List<BookInfo>,
-    readingHistoryBooks: List<BookInfo>,
-    categories: List<String>
+    onClickFavorite: (Boolean, BookInfo) -> Unit,
+    viewModel: HomeViewModel
 ) {
 
     Column(
@@ -91,71 +77,79 @@ fun HomeScreen(
         // 読み始めたシリーズを続ける
         RecommendBooks(
             title = stringResource(id = R.string.recently_reading_carousel_title),
-            books = recentlyReadingBooks,
+            books = viewModel.recentlyReadingBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // すぐ読める本
         RecommendBooks(
             title = stringResource(id = R.string.recommend_carousel_title),
-            books = recommendBooks,
+            books = viewModel.recommendBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // プライム会員特定で読めるベストセラー
         RecommendBooks(
             title = stringResource(id = R.string.best_seller_carousel_title),
-            books = bestSellerBooks,
+            books = viewModel.bestSellerBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // 最近読んだ本に基づくおすすめ
         RecommendBooks(
             title = stringResource(id = R.string.recently_read_history_carousel_title),
-            books = recentlyReadHistoryBooks,
+            books = viewModel.recentlyReadHistoryBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // もうすぐ読み放題が終了するタイトル
         RecommendBooks(
             title = stringResource(id = R.string.end_unlimited_reading_carousel_title),
-            books = endUnlimitedReadingBooks,
+            books = viewModel.endUnlimitedReadingBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // 近日配信開始のタイトルのおすすめ
         RecommendBooks(
             title = stringResource(id = R.string.recently_release_carousel_title),
-            books = recentlyReleaseBooks,
+            books = viewModel.recentlyReleaseBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // 類似タイトルに基づくおすすめ
         RecommendBooks(
             title = stringResource(id = R.string.similar_title_carousel_title),
-            books = similarTitleBooks,
+            books = viewModel.similarTitleBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // 読書履歴に基づくおすすめ
         RecommendBooks(
             title = stringResource(id = R.string.reading_history_carousel_title),
-            books = readingHistoryBooks,
+            books = viewModel.readingHistoryBooks.collectAsState(),
             onClickItem = onItemClick,
-            onClickShowAll = onClickShowAll
+            onClickShowAll = onClickShowAll,
+            onClickFavorite = onClickFavorite
         )
 
         // 本をさらに見る
         RecommendCategories(
             title = stringResource(id = R.string.recommend_category_carousel_title),
-            categoryNameList = categories,
+            categoryNameList = viewModel.categories.collectAsState().value,
             onClickItem = onCategoryClick,
         )
     }

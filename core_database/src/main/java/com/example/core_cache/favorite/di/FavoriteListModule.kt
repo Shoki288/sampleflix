@@ -23,7 +23,7 @@ object FavoriteListModule {
         Room.databaseBuilder(
             context,
             FavoriteListDatabase::class.java,
-            "searchResult"
+            "favoriteList"
         ).build()
 
     @Singleton

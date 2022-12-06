@@ -9,9 +9,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,15 +21,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core_design.R
+import com.example.core_design.compose.FavoriteButton
 import com.example.entity.*
 
 @Composable
 fun RecommendBooks(
     title: String,
-    books: List<BookInfo>,
+    books: State<List<BookInfo>>,
     onClickItem: (BookInfo) -> Unit,
     onClickShowAll: (String, BookInfoListResponse) -> Unit,
+    onClickFavorite: (Boolean, BookInfo) -> Unit,
 ) {
+    println("RecommendBooks")
     Card(
         shape = RoundedCornerShape(size = 20.dp),
         border = BorderStroke(
@@ -51,12 +56,13 @@ fun RecommendBooks(
 
             RecommendBookCarousel(
                 books = books,
-                onClickItem = onClickItem
+                onClickItem = onClickItem,
+                onClickFavorite = onClickFavorite
             )
 
             // リンク
             LinkText {
-                onClickShowAll(title, BookInfoListResponse(books))
+                onClickShowAll(title, BookInfoListResponse(books.value))
             }
         }
     }
@@ -64,33 +70,45 @@ fun RecommendBooks(
 
 @Composable
 private fun RecommendBookCarousel(
-    books: List<BookInfo>,
-    onClickItem: (BookInfo) -> Unit
+    books: State<List<BookInfo>>,
+    onClickItem: (BookInfo) -> Unit,
+    onClickFavorite: (Boolean, BookInfo) -> Unit,
 ) {
     LazyRow(
         contentPadding = PaddingValues(4.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(
-            items = books,
+            items = books.value,
             key = { bookInfo ->
                 bookInfo.id
             }
         ) { bookInfo ->
-            // 商品画像
-            AsyncImage(
-                model = bookInfo.volumeInfo.images.imageUrl,
-                placeholder = painterResource(id = R.drawable.ic_not_found_image),
-                error = painterResource(id = R.drawable.ic_not_found_image),
-                fallback = painterResource(id = R.drawable.ic_not_found_image),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(150.dp)
-                    .height(200.dp)
-                    .clickable {
-                        onClickItem(bookInfo)
-                    }
-            )
+            println("RecommendBookCarousel: ${bookInfo.volumeInfo.isFavorite}")
+            Box {
+                // 商品画像
+                AsyncImage(
+                    model = bookInfo.volumeInfo.images.imageUrl,
+                    placeholder = painterResource(id = R.drawable.ic_not_found_image),
+                    error = painterResource(id = R.drawable.ic_not_found_image),
+                    fallback = painterResource(id = R.drawable.ic_not_found_image),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(150.dp)
+                        .height(200.dp)
+                        .clickable {
+                            onClickItem(bookInfo)
+                        }
+                )
+
+                FavoriteButton(
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .align(Alignment.BottomEnd),
+                    isFavorite = bookInfo.volumeInfo.isFavorite,
+                    onClickFavorite = { isFavorite -> onClickFavorite(isFavorite, bookInfo) }
+                )
+            }
         }
     }
 }
@@ -111,32 +129,34 @@ private fun LinkText(
 @Preview
 @Composable
 private fun Preview() {
+    val books = (0..10).map {
+        BookInfo(
+            id = "id$it",
+            volumeInfo = VolumeInfo(
+                title = "title",
+                authors = listOf("authors"),
+                publisher = "publisher",
+                publishedDate = "publishedDate",
+                description = "description",
+                pageCount = 100,
+                categories = listOf("categories"),
+                averageRating = 100,
+                ratingCount = 100,
+                language = "language",
+                previewLink = "previewLink",
+                isFavorite = false,
+            ),
+            saleInfo = SaleInfo(
+                listPrice = Price(10000)
+            ),
+            accessInfo = null
+        )
+    }
     RecommendBooks(
         title = "title",
-        books = (0..10).map {
-            BookInfo(
-                id = "id$it",
-                volumeInfo = VolumeInfo(
-                    title = "title",
-                    authors = listOf("authors"),
-                    publisher = "publisher",
-                    publishedDate = "publishedDate",
-                    description = "description",
-                    pageCount = 100,
-                    categories = listOf("categories"),
-                    averageRating = 100,
-                    ratingCount = 100,
-                    language = "language",
-                    previewLink = "previewLink",
-                    isFavorite = false,
-                ),
-                saleInfo = SaleInfo(
-                    listPrice = Price(10000)
-                ),
-                accessInfo = null
-            )
-        },
+        books = remember { mutableStateOf(books) },
         onClickItem = {},
-        onClickShowAll = { _, _ -> }
+        onClickShowAll = { _, _ -> },
+        onClickFavorite = { _, _ ->  }
     )
 }

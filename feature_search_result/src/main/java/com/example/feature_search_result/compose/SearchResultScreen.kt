@@ -20,7 +20,7 @@ import com.example.search_repository.SearchBooksPagingSource.SearchResultState
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
-fun SearchResultRoute(
+fun SearchResultRoot(
     viewModel: SearchResultViewModel = hiltViewModel(),
     arg: String?,
     onClickItem: (BookInfo) -> Unit
@@ -32,7 +32,7 @@ fun SearchResultRoute(
         state = viewModel.searchResultState.collectAsState().value,
         pagingItems = viewModel.searchResult.collectAsLazyPagingItems(),
         onClickItem = onClickItem,
-        onClickFavorite = { id, isFavorite -> }
+        onClickFavorite = { bookInfo, isFavorite -> viewModel.updateFavoriteState(isFavorite, bookInfo) }
     )
 }
 @Composable
@@ -41,7 +41,7 @@ fun SearchResultScreen(
     state: SearchResultState,
     pagingItems: LazyPagingItems<BookInfo>,
     onClickItem: (BookInfo) -> Unit,
-    onClickFavorite: (String, Boolean) -> Unit
+    onClickFavorite: (BookInfo, Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier.background(MaterialTheme.colorScheme.background)

@@ -40,13 +40,18 @@ class HomeViewModel @Inject constructor(
             }
         }
 
-        viewModelScope.launch { books.collect() }
+        viewModelScope.launch {
+            books.collectLatest {
+                println("collect $it")
+            }
+        }
     }
 
     val isDisableUpdateFavoriteState = MutableStateFlow(false)
 
     // 読み始めたシリーズを続ける
     val recentlyReadingBooks = books.filterIsInstance<HomeUiState.Success>().map {
+        println("recentlyReadingBooks")
         it.books.filterIndexed { index, _ -> index in 0..10 }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 

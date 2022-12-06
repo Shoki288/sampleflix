@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -143,18 +141,16 @@ fun SingleColumnItem(
             }
         )
         // お気に入りボタン
-        IconButton(
-            onClick = { onClickFavorite(isFavorite) },
+        FavoriteButton(
             modifier = Modifier
                 .padding(4.dp)
                 .constrainAs(refFavorite) {
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
-                }
-        ) {
-            val iconPaintRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_no_favorite
-            Icon(painter = painterResource(id = iconPaintRes), contentDescription = "お気に入り")
-        }
+                },
+            isFavorite = isFavorite,
+            onClickFavorite = onClickFavorite
+        )
     }
 }
 

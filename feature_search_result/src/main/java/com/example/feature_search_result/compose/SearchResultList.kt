@@ -15,7 +15,7 @@ fun SearchResultList(
     state: SearchBooksPagingSource.SearchResultState,
     books: LazyPagingItems<BookInfo>,
     onClickItem: (BookInfo) -> Unit,
-    onClickFavorite: (String, Boolean) -> Unit
+    onClickFavorite: (BookInfo, Boolean) -> Unit
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(2.dp)
@@ -35,7 +35,7 @@ fun SearchResultList(
                     isFavorite = book.volumeInfo.isFavorite,
                     price = book.saleInfo.listPrice.price,
                     onClickItem = { onClickItem(book) },
-                    onClickFavorite = { onClickFavorite(book.id, it) },
+                    onClickFavorite = { onClickFavorite(book, it) },
                 )
             }
         }

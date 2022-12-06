@@ -38,8 +38,8 @@ class SearchBooksPagingSource @AssistedInject constructor(
             }
 
             val ids = useCase.fetchFavoriteList().map { it.id }
-            body.apply {
-                items.map { items ->
+            val mergedBody = body.also {
+                it.items.map { items ->
                     if (ids.any { it == items.id }) {
                         val isFavorite = items.volumeInfo.isFavorite
                         items.copy(volumeInfo = items.volumeInfo.copy(isFavorite = isFavorite.not()))
@@ -47,10 +47,10 @@ class SearchBooksPagingSource @AssistedInject constructor(
                 }
             }
 
-            val itemSize = body.items.size
+            val itemSize = mergedBody.items.size
             stateListener(SearchResultState.SUCCESS)
             return LoadResult.Page(
-                data = body.items,
+                data = mergedBody.items,
                 prevKey = if (offset == 1) null else offset.minus(itemSize),
                 nextKey = if (itemSize < 20) null else offset.plus(itemSize),
             )

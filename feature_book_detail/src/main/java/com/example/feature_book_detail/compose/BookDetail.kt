@@ -34,7 +34,7 @@ import com.example.feature_book_detail.R
 import com.example.core_design.R as CoreR
 
 @Composable
-fun BookDetailRoute(
+fun BookDetailRoot(
     viewModel: BookDetailViewModel = viewModel()
 ) {
     val context = LocalContext.current

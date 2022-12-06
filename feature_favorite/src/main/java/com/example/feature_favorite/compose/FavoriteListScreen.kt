@@ -23,12 +23,13 @@ import com.example.feature_favorite.R
 import com.example.feature_favorite.android_view.FavoriteListUiState
 
 @Composable
-fun FavoriteListRoute(
+fun FavoriteListRoot(
     viewModel: FavoriteListViewModel = hiltViewModel(),
     onClickItem: (BookInfo) -> Unit
 ) {
     when (val uiState = viewModel.favoriteList.collectAsState().value) {
         is FavoriteListUiState.Loading -> {
+            println("FavoriteListUiState.Loading")
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -38,13 +39,15 @@ fun FavoriteListRoute(
             }
         }
         is FavoriteListUiState.Success -> {
+            println("FavoriteListUiState.Success")
             FavoriteListScreen(
                 bookInfoList = uiState.bookInfoList,
                 onClickItem = onClickItem,
-                onClickFavorite = { bookInfo, isFavorite -> }
+                onClickFavorite = { bookInfo, isFavorite -> viewModel.updateFavoriteState(bookInfo, isFavorite) }
             )
         }
         is FavoriteListUiState.Error -> {
+            println("FavoriteListUiState.Error")
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -89,7 +92,7 @@ private fun FavoriteListScreen(
                     isFavorite = bookInfo.volumeInfo.isFavorite,
                     price = bookInfo.saleInfo.listPrice.price,
                     onClickItem = { onClickItem(bookInfo) },
-                    onClickFavorite = { }
+                    onClickFavorite = { isFavorite -> onClickFavorite(bookInfo, isFavorite) }
                 )
             }
         }

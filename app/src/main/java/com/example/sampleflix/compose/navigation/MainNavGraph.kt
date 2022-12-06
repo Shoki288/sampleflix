@@ -11,17 +11,17 @@ import androidx.navigation.compose.composable
 import com.example.entity.BookInfoListResponse
 import com.example.extension.convertArgumentToJson
 import com.example.extension.getNotNullParcelable
-import com.example.feature_book_detail.compose.BookDetailRoute
-import com.example.feature_favorite.compose.FavoriteListRoute
-import com.example.feature_home.compose.HomeScreenRoute
+import com.example.feature_book_detail.compose.BookDetailRoot
+import com.example.feature_favorite.compose.FavoriteListRoot
+import com.example.feature_home.compose.HomeRoot
 import com.example.feature_recommend_list.compose.RecommendListScreen
 import com.example.feature_search.compose.SearchTopScreen
-import com.example.feature_search_result.compose.SearchResultRoute
+import com.example.feature_search_result.compose.SearchResultRoot
 
 fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     // ホーム画面
     composable(BottomNavigationScreen.Home.route) {
-        HomeScreenRoute(
+        HomeRoot(
             onCategoryClick = { keyword ->
                 navController.openHasArgumentScreen(SearchResult.route, keyword)
             },
@@ -55,7 +55,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
 
     // お気に入りリスト
     composable(BottomNavigationScreen.Favorite.route) {
-        FavoriteListRoute(
+        FavoriteListRoot(
             onClickItem = { bookInfo ->
                 navController.openHasArgumentScreen(BookDetail.route, convertArgumentToJson(bookInfo))
             }
@@ -68,7 +68,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
         arguments = SearchResult.argument
     ) { navBackStackEntry ->
         val keyword = navBackStackEntry.arguments?.getString(SearchResult.keywordArgs)
-        SearchResultRoute(
+        SearchResultRoot(
             arg = keyword,
             onClickItem = { bookInfo ->
                 navController.openHasArgumentScreen(BookDetail.route, convertArgumentToJson(bookInfo))
@@ -81,7 +81,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
         route = BookDetail.routeWithArgs,
         arguments = BookDetail.argument
     ) {
-        BookDetailRoute()
+        BookDetailRoot()
     }
 }
 
