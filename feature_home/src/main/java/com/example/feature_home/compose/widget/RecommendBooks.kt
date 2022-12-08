@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +31,7 @@ fun RecommendBooks(
     onClickShowAll: (String, BookInfoListResponse) -> Unit,
     onClickFavorite: (Boolean, BookInfo) -> Unit,
 ) {
-    println("RecommendBooks")
+
     Card(
         shape = RoundedCornerShape(size = 20.dp),
         border = BorderStroke(
@@ -84,7 +83,6 @@ private fun RecommendBookCarousel(
                 bookInfo.id
             }
         ) { bookInfo ->
-            println("RecommendBookCarousel: ${bookInfo.volumeInfo.isFavorite}")
             Box {
                 // 商品画像
                 AsyncImage(
@@ -100,13 +98,15 @@ private fun RecommendBookCarousel(
                             onClickItem(bookInfo)
                         }
                 )
-
+                val favoriteState by remember { mutableStateOf(bookInfo.volumeInfo.isFavorite) }
                 FavoriteButton(
                     modifier = Modifier
                         .padding(4.dp)
                         .align(Alignment.BottomEnd),
-                    isFavorite = bookInfo.volumeInfo.isFavorite,
-                    onClickFavorite = { isFavorite -> onClickFavorite(isFavorite, bookInfo) }
+                    isFavorite = favoriteState,
+                    onClickFavorite = { isFavorite ->
+                        onClickFavorite(isFavorite, bookInfo)
+                    }
                 )
             }
         }

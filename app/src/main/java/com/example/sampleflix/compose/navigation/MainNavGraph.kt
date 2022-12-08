@@ -15,7 +15,7 @@ import com.example.feature_book_detail.compose.BookDetailRoot
 import com.example.feature_favorite.compose.FavoriteListRoot
 import com.example.feature_home.compose.HomeRoot
 import com.example.feature_recommend_list.compose.RecommendListScreen
-import com.example.feature_search.compose.SearchTopScreen
+import com.example.feature_search.compose.SearchTopRoot
 import com.example.feature_search_result.compose.SearchResultRoot
 
 fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
@@ -46,7 +46,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
 
     // 検索TOP
     composable(BottomNavigationScreen.SearchTop.route) {
-        SearchTopScreen(
+        SearchTopRoot(
             onSearch = { keyword ->
                 navController.openHasArgumentScreen(SearchResult.route, keyword)
             }

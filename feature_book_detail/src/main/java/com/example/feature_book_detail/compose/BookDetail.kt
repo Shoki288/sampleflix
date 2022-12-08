@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -26,6 +23,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.example.core_design.theme.AppTheme
 import com.example.feature_book_detail.BookDetailInfo
 import com.example.feature_book_detail.BookDetailInfoUiState
 import com.example.feature_book_detail.BookDetailViewModel
@@ -33,18 +31,25 @@ import com.example.feature_book_detail.BookDetailViewModel.ViewEvent
 import com.example.feature_book_detail.R
 import com.example.core_design.R as CoreR
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookDetailRoot(
     viewModel: BookDetailViewModel = viewModel()
 ) {
     val context = LocalContext.current
 
-    BookDetailScreen(
-        uiState = viewModel.bookInfoDetail.collectAsState().value,
-        context = context,
-        onClickDescription = { viewModel.onClickDescription() },
-        onclickAbout = { viewModel.onClickAbout() }
-    )
+    AppTheme {
+        Scaffold { paddingValues ->
+            BookDetailScreen(
+                uiState = viewModel.bookInfoDetail.collectAsState().value,
+                context = context,
+                modifier = Modifier.padding(paddingValues),
+                onClickDescription = { viewModel.onClickDescription() },
+                onclickAbout = { viewModel.onClickAbout() }
+            )
+
+        }
+    }
 
     when (val event = viewModel.viewEvent.collectAsState(initial = ViewEvent.None).value) {
         is ViewEvent.OpenDescriptionDialog -> {
@@ -67,7 +72,7 @@ fun BookDetailScreen(
 ) {
     // TODO statusをみる
     ConstraintLayout(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize().padding()
     ) {
         val (image, bookDetail, purchaseButton, description, about, userReviews) = createRefs()
         // 商品画像

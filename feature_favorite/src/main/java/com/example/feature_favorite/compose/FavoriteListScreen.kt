@@ -6,6 +6,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -16,45 +18,49 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core_design.compose.SingleColumnItem
+import com.example.core_design.theme.AppTheme
 import com.example.core_unit_test.fixture.createBookInfo
 import com.example.entity.BookInfo
 import com.example.feature_favorite.FavoriteListViewModel
 import com.example.feature_favorite.R
 import com.example.feature_favorite.android_view.FavoriteListUiState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteListRoot(
     viewModel: FavoriteListViewModel = hiltViewModel(),
     onClickItem: (BookInfo) -> Unit
 ) {
-    when (val uiState = viewModel.favoriteList.collectAsState().value) {
-        is FavoriteListUiState.Loading -> {
-            println("FavoriteListUiState.Loading")
-            Box(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-        }
-        is FavoriteListUiState.Success -> {
-            println("FavoriteListUiState.Success")
-            FavoriteListScreen(
-                bookInfoList = uiState.bookInfoList,
-                onClickItem = onClickItem,
-                onClickFavorite = { bookInfo, isFavorite -> viewModel.updateFavoriteState(bookInfo, isFavorite) }
-            )
-        }
-        is FavoriteListUiState.Error -> {
-            println("FavoriteListUiState.Error")
-            Box(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.empty_favorite_list),
-                    modifier = Modifier.align(Alignment.Center)
-                )
+    AppTheme {
+        Scaffold { paddingValues ->
+            when (val uiState = viewModel.favoriteList.collectAsState().value) {
+                is FavoriteListUiState.Loading -> {
+                    println("FavoriteListUiState.Loading")
+                    Box(
+                        modifier = Modifier.fillMaxSize().padding(paddingValues)
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
+                }
+                is FavoriteListUiState.Success -> {
+                    FavoriteListScreen(
+                        bookInfoList = uiState.bookInfoList,
+                        onClickItem = onClickItem,
+                        onClickFavorite = { bookInfo, isFavorite -> viewModel.updateFavoriteState(bookInfo, isFavorite) }
+                    )
+                }
+                is FavoriteListUiState.Error -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize().padding(paddingValues)
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.empty_favorite_list),
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
+                }
             }
         }
     }

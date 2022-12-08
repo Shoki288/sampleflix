@@ -4,7 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -14,11 +17,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.core_design.theme.AppTheme
 import com.example.entity.*
 import com.example.feature_search_result.SearchResultViewModel
 import com.example.search_repository.SearchBooksPagingSource.SearchResultState
 import kotlinx.coroutines.flow.flowOf
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchResultRoot(
     viewModel: SearchResultViewModel = hiltViewModel(),
@@ -27,16 +32,22 @@ fun SearchResultRoot(
 ) {
     val keyword = rememberSaveable { mutableStateOf(arg ?: "") }
 
-    SearchResultScreen(
-        keyword = keyword,
-        state = viewModel.searchResultState.collectAsState().value,
-        pagingItems = viewModel.searchResult.collectAsLazyPagingItems(),
-        onClickItem = onClickItem,
-        onClickFavorite = { bookInfo, isFavorite -> viewModel.updateFavoriteState(isFavorite, bookInfo) }
-    )
+    AppTheme {
+        Scaffold { paddingValues ->
+            SearchResultScreen(
+                modifier = Modifier.padding(paddingValues),
+                keyword = keyword,
+                state = viewModel.searchResultState.collectAsState().value,
+                pagingItems = viewModel.searchResult.collectAsLazyPagingItems(),
+                onClickItem = onClickItem,
+                onClickFavorite = { bookInfo, isFavorite -> viewModel.updateFavoriteState(isFavorite, bookInfo) }
+            )
+        }
+    }
 }
 @Composable
 fun SearchResultScreen(
+    modifier: Modifier = Modifier,
     keyword: MutableState<String>,
     state: SearchResultState,
     pagingItems: LazyPagingItems<BookInfo>,
@@ -44,7 +55,7 @@ fun SearchResultScreen(
     onClickFavorite: (BookInfo, Boolean) -> Unit
 ) {
     Column(
-        modifier = Modifier.background(MaterialTheme.colorScheme.background)
+        modifier = modifier.background(MaterialTheme.colorScheme.background)
     ) {
         Spacer(modifier = Modifier.height(8.dp))
         SearchBox(

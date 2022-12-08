@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -17,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.core_design.theme.AppTheme
 import com.example.entity.BookInfo
 import com.example.entity.BookInfoListResponse
 import com.example.feature_home.HomeViewModel
@@ -35,26 +33,32 @@ fun HomeRoot(
 ) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        modifier = Modifier.fillMaxSize(),
-        sheetContent = {
-            SingleBookDetailBottomSheet(
-                uiState = viewModel.selectBook.collectAsState().value,
-                onClickClose = { scope.launch { sheetState.hide() } },
-            )
+    AppTheme {
+        Scaffold { paddingValue ->
+            ModalBottomSheetLayout(
+                sheetState = sheetState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValue),
+                sheetContent = {
+                    SingleBookDetailBottomSheet(
+                        uiState = viewModel.selectBook.collectAsState().value,
+                        onClickClose = { scope.launch { sheetState.hide() } },
+                    )
+                }
+            ) {
+                HomeScreen(
+                    onItemClick = {
+                        viewModel.onItemClick(it)
+                        scope.launch { sheetState.show() }
+                    },
+                    onCategoryClick = onCategoryClick,
+                    onClickShowAll = onClickShowAll,
+                    onClickFavorite = { isFavorite, bookInfo -> viewModel.updateFavoriteState(isFavorite, bookInfo) },
+                    viewModel = viewModel,
+                )
+            }
         }
-    ) {
-        HomeScreen(
-            onItemClick = {
-                viewModel.onItemClick(it)
-                scope.launch { sheetState.show() }
-            },
-            onCategoryClick = onCategoryClick,
-            onClickShowAll = onClickShowAll,
-            onClickFavorite = { isFavorite, bookInfo -> viewModel.updateFavoriteState(isFavorite, bookInfo) },
-            viewModel = viewModel,
-        )
     }
 }
 

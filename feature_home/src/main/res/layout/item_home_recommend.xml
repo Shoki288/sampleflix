@@ -38,13 +38,10 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="12dp"
-            android:padding="4dp"
             android:textOff="@null"
             android:textOn="@null"
             android:checked="@{isFavorite}"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="@{!viewModel.isDisableUpdateFavoriteState}"
-            android:focusable="@{!viewModel.isDisableUpdateFavoriteState}"
             android:background="@drawable/btn_favorite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

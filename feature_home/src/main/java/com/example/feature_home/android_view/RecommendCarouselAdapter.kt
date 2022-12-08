@@ -16,9 +16,7 @@ class RecommendCarouselAdapter(
     companion object {
         private val diffCalBack = object : DiffUtil.ItemCallback<BookInfo>() {
             override fun areItemsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean {
-                return oldItem.volumeInfo.isFavorite == newItem.volumeInfo.isFavorite && oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: BookInfo, newItem: BookInfo): Boolean = oldItem == newItem
         }
     }
 
