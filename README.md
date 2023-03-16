@@ -4,5 +4,6 @@
 - Coroutine(テストも)
 - JetpackCompose
 - モジュール分け
+- room
 
-をしたプロジェクト
+を使ったプロジェクト
